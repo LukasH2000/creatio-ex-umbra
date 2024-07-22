@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0gvh212kv4n"]
+
+[sub_resource type="Gradient" id="Gradient_lh8ox"]
+colors = PackedColorArray(0.97, 0.927967, 0.3395, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0kc1a"]
+gradient = SubResource("Gradient_lh8ox")
+fill = 2
+fill_from = Vector2(0, 0.5)
+
+[node name="DoorwayLight" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-32, -24)
+texture = SubResource("GradientTexture2D_0kc1a")
+texture_offset = Vector2(-16, 0)
+polygon = PackedVector2Array(96, -40, 32, -24, 32, 72, 96, 88)

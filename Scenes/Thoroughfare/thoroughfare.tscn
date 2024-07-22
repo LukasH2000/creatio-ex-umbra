@@ -1,3 +1,127 @@
-[gd_scene format=3 uid="uid://cc8ruj4f5np42"]
+[gd_scene load_steps=7 format=3 uid="uid://cc8ruj4f5np42"]
 
-[node name="Thoroughfare" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://s5shnsu5pajx" path="res://Scenes/Thoroughfare/marketplace_bg.png" id="1_7bhku"]
+[ext_resource type="Script" path="res://Scenes/Thoroughfare/thoroughfare_interface.gd" id="2_7vnep"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_hiypv"]
+[ext_resource type="Texture2D" uid="uid://b65ykf0hs2lma" path="res://Resources/button_normal_texture.tres" id="4_i8hsx"]
+[ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="4_kle1o"]
+[ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="6_ulw2i"]
+
+[node name="Thoroughfare" type="Node"]
+
+[node name="ThoroughfareArea" type="Node2D" parent="."]
+
+[node name="MarketplaceBg" type="Sprite2D" parent="ThoroughfareArea"]
+texture_filter = 1
+texture = ExtResource("1_7bhku")
+centered = false
+
+[node name="ThoroughfareInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_7vnep")
+
+[node name="Labels" type="Control" parent="ThoroughfareInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelWorkshop" type="RichTextLabel" parent="ThoroughfareInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -71.0
+offset_right = -149.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hiypv")
+bbcode_enabled = true
+text = "[center]To the Umbral Workshop[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelMerchantGuild" type="RichTextLabel" parent="ThoroughfareInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -54.0
+offset_right = 255.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_hiypv")
+bbcode_enabled = true
+text = "[center]To the Merchant Guild[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Buttons" type="Control" parent="ThoroughfareInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonWorkshop" type="TextureButton" parent="ThoroughfareInterface/Buttons" groups=["area_change_buttons"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -26.0
+offset_right = -186.0
+offset_bottom = 138.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_i8hsx")
+texture_hover = ExtResource("4_kle1o")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_ulw2i")
+
+[node name="ButtonMerchantGuild" type="TextureButton" parent="ThoroughfareInterface/Buttons" groups=["area_change_buttons"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 177.0
+offset_top = -5.0
+offset_right = 206.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_i8hsx")
+texture_hover = ExtResource("4_kle1o")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("6_ulw2i")
+
+[connection signal="mouse_entered" from="ThoroughfareInterface/Buttons/ButtonWorkshop" to="ThoroughfareInterface" method="_on_button_workshop_mouse_entered"]
+[connection signal="mouse_exited" from="ThoroughfareInterface/Buttons/ButtonWorkshop" to="ThoroughfareInterface" method="_on_button_workshop_mouse_exited"]
+[connection signal="pressed" from="ThoroughfareInterface/Buttons/ButtonWorkshop" to="ThoroughfareInterface/Buttons/ButtonWorkshop" method="_on_pressed" binds= ["Workshop"]]
+[connection signal="mouse_entered" from="ThoroughfareInterface/Buttons/ButtonMerchantGuild" to="ThoroughfareInterface" method="_on_button_merchant_guild_mouse_entered"]
+[connection signal="mouse_exited" from="ThoroughfareInterface/Buttons/ButtonMerchantGuild" to="ThoroughfareInterface" method="_on_button_merchant_guild_mouse_exited"]
+[connection signal="pressed" from="ThoroughfareInterface/Buttons/ButtonMerchantGuild" to="ThoroughfareInterface/Buttons/ButtonMerchantGuild" method="_on_pressed" binds= ["Merchant Guild"]]

@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://uyoqkcg1apr4"]
+[gd_scene load_steps=2 format=3 uid="uid://uyoqkcg1apr4"]
+
+[ext_resource type="PackedScene" uid="uid://ekvs4ujlm5yt" path="res://Scenes/Workshop/workshop.tscn" id="7_4umbm"]
 
 [node name="World" type="Node2D"]
+
+[node name="Workshop" parent="." instance=ExtResource("7_4umbm")]

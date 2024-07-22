@@ -1,3 +1,223 @@
-[gd_scene format=3 uid="uid://ekvs4ujlm5yt"]
+[gd_scene load_steps=8 format=3 uid="uid://ekvs4ujlm5yt"]
 
-[node name="Workshop" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://cani44s8owksn" path="res://Scenes/Workshop/workshop_bg.png" id="1_0xrml"]
+[ext_resource type="Script" path="res://Scenes/Workshop/workshop_interface.gd" id="2_3a7mt"]
+[ext_resource type="Texture2D" uid="uid://d3r8unkckv01d" path="res://Resources/point_light_gradient.tres" id="2_46xg0"]
+[ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="2_vaytk"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="4_due53"]
+[ext_resource type="Texture2D" uid="uid://b65ykf0hs2lma" path="res://Resources/button_normal_texture.tres" id="5_d3f7y"]
+[ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="7_n0bpo"]
+
+[node name="Workshop" type="Node"]
+
+[node name="WorkshopArea" type="Node2D" parent="."]
+
+[node name="WorkshopBg" type="Sprite2D" parent="WorkshopArea"]
+texture = ExtResource("1_0xrml")
+centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="WorkshopArea"]
+color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="WorkshopArea"]
+position = Vector2(320.5, 65)
+texture = ExtResource("2_46xg0")
+texture_scale = 16.0
+
+[node name="WorkshopInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_3a7mt")
+
+[node name="Labels" type="Control" parent="WorkshopInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelOutside" type="RichTextLabel" parent="WorkshopInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -292.0
+offset_top = -96.0
+offset_right = -227.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_due53")
+bbcode_enabled = true
+text = "[center]To the outside[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelShadowCanvas" type="RichTextLabel" parent="WorkshopInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -89.0
+offset_right = 89.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_due53")
+bbcode_enabled = true
+text = "[center]To the Shadow Canvas room[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelStorageRoom" type="RichTextLabel" parent="WorkshopInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = -127.0
+offset_right = 324.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_due53")
+bbcode_enabled = true
+text = "[center]To the storage room
+(Unavailable)[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="LabelBook" type="RichTextLabel" parent="WorkshopInterface/Labels"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 95.0
+offset_top = -36.0
+offset_right = 188.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_due53")
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+text = "[center]Read Umbral Alchemy for Dummies[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Buttons" type="Control" parent="WorkshopInterface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonOutside" type="TextureButton" parent="WorkshopInterface/Buttons" groups=["area_change_buttons"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0828125
+anchor_top = 0.427778
+anchor_right = 0.101563
+anchor_bottom = 0.844444
+offset_left = -288.0
+offset_top = -47.0
+offset_right = -234.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_d3f7y")
+texture_hover = ExtResource("2_vaytk")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("7_n0bpo")
+
+[node name="ButtonShadowCanvas" type="TextureButton" parent="WorkshopInterface/Buttons" groups=["area_change_buttons"]]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45625
+anchor_top = 0.441667
+anchor_right = 0.545313
+anchor_bottom = 0.711111
+offset_left = -48.0
+offset_top = -41.0
+offset_right = 49.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_d3f7y")
+texture_hover = ExtResource("2_vaytk")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("7_n0bpo")
+
+[node name="ButtonStorageRoom" type="TextureButton" parent="WorkshopInterface/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.89375
+anchor_top = 0.413889
+anchor_right = 0.967188
+anchor_bottom = 0.888889
+offset_left = 231.0
+offset_top = -52.0
+offset_right = 320.0
+offset_bottom = 159.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_d3f7y")
+texture_hover = ExtResource("2_vaytk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ButtonBook" type="TextureButton" parent="WorkshopInterface/Buttons"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.812
+anchor_top = 0.462
+anchor_right = 0.812
+anchor_bottom = 0.462
+offset_left = 183.0
+offset_top = -29.0
+offset_right = 217.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_d3f7y")
+texture_hover = ExtResource("2_vaytk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="mouse_entered" from="WorkshopInterface/Buttons/ButtonOutside" to="WorkshopInterface" method="_on_button_outside_mouse_entered"]
+[connection signal="mouse_exited" from="WorkshopInterface/Buttons/ButtonOutside" to="WorkshopInterface" method="_on_button_outside_mouse_exited"]
+[connection signal="pressed" from="WorkshopInterface/Buttons/ButtonOutside" to="WorkshopInterface/Buttons/ButtonOutside" method="_on_pressed" binds= ["Thoroughfare"]]
+[connection signal="mouse_entered" from="WorkshopInterface/Buttons/ButtonShadowCanvas" to="WorkshopInterface" method="_on_button_shadow_canvas_mouse_entered"]
+[connection signal="mouse_exited" from="WorkshopInterface/Buttons/ButtonShadowCanvas" to="WorkshopInterface" method="_on_button_shadow_canvas_mouse_exited"]
+[connection signal="pressed" from="WorkshopInterface/Buttons/ButtonShadowCanvas" to="WorkshopInterface/Buttons/ButtonShadowCanvas" method="_on_pressed" binds= ["Dark Room"]]
+[connection signal="mouse_entered" from="WorkshopInterface/Buttons/ButtonStorageRoom" to="WorkshopInterface" method="_on_button_storage_room_mouse_entered"]
+[connection signal="mouse_exited" from="WorkshopInterface/Buttons/ButtonStorageRoom" to="WorkshopInterface" method="_on_button_storage_room_mouse_exited"]
+[connection signal="mouse_entered" from="WorkshopInterface/Buttons/ButtonBook" to="WorkshopInterface" method="_on_button_book_mouse_entered"]
+[connection signal="mouse_exited" from="WorkshopInterface/Buttons/ButtonBook" to="WorkshopInterface" method="_on_button_book_mouse_exited"]
