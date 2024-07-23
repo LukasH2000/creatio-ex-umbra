@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dufnexll8mvxf"]
+
+[ext_resource type="Shader" path="res://Scenes/ShadowCanvas/Canvas stuff/canvas_editor.gdshader" id="1_7huk8"]
+
+[resource]
+shader = ExtResource("1_7huk8")
+shader_parameter/origin = Vector2(26, 12)
+shader_parameter/tint = Vector4(0, 0, 0, 0)
+shader_parameter/tile_size = Vector2(42, 42)
+shader_parameter/lock_to_global = 1.0

@@ -33,6 +33,11 @@ var area_scene_paths : Dictionary = {
 var current_scene : Node = null
 var world : Node = null
 var game_data : GameData = null
+
+var window_size_base : Vector2 = Vector2(
+	ProjectSettings.get_setting("display/window/size/viewport_width"),
+	ProjectSettings.get_setting("display/window/size/viewport_height")
+)
 # PRIVATE VARIABLES
 
 
@@ -48,9 +53,11 @@ func _ready():
 	var root = get_tree().root
 	# The last child of root will be Main, while we need to change a scene in
 	# the World node, which is the first child of Main
-	world = root.get_child(root.get_child_count() - 1).get_child(0)
-	# The current (area) scene will be the first child of world
-	current_scene = world.get_child(0)
+	var last_child = root.get_child(root.get_child_count() - 1)
+	if last_child.is_in_group("main"):
+		world = last_child.get_child(0)
+		# The current (area) scene will be the first child of world
+		current_scene = world.get_child(0)
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

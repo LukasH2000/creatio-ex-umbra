@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://l1vik88cgpaa"]
+
+[ext_resource type="Script" path="res://Scenes/ShadowCanvas/Canvas stuff/drawable_canvas.gd" id="1_73qcc"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jdwm4"]
+
+[node name="DrawableCanvas" type="Node2D"]
+script = ExtResource("1_73qcc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+show_behind_parent = true
+scale = Vector2(168, 168)
+texture = SubResource("PlaceholderTexture2D_jdwm4")
+centered = false

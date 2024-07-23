@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1mneamuwm318"]
+[gd_scene load_steps=8 format=3 uid="uid://b1mneamuwm318"]
 
+[ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas_area.gd" id="1_4cwdc"]
 [ext_resource type="Texture2D" uid="uid://cdsbcnkveb0my" path="res://Scenes/ShadowCanvas/shadow_canvas.png" id="1_sbyhv"]
 [ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas_interface.gd" id="2_2a30a"]
+[ext_resource type="PackedScene" uid="uid://l1vik88cgpaa" path="res://Scenes/ShadowCanvas/Canvas stuff/drawable_canvas.tscn" id="2_5bhui"]
 [ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_2b1bd"]
 [ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="4_g6q7w"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="5_lpa7v"]
@@ -9,17 +11,29 @@
 [node name="ShadowCanvas" type="Node"]
 
 [node name="ShadowCanvasArea" type="Node2D" parent="."]
+script = ExtResource("1_4cwdc")
 
 [node name="ShadowCanvas" type="Sprite2D" parent="ShadowCanvasArea"]
 texture_filter = 1
 texture = ExtResource("1_sbyhv")
 centered = false
 
+[node name="DrawableCanvas" parent="ShadowCanvasArea" instance=ExtResource("2_5bhui")]
+position = Vector2(236, 96)
+
+[node name="Camera2D" type="Camera2D" parent="ShadowCanvasArea"]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 360
+
 [node name="ShadowCanvasInterface" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_2a30a")

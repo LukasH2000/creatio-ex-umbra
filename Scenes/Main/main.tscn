@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://uyoqkcg1apr4" path="res://Scenes/Overworld/world.tscn" id="1_hemcx"]
 [ext_resource type="PackedScene" uid="uid://b1fe6ammc38bm" path="res://UI/user_interface.tscn" id="2_114aa"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" groups=["main"]]
 
 [node name="World" parent="." instance=ExtResource("1_hemcx")]
 
