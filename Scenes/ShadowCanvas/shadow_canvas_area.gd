@@ -94,9 +94,10 @@ func pan_camera():
 	if is_panning:
 		var move_vector = mouse_pos_camera - pan_mouse_start_pos
 		$Camera2D.position = pan_cam_start_pos - (move_vector / $Camera2D.zoom.x)
-		
-		$Camera2D.position.x = clamp($Camera2D.position.x, $Camera2D.limit_top, $Camera2D.limit_bottom)
-		$Camera2D.position.y = clamp($Camera2D.position.y, $Camera2D.limit_left, $Camera2D.limit_right)
+		var clamp_offset := Vector2((PersistentData.window_size_base.x/2)/$Camera2D.zoom.x, (PersistentData.window_size_base.y/2)/$Camera2D.zoom.y)
+		$Camera2D.position.y = clamp($Camera2D.position.y, $Camera2D.limit_top + clamp_offset.y, $Camera2D.limit_bottom - clamp_offset.y)
+		$Camera2D.position.x = clamp($Camera2D.position.x, $Camera2D.limit_left + clamp_offset.x, $Camera2D.limit_right - clamp_offset.x)
+		print($Camera2D.position)
 # PRIVATE METHODS
 
 

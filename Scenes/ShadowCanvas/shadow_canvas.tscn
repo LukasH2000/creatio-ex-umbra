@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1mneamuwm318"]
+[gd_scene load_steps=9 format=3 uid="uid://b1mneamuwm318"]
 
 [ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas_area.gd" id="1_4cwdc"]
 [ext_resource type="Texture2D" uid="uid://cdsbcnkveb0my" path="res://Scenes/ShadowCanvas/shadow_canvas.png" id="1_sbyhv"]
@@ -7,6 +7,8 @@
 [ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_2b1bd"]
 [ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="4_g6q7w"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="5_lpa7v"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_we8c6"]
 
 [node name="ShadowCanvas" type="Node"]
 
@@ -22,10 +24,14 @@ centered = false
 position = Vector2(236, 96)
 
 [node name="Camera2D" type="Camera2D" parent="ShadowCanvasArea"]
+position = Vector2(320, 180)
 limit_left = 0
 limit_top = 0
 limit_right = 640
 limit_bottom = 360
+
+[node name="Sprite2D" type="Sprite2D" parent="ShadowCanvasArea/Camera2D"]
+texture = SubResource("PlaceholderTexture2D_we8c6")
 
 [node name="ShadowCanvasInterface" type="Control" parent="."]
 layout_mode = 3
