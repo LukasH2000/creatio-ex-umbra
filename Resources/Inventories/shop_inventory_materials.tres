@@ -1,0 +1,60 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=9 format=3 uid="uid://ue4qwyn7ol33"]
+
+[ext_resource type="Image" uid="uid://cp5ep4hckdp5t" path="res://Resources/Items/Materials/leather_skin.png" id="1_wxbkt"]
+[ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="1_xmgae"]
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="2_hvgrw"]
+[ext_resource type="Image" uid="uid://ce4b5mkoig6gy" path="res://Resources/Items/Materials/steel_ingot.png" id="3_fyt53"]
+[ext_resource type="Image" uid="uid://ck521nrnjw7el" path="res://Resources/Items/Materials/wood_log.png" id="4_pqw14"]
+
+[sub_resource type="Resource" id="Resource_5ygsw"]
+script = ExtResource("2_hvgrw")
+mat_type = 2
+mat_uses = Array[int]([2, 4, 9, 10, 13])
+amount_held = 999
+name = "Tanned leather"
+tier = 0
+grade = 0
+description = "A tanned leather skin 
+from the Hunter's Lodge."
+gold_value = 10
+image = ExtResource("1_wxbkt")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = false
+
+[sub_resource type="Resource" id="Resource_8vcd4"]
+script = ExtResource("2_hvgrw")
+mat_type = 1
+mat_uses = Array[int]([1, 2, 3, 5, 7, 8, 12, 0])
+amount_held = 999
+name = "Steel ingot"
+tier = 0
+grade = 0
+description = "A steel ingot, created by
+the local Blacksmith."
+gold_value = 10
+image = ExtResource("3_fyt53")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = false
+
+[sub_resource type="Resource" id="Resource_ocmuc"]
+script = ExtResource("2_hvgrw")
+mat_type = 0
+mat_uses = Array[int]([0, 1, 2, 3, 7, 11, 16])
+amount_held = 999
+name = "Wood log"
+tier = 0
+grade = 0
+description = "A normal wooden log, harvested
+from the nearby forest."
+gold_value = 10
+image = ExtResource("4_pqw14")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = false
+
+[resource]
+script = ExtResource("1_xmgae")
+items = Array[Resource("res://Resources/Items/item.gd")]([SubResource("Resource_5ygsw"), SubResource("Resource_8vcd4"), SubResource("Resource_ocmuc")])
+num_slots = 100

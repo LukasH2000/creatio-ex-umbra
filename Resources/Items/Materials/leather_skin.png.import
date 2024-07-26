@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://cp5ep4hckdp5t"
+path="res://.godot/imported/leather_skin.png-64c7ece85c014a4e10a8d6127faae49f.image"
+
+[deps]
+
+source_file="res://Resources/Items/Materials/leather_skin.png"
+dest_files=["res://.godot/imported/leather_skin.png-64c7ece85c014a4e10a8d6127faae49f.image"]
+
+[params]
+

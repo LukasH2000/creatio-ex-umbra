@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://w16m22gmxhj6"]
 
 [ext_resource type="PackedScene" uid="uid://uyoqkcg1apr4" path="res://Scenes/Overworld/world.tscn" id="1_hemcx"]
-[ext_resource type="PackedScene" uid="uid://b1fe6ammc38bm" path="res://UI/user_interface.tscn" id="2_114aa"]
+[ext_resource type="PackedScene" uid="uid://b2bysrf84s6lk" path="res://UI/popup_window.tscn" id="2_4wf3g"]
 
 [node name="Main" type="Node" groups=["main"]]
 
 [node name="World" parent="." instance=ExtResource("1_hemcx")]
 
-[node name="UserInterface" parent="." instance=ExtResource("2_114aa")]
+[node name="PopupWindow" parent="." instance=ExtResource("2_4wf3g")]
+visible = false

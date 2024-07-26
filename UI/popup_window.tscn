@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2bysrf84s6lk"]
+
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="1_5m4t1"]
+[ext_resource type="Script" path="res://UI/popup_window.gd" id="1_fac20"]
+[ext_resource type="Script" path="res://UI/popup_panel.gd" id="3_ixilp"]
+
+[node name="PopupWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fac20")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.498039)
+
+[node name="PopupWindow" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PopupPanel" type="PanelContainer" parent="PopupWindow"]
+layout_mode = 2
+theme = ExtResource("1_5m4t1")
+script = ExtResource("3_ixilp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupWindow/PopupPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PopupTitle" type="Label" parent="PopupWindow/PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+text = "Select Amount"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PopupText" type="Label" parent="PopupWindow/PopupPanel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="PopupWindow/PopupPanel/VBoxContainer"]
+layout_mode = 2
+max_value = 999.0
+update_on_text_changed = true
+
+[node name="Button" type="Button" parent="PopupWindow/PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+text = "Select"
+
+[connection signal="pressed" from="PopupWindow/PopupPanel/VBoxContainer/Button" to="." method="close_popup"]

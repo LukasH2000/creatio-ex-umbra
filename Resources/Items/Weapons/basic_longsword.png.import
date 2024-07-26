@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://drnctx77wqyc4"
+path="res://.godot/imported/basic_longsword.png-dec7181e57317796a04f91d20f471bcb.image"
+
+[deps]
+
+source_file="res://Resources/Items/Weapons/basic_longsword.png"
+dest_files=["res://.godot/imported/basic_longsword.png-dec7181e57317796a04f91d20f471bcb.image"]
+
+[params]
+

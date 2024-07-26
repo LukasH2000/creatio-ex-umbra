@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://ce4b5mkoig6gy"
+path="res://.godot/imported/steel_ingot.png-3f1247d69267ca3995f6dd5d24dc9de6.image"
+
+[deps]
+
+source_file="res://Resources/Items/Materials/steel_ingot.png"
+dest_files=["res://.godot/imported/steel_ingot.png-3f1247d69267ca3995f6dd5d24dc9de6.image"]
+
+[params]
+

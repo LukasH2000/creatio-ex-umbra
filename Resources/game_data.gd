@@ -2,7 +2,7 @@
 # @TOOL
 # CLASS_NAME
 # EXTENDS
-class_name GameData extends Node
+class_name GameData extends Resource
 # DOCSTRING
 
 # SIGNALS
@@ -19,21 +19,21 @@ class_name GameData extends Node
 # @EXPORT_GROUP("name")
 # @EXPORT_SUBGROUP("name")
 # @EXPORT
-@export var current_scene : PackedScene
-@export var player_storage : Array[Item]
+#@export var current_scene : PackedScene
+@export var player_storage : Inventory
 @export var player_gold : int
+@export var player_reputation : int
 @export var discovered_forms : Array[Form]
 @export var discovered_materials : Array[AlchemyMaterial]
 
 @export var day : int
-@export var time : int
 
-@export var material_store : Array[AlchemyMaterial]
-@export var item_store : Array[Item]
+@export var material_store : Inventory
+@export var item_store : Inventory
 #@export var open_orders : ???
 
 # PUBLIC VARIABLES
-
+static var save_num = 0
 
 # PRIVATE VARIABLES
 

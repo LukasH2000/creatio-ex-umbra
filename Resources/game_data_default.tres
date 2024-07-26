@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GameData" load_steps=5 format=3 uid="uid://dn03usoj04y2v"]
+
+[ext_resource type="Resource" uid="uid://46v82up16mrc" path="res://Resources/Inventories/shop_inventory_items.tres" id="1_s5tyj"]
+[ext_resource type="Resource" uid="uid://ue4qwyn7ol33" path="res://Resources/Inventories/shop_inventory_materials.tres" id="2_ixtje"]
+[ext_resource type="Resource" uid="uid://diprf4k3nxmi3" path="res://Resources/Inventories/player_inventory.tres" id="3_2jmo6"]
+[ext_resource type="Script" path="res://Resources/game_data.gd" id="4_eybdc"]
+
+[resource]
+script = ExtResource("4_eybdc")
+player_storage = ExtResource("3_2jmo6")
+player_gold = 250
+player_reputation = 0
+discovered_forms = Array[Resource("res://Resources/Items/form.gd")]([])
+discovered_materials = Array[Resource("res://Resources/Items/Materials/material.gd")]([])
+day = 0
+material_store = ExtResource("2_ixtje")
+item_store = ExtResource("1_s5tyj")

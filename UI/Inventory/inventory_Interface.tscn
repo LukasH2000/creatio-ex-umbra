@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2tnm3jrgkqan"]
+
+[ext_resource type="Script" path="res://UI/Inventory/inventory_interface.gd" id="1_1pgwy"]
+[ext_resource type="Resource" uid="uid://diprf4k3nxmi3" path="res://Resources/Inventories/player_inventory.tres" id="3_1lpv8"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_6j6sg"]
+
+[node name="InventoryInterface" type="PanelContainer"]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_6j6sg")
+script = ExtResource("1_1pgwy")
+inventory = ExtResource("3_1lpv8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryScroll" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_6j6sg")
+horizontal_scroll_mode = 0
+
+[node name="InventoryGrid" type="HFlowContainer" parent="VBoxContainer/InventoryScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("3_6j6sg")

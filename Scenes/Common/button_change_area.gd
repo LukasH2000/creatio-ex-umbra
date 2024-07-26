@@ -2,7 +2,7 @@
 # @TOOL
 # CLASS_NAME
 # EXTENDS
-class_name area_change_button extends TextureButton
+class_name area_change_button extends Button
 # DOCSTRING
 
 # SIGNALS

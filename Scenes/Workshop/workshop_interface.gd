@@ -35,7 +35,9 @@ extends Control
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-
+func _on_button_storage_pressed():
+	$WorkshopInventory.visible = not $WorkshopInventory.visible
+	$WorkshopInventory.set_inventory()
 
 # PRIVATE METHODS
 
@@ -45,33 +47,33 @@ extends Control
 
 
 
-func _on_button_book_mouse_entered():
-	$Labels/LabelBook.show()
-
-
-func _on_button_book_mouse_exited():
-	$Labels/LabelBook.hide()
-
-
-func _on_button_storage_room_mouse_entered():
-	$Labels/LabelStorageRoom.show()
-
-
-func _on_button_storage_room_mouse_exited():
-	$Labels/LabelStorageRoom.hide()
-
-
-func _on_button_shadow_canvas_mouse_entered():
-	$Labels/LabelShadowCanvas.show()
-
-
-func _on_button_shadow_canvas_mouse_exited():
-	$Labels/LabelShadowCanvas.hide()
-
-
-func _on_button_outside_mouse_entered():
-	$Labels/LabelOutside.show()
-
-
-func _on_button_outside_mouse_exited():
-	$Labels/LabelOutside.hide()
+#func _on_button_book_mouse_entered():
+	#$Labels/LabelBook.show()
+#
+#
+#func _on_button_book_mouse_exited():
+	#$Labels/LabelBook.hide()
+#
+#
+#func _on_button_storage_room_mouse_entered():
+	#$Labels/LabelStorageRoom.show()
+#
+#
+#func _on_button_storage_room_mouse_exited():
+	#$Labels/LabelStorageRoom.hide()
+#
+#
+#func _on_button_shadow_canvas_mouse_entered():
+	#$Labels/LabelShadowCanvas.show()
+#
+#
+#func _on_button_shadow_canvas_mouse_exited():
+	#$Labels/LabelShadowCanvas.hide()
+#
+#
+#func _on_button_outside_mouse_entered():
+	#$Labels/LabelOutside.show()
+#
+#
+#func _on_button_outside_mouse_exited():
+	#$Labels/LabelOutside.hide()

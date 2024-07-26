@@ -45,9 +45,9 @@ extends Control
 
 
 
-func _on_button_merchant_guild_mouse_entered():
-	$Labels/LabelMerchantGuild.show()
-
-
-func _on_button_merchant_guild_mouse_exited():
-	$Labels/LabelMerchantGuild.hide()
+#func _on_button_merchant_guild_mouse_entered():
+	#$Labels/LabelMerchantGuild.show()
+#
+#
+#func _on_button_merchant_guild_mouse_exited():
+	#$Labels/LabelMerchantGuild.hide()

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AlchemyMaterial" load_steps=3 format=3 uid="uid://bvbbyjneb57dl"]
+
+[ext_resource type="Image" uid="uid://ce4b5mkoig6gy" path="res://Resources/Items/Materials/steel_ingot.png" id="1_18mr8"]
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="1_weo00"]
+
+[resource]
+script = ExtResource("1_weo00")
+mat_type = 1
+mat_uses = Array[int]([1, 2, 3, 5, 7, 8, 12, 0])
+amount_held = 0
+name = "Steel ingot"
+tier = 0
+grade = 0
+description = "A steel ingot, created by
+the local Blacksmith."
+gold_value = 10
+image = ExtResource("1_18mr8")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true

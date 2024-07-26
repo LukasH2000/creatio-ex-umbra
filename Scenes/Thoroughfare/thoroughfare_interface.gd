@@ -45,17 +45,17 @@ extends Control
 
 
 
-func _on_button_workshop_mouse_entered():
-	$Labels/LabelWorkshop.show()
-
-
-func _on_button_workshop_mouse_exited():
-	$Labels/LabelWorkshop.hide()
-
-
-func _on_button_merchant_guild_mouse_entered():
-	$Labels/LabelMerchantGuild.show()
-
-
-func _on_button_merchant_guild_mouse_exited():
-	$Labels/LabelMerchantGuild.hide()
+#func _on_button_workshop_mouse_entered():
+	#$Labels/LabelWorkshop.show()
+#
+#
+#func _on_button_workshop_mouse_exited():
+	#$Labels/LabelWorkshop.hide()
+#
+#
+#func _on_button_merchant_guild_mouse_entered():
+	#$Labels/LabelMerchantGuild.show()
+#
+#
+#func _on_button_merchant_guild_mouse_exited():
+	#$Labels/LabelMerchantGuild.hide()

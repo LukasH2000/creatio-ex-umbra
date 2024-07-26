@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AlchemyMaterial" load_steps=3 format=3 uid="uid://8ko1mwvp2n1w"]
+
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="1_de734"]
+[ext_resource type="Image" uid="uid://ck521nrnjw7el" path="res://Resources/Items/Materials/wood_log.png" id="1_w41c0"]
+
+[resource]
+script = ExtResource("1_de734")
+mat_type = 0
+mat_uses = Array[int]([0, 1, 2, 3, 7, 11, 16])
+amount_held = 1
+name = "Wood log"
+tier = 0
+grade = 0
+description = "A normal wooden log, harvested
+from the nearby forest."
+gold_value = 10
+image = ExtResource("1_w41c0")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true

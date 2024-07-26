@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://bcegt1688frth"]
+
+[ext_resource type="Image" uid="uid://drnctx77wqyc4" path="res://Resources/Items/Weapons/basic_longsword.png" id="1_hk5bs"]
+[ext_resource type="Script" path="res://Resources/Items/Weapons/weapon.gd" id="1_j2ba5"]
+
+[resource]
+script = ExtResource("1_j2ba5")
+name = "Longsword"
+tier = 1
+grade = 1
+description = "A basic steel Longsword. 
+Many monsters were harmed 
+after the creation of this item."
+gold_value = 100
+image = ExtResource("1_hk5bs")
+item_components = Array[int]([1, 3, 4])
+item_type = 1
+transmutable = false

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf23ngwrl64s3"]
+
+[ext_resource type="Script" path="res://UI/Inventory/Workshop Inventory/workshop_inventory_interface.gd" id="1_55rgt"]
+[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_Interface.tscn" id="1_chi63"]
+
+[node name="WorkshopInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_55rgt")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="InventoryInterface" parent="CenterContainer/VBoxContainer" instance=ExtResource("1_chi63")]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+title = "Workshop Storage"
+
+[node name="ButtonClose" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonClose" to="." method="_on_button_close_pressed"]

@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://6l3q8jmqk1at"]
+[gd_scene load_steps=4 format=3 uid="uid://6l3q8jmqk1at"]
 
 [ext_resource type="Texture2D" uid="uid://oiv0rvcxhyts" path="res://Scenes/OrderBoard/order_board_bg.png" id="1_gvbj5"]
 [ext_resource type="Script" path="res://Scenes/OrderBoard/order_board_interface.gd" id="2_xtje7"]
-[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_lfraw"]
-[ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="4_c4p5h"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="5_3xndl"]
 
 [node name="OrderBoard" type="Node"]
@@ -24,35 +22,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_xtje7")
 
-[node name="Labels" type="Control" parent="OrderBoardInterface"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LabelMerchantGuild" type="RichTextLabel" parent="OrderBoardInterface/Labels"]
-visible = false
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -279.0
-offset_top = 149.0
-offset_right = -225.0
-offset_bottom = 172.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_lfraw")
-bbcode_enabled = true
-text = "[center]Return[/center]"
-fit_content = true
-scroll_active = false
-
 [node name="Buttons" type="Control" parent="OrderBoardInterface"]
 layout_mode = 1
 anchors_preset = 15
@@ -61,24 +30,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonMerchantGuild" type="TextureButton" parent="OrderBoardInterface/Buttons" groups=["area_change_buttons"]]
+[node name="ButtonMerchantGuild" type="Button" parent="OrderBoardInterface/Buttons" groups=["area_change_buttons"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -317.0
-offset_top = 143.0
-offset_right = -285.0
-offset_bottom = 177.0
+offset_left = -313.0
+offset_top = 141.0
+offset_right = -236.0
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_hover = ExtResource("4_c4p5h")
-ignore_texture_size = true
-stretch_mode = 0
+text = "Return"
 script = ExtResource("5_3xndl")
 
-[connection signal="mouse_entered" from="OrderBoardInterface/Buttons/ButtonMerchantGuild" to="OrderBoardInterface" method="_on_button_merchant_guild_mouse_entered"]
-[connection signal="mouse_exited" from="OrderBoardInterface/Buttons/ButtonMerchantGuild" to="OrderBoardInterface" method="_on_button_merchant_guild_mouse_exited"]
 [connection signal="pressed" from="OrderBoardInterface/Buttons/ButtonMerchantGuild" to="OrderBoardInterface/Buttons/ButtonMerchantGuild" method="_on_pressed" binds= ["Merchant Guild"]]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://diprf4k3nxmi3"]
+
+[ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="1_8r80n"]
+[ext_resource type="Resource" uid="uid://bcegt1688frth" path="res://Resources/Items/Weapons/Longsword.tres" id="1_21yys"]
+[ext_resource type="Resource" uid="uid://8ko1mwvp2n1w" path="res://Resources/Items/Materials/wood_log.tres" id="2_w532q"]
+
+[resource]
+script = ExtResource("1_8r80n")
+items = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("1_21yys"), ExtResource("2_w532q")])
+num_slots = 30

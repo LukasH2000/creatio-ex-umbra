@@ -45,9 +45,13 @@ extends Control
 
 
 
-func _on_button_dark_room_mouse_entered():
-	$Labels/LabelDarkRoom.show()
+#func _on_button_dark_room_mouse_entered():
+	#$Labels/LabelDarkRoom.show()
+#
+#
+#func _on_button_dark_room_mouse_exited():
+	#$Labels/LabelDarkRoom.hide()
 
 
-func _on_button_dark_room_mouse_exited():
-	$Labels/LabelDarkRoom.hide()
+func _on_button_finish_item_pressed():
+	$FinishedItemScreen.show()

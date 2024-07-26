@@ -1,3 +1,23 @@
-[gd_resource type="Theme" format=3 uid="uid://cty2l2sj86fnj"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cty2l2sj86fnj"]
+
+[ext_resource type="StyleBox" uid="uid://bajqb6xjj5u08" path="res://UI/button_style_disabled.tres" id="1_tivcy"]
+[ext_resource type="StyleBox" uid="uid://2uoe6ui0txxm" path="res://UI/button_style_hover.tres" id="2_ofkop"]
+[ext_resource type="StyleBox" uid="uid://ntoekj6engo0" path="res://UI/button_style_box_normal.tres" id="3_f678n"]
+[ext_resource type="StyleBox" uid="uid://bq6luw2imupf7" path="res://UI/button_style_pressed.tres" id="4_2s0lr"]
+[ext_resource type="StyleBox" uid="uid://brcty83y8iv8b" path="res://UI/panel_style_container.tres" id="5_58w25"]
+[ext_resource type="FontFile" uid="uid://driqhgeax584v" path="res://UI/upheavtt.ttf" id="5_kh6j3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_br2jj"]
 
 [resource]
+default_font = ExtResource("5_kh6j3")
+default_font_size = 16
+Button/styles/disabled = ExtResource("1_tivcy")
+Button/styles/focus = SubResource("StyleBoxEmpty_br2jj")
+Button/styles/hover = ExtResource("2_ofkop")
+Button/styles/normal = ExtResource("3_f678n")
+Button/styles/pressed = ExtResource("4_2s0lr")
+FlowContainer/constants/h_separation = 6
+FlowContainer/constants/v_separation = 6
+PanelContainer/styles/panel = ExtResource("5_58w25")
+TooltipLabel/font_sizes/font_size = 12

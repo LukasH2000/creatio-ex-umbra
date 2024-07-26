@@ -12,14 +12,14 @@ extends Node
 
 
 # CONSTANTS
-
+const SAVE_DATA_PATH : String = "user://Saves/"
+const THEME_PATH : String = "res://UI/game_theme.tres"
 
 # EXPORTING PROPERTIES https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
 # @EXPORT_CATEGORY("name")
 # @EXPORT_GROUP("name")
 # @EXPORT_SUBGROUP("name")
 # @EXPORT
-
 
 # PUBLIC VARIABLES
 var area_scene_paths : Dictionary = {
@@ -32,7 +32,9 @@ var area_scene_paths : Dictionary = {
 }
 var current_scene : Node = null
 var world : Node = null
-var game_data : GameData = null
+var popup_window : Node = null
+
+var game_data : Resource = load("res://Resources/game_data_default.tres")
 
 var window_size_base : Vector2 = Vector2(
 	ProjectSettings.get_setting("display/window/size/viewport_width"),
@@ -50,14 +52,30 @@ var window_size_base : Vector2 = Vector2(
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
 func _ready():
-	var root = get_tree().root
-	# The last child of root will be Main, while we need to change a scene in
-	# the World node, which is the first child of Main
-	var last_child = root.get_child(root.get_child_count() - 1)
-	if last_child.is_in_group("main"):
-		world = last_child.get_child(0)
-		# The current (area) scene will be the first child of world
-		current_scene = world.get_child(0)
+	get_curr_scene()
+	#create_new_game()
+
+func get_curr_scene() -> Node:
+	if current_scene == null:
+		var root := get_tree().root
+		# The last child of root will be Main, while we need to change a scene in
+		# the World node, which is the first child of Main
+		var last_child := root.get_child(root.get_child_count() - 1)
+		if last_child.is_in_group("main"):
+			world = last_child.get_child(0)
+			# The current (area) scene will be the first child of world
+			current_scene = world.get_child(0)
+	return current_scene
+
+func get_popup_window() -> Node:
+	if popup_window == null:
+		var root := get_tree().root
+		# The last child of root will be Main, while we need to change a scene in
+		# the World node, which is the first child of Main
+		var last_child := root.get_child(root.get_child_count() - 1)
+		if last_child.is_in_group("main"):
+			popup_window = last_child.get_child(1)
+	return popup_window
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -88,6 +106,31 @@ func _deferred_goto_scene(path):
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	#get_tree().current_scene = current_scene
 
+func check_save_path() -> Error:
+	if not DirAccess.dir_exists_absolute(SAVE_DATA_PATH):
+		return DirAccess.make_dir_absolute(SAVE_DATA_PATH)
+	return OK
+
+func save_game(save_num : int = -1) -> void:
+	if check_save_path() == OK:
+		if save_num == -1:
+			save_num = GameData.save_num
+			GameData.save_num += 1
+		var save_file_path := SAVE_DATA_PATH + "save_%s.tres" % save_num
+		ResourceSaver.save(game_data, save_file_path)
+	else:
+		printerr("Could not create save data folder")
+
+func load_game(save_num : int) -> Resource:
+	if ResourceLoader.exists(SAVE_DATA_PATH):
+		return ResourceLoader.load(SAVE_DATA_PATH + "save_%s.tres" % save_num)
+	return null
+
+
+#func create_new_game():
+	#game_data = GameData.new()
+	#game_data.player_storage
+	#save_game()
 # PRIVATE METHODS
 
 
