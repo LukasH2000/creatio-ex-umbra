@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_Interface.tscn" id="2_6o2uq"]
 [ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="3_f8yr3"]
 
-[sub_resource type="Resource" id="Resource_fc3ls"]
+[sub_resource type="Resource" id="Resource_x7tgd"]
 resource_local_to_scene = true
 resource_name = "BuyInv"
 script = ExtResource("3_f8yr3")
 items = Array[Resource("res://Resources/Items/item.gd")]([])
 num_slots = 12
 
-[sub_resource type="Resource" id="Resource_ortni"]
+[sub_resource type="Resource" id="Resource_m87dn"]
 resource_local_to_scene = true
 resource_name = "SellInv"
 script = ExtResource("3_f8yr3")
@@ -64,7 +64,7 @@ theme_override_constants/separation = 12
 [node name="BuyInv" parent="CenterContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_6o2uq")]
 unique_name_in_owner = true
 layout_mode = 2
-inventory = SubResource("Resource_fc3ls")
+inventory = SubResource("Resource_x7tgd")
 title = "Buy"
 inv_source = 2
 
@@ -84,7 +84,7 @@ text = "trade: +00000"
 [node name="SellInv" parent="CenterContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_6o2uq")]
 unique_name_in_owner = true
 layout_mode = 2
-inventory = SubResource("Resource_ortni")
+inventory = SubResource("Resource_m87dn")
 title = "Sell"
 inv_source = 3
 

@@ -1,0 +1,12 @@
+[gd_scene load_steps=6 format=3 uid="uid://b38g6w0p2gsrm"]
+
+[ext_resource type="Script" path="res://Globals/persistent_data.gd" id="1_u5nqd"]
+[ext_resource type="Resource" uid="uid://dinyoox0ms2x8" path="res://Resources/Items/Materials/leather_skin.tres" id="2_v6l54"]
+[ext_resource type="Resource" uid="uid://bvbbyjneb57dl" path="res://Resources/Items/Materials/steel_ingot.tres" id="3_rkwy4"]
+[ext_resource type="Resource" uid="uid://8ko1mwvp2n1w" path="res://Resources/Items/Materials/wood_log.tres" id="4_h6ewf"]
+[ext_resource type="Resource" uid="uid://bcegt1688frth" path="res://Resources/Items/Weapons/Longsword.tres" id="5_3fs7h"]
+
+[node name="PersistentData" type="Node"]
+script = ExtResource("1_u5nqd")
+materials_data = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("2_v6l54"), ExtResource("3_rkwy4"), ExtResource("4_h6ewf")])
+items_data = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("5_3fs7h")])

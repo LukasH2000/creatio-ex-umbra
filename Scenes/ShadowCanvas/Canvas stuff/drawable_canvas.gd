@@ -29,7 +29,7 @@ const CANVAS_SIDE_LENGTH : int = 168
 # PIXEL SIZE = 6 	-> 28x28 canvas
 # PIXEL SIZE = 7 	-> 24x24 canvas
 # PIXEL SIZE = 8 	-> 21x21 canvas
-var pixel_size : float = 6
+var pixel_size : float = 4
 var canvas_size : Vector2i
 var canvas_pixels : BitMap = BitMap.new()
 var canvas_preview : BitMap = BitMap.new()

@@ -12,7 +12,14 @@ class_name InventoryItem extends TextureRect
 
 
 # CONSTANTS
-const item_tiers : Array[String] = ["MORTAL", "PEAK MORTAL", "MAGICAL", "DRACONIC", "DIVINE", "IMMORTAL"]
+const item_tiers : Array[String] = [
+	"MORTAL",
+	"[color=green]PEAK MORTAL[/color]",
+	"[color=blue]MAGICAL[/color]",
+	"[color=red]DRACONIC[/color]",
+	"[color=gold]DIVINE[/color]",
+	"[color=plum]IMMORTAL[/color]"
+]
 const item_grades : Array[String] = ["F", "E", "D", "C", "B", "A", "S", "P"]
 
 # EXPORTING PROPERTIES https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
@@ -23,7 +30,7 @@ const item_grades : Array[String] = ["F", "E", "D", "C", "B", "A", "S", "P"]
 @export var item : Item
 
 # PUBLIC VARIABLES
-
+var label_scene := preload("res://UI/Inventory/item_tooltip.tscn")
 
 # PRIVATE VARIABLES
 
@@ -68,10 +75,11 @@ func make_drag_preview(at_pos : Vector2) -> Control:
 	return c
 
 func update_tooltip_and_label():
-	tooltip_text = "%s\nTier: %s\nValue: %s" % [
+	tooltip_text = "%s\nTier: %s\nGrade: %s\nValue: %s" % [
 			item.name, 
 			item_tiers[item.tier],
-			item.gold_value
+			item_grades[item.grade],
+			item.get_actual_value()
 		]
 	if item.item_type == Item.ITEM_TYPE.MATERIAL:
 		tooltip_text += "\nAmount: %s" % item.amount_held
@@ -84,6 +92,20 @@ func update_tooltip_and_label():
 			add_child(amount_label)
 		amount_label.text = "%s" % item.amount_held
 	tooltip_text += "\n\n%s" % item.description
+	_make_custom_tooltip(tooltip_text)
+
+func _make_custom_tooltip(for_text):
+	#var label := RichTextLabel.new()
+	var label := label_scene.instantiate()
+	#label.bbcode_enabled = true
+	#label.visible = true
+	#label.add_theme_font_size_override("normal_font_size", 12)
+	#label.text = for_text
+	label.text = for_text
+	#label.fit_content = true
+	label.custom_minimum_size = Vector2(128,1)
+	#label.mouse_force_pass_scroll_events = false
+	return label
 # PRIVATE METHODS
 
 

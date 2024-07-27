@@ -1,10 +1,60 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://diprf4k3nxmi3"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=9 format=3 uid="uid://diprf4k3nxmi3"]
 
 [ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="1_8r80n"]
-[ext_resource type="Resource" uid="uid://bcegt1688frth" path="res://Resources/Items/Weapons/Longsword.tres" id="1_21yys"]
-[ext_resource type="Resource" uid="uid://8ko1mwvp2n1w" path="res://Resources/Items/Materials/wood_log.tres" id="2_w532q"]
+[ext_resource type="Image" uid="uid://ce4b5mkoig6gy" path="res://Resources/Items/Materials/steel_ingot.png" id="1_emvqw"]
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="2_baco2"]
+[ext_resource type="Image" uid="uid://ck521nrnjw7el" path="res://Resources/Items/Materials/wood_log.png" id="3_jec2l"]
+[ext_resource type="Image" uid="uid://cp5ep4hckdp5t" path="res://Resources/Items/Materials/leather_skin.png" id="4_c4tnx"]
+
+[sub_resource type="Resource" id="Resource_ka6m6"]
+script = ExtResource("2_baco2")
+mat_type = 1
+mat_uses = Array[int]([1, 2, 3, 5, 7, 8, 12, 0])
+amount_held = 5
+name = "Steel ingot"
+tier = 0
+grade = 0
+description = "A steel ingot, created by
+the local Blacksmith."
+gold_value = 10
+image = ExtResource("1_emvqw")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true
+
+[sub_resource type="Resource" id="Resource_kssx0"]
+script = ExtResource("2_baco2")
+mat_type = 0
+mat_uses = Array[int]([0, 1, 2, 3, 7, 11, 16])
+amount_held = 5
+name = "Wood log"
+tier = 0
+grade = 0
+description = "A normal wooden log, harvested
+from the nearby forest."
+gold_value = 10
+image = ExtResource("3_jec2l")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true
+
+[sub_resource type="Resource" id="Resource_sd22h"]
+script = ExtResource("2_baco2")
+mat_type = 2
+mat_uses = Array[int]([2, 4, 9, 10, 13])
+amount_held = 5
+name = "Tanned leather"
+tier = 0
+grade = 0
+description = "A tanned leather skin 
+from the Hunter's Lodge."
+gold_value = 10
+image = ExtResource("4_c4tnx")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true
 
 [resource]
 script = ExtResource("1_8r80n")
-items = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("1_21yys"), ExtResource("2_w532q")])
+items = Array[Resource("res://Resources/Items/item.gd")]([SubResource("Resource_ka6m6"), SubResource("Resource_kssx0"), SubResource("Resource_sd22h")])
 num_slots = 30

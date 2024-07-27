@@ -18,7 +18,7 @@ config/icon="res://icon_64x64.svg"
 
 [autoload]
 
-PersistentData="*res://Globals/persistent_data.gd"
+PersistentData="*res://Globals/persistent_data.tscn"
 
 [display]
 

@@ -20,4 +20,4 @@ Button/styles/pressed = ExtResource("4_2s0lr")
 FlowContainer/constants/h_separation = 6
 FlowContainer/constants/v_separation = 6
 PanelContainer/styles/panel = ExtResource("5_58w25")
-TooltipLabel/font_sizes/font_size = 12
+TooltipLabel/font_sizes/font_size = 10

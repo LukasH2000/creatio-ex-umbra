@@ -57,17 +57,9 @@ func is_same_material(material_to_compare : AlchemyMaterial) -> bool:
 				return true
 	return false
 
-func custom_duplicate() -> AlchemyMaterial:
+func custom_duplicate() -> Item:
 	var dupe := AlchemyMaterial.new()
-	dupe.name = name
-	dupe.tier = tier
-	dupe.grade = grade
-	dupe.description = description
-	dupe.gold_value = gold_value
-	dupe.image = image
-	dupe.item_components = item_components
-	dupe.item_type = item_type
-	dupe.transmutable = transmutable
+	dupe = set_dupe_props(dupe)
 	dupe.mat_type = mat_type
 	dupe.mat_uses = mat_uses
 	dupe.amount_held = amount_held
@@ -75,6 +67,10 @@ func custom_duplicate() -> AlchemyMaterial:
 
 func get_actual_value() -> int:
 	return super() * amount_held
+
+func randomize_item():
+	super()
+	amount_held = randi_range(1, 999)
 # PRIVATE METHODS
 
 

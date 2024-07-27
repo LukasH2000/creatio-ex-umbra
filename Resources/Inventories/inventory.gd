@@ -50,24 +50,24 @@ func resize_inventory():
 	#inventory_updated.emit()
 
 func add_item(item : Item, index : int): # TODO
-	resize_inventory()
+	#resize_inventory()
 	items[index] = item
-	resize_inventory()
+	#resize_inventory()
 	#inventory_updated.emit()
 
 func remove_item(item : Item): # TODO
 	if item in items:
-		resize_inventory()
-		items.erase(item)
-	resize_inventory()
+		#resize_inventory()
+		items[items.find(item)] = null
+	#resize_inventory()
 		#inventory_updated.emit()
 
 func remove_item_at(index : int): # TODO
 	#if item in items:
 		#items.erase(item)
-	resize_inventory()
-	items.remove_at(index)
-	resize_inventory()
+	#resize_inventory()
+	items[index] = null
+	#resize_inventory()
 	#inventory_updated.emit()
 
 func count_items() -> int:
@@ -89,6 +89,19 @@ func clear_inventory():
 	for i in num_slots:
 		items[i] = null
 	resize_inventory()
+
+func sort_inventory(sort_func : Callable):
+	#items.sort() # sort items and null
+	items.sort_custom(sort_func)
+
+func sort_by_tier(a : Item, b : Item) -> bool:
+	if a != null:
+		#if : return true
+		if b == null \
+		or a.tier < b.tier\
+		or (a.tier == b.tier and a.grade < b.grade):
+			return true
+	return false
 # PRIVATE METHODS
 
 

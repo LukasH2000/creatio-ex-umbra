@@ -126,11 +126,11 @@ func create_form_discovered():
 	pass
 
 func get_actual_value() -> int:
-	var grade_multiplier := grade * 2
-	var tier_multiplier := tier * 2
-	var actual_value := gold_value
-	actual_value += gold_value * tier_multiplier
-	actual_value += gold_value * grade_multiplier
+	var tier_multiplier := (tier+1) ** 2 # if tier > 0 else 0
+	var grade_multiplier := (grade+1) * tier_multiplier
+	var actual_value := gold_value * grade_multiplier
+	#actual_value += gold_value * tier_multiplier
+	#actual_value += gold_value * grade_multiplier
 	return actual_value
 
 func get_sell_value() -> int:
@@ -149,6 +149,27 @@ func is_same_item(item_to_compare : Item):
 		transmutable == item_to_compare.transmutable
 	]
 	return not checks_array.has(false)
+
+func custom_duplicate() -> Item:
+	var dupe := Item.new()
+	return set_dupe_props(dupe)
+
+func set_dupe_props(dupe : Item):
+	dupe.name = name
+	dupe.tier = tier
+	dupe.grade = grade
+	dupe.description = description
+	dupe.gold_value = gold_value
+	dupe.image = image
+	dupe.item_components = item_components
+	dupe.item_type = item_type
+	dupe.transmutable = transmutable
+	return dupe
+
+func randomize_item():
+	#print(TIER[TIER.keys().pick_random()])
+	tier = TIER[TIER.keys().pick_random()]
+	grade = GRADE[GRADE.keys().pick_random()]
 
 # PRIVATE METHODS
 

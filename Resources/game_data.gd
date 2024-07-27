@@ -35,6 +35,7 @@ class_name GameData extends Resource
 # PUBLIC VARIABLES
 static var save_num = 0
 
+
 # PRIVATE VARIABLES
 
 
@@ -46,7 +47,27 @@ static var save_num = 0
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
+# TODO: every day, randomize the shop stores
+func pass_day():
+	day += 1
+	randomize_stores()
 
+func randomize_stores():
+	randomize_store_inventory(material_store, PersistentData.materials_data)
+	randomize_store_inventory(item_store, PersistentData.items_data)
+
+func randomize_store_inventory(store : Inventory, data_array : Array[Item]):
+	# TODO: make weighted randomization
+	# so the chance of a high tier or grade
+	# appearing is much lower (depending on rep/location)
+	store.clear_inventory()
+	var random_amount_of_items := randi_range(store.num_slots / 10, store.num_slots / 2)
+	for i in random_amount_of_items:
+		var item : Item= data_array.pick_random()
+		item = item.custom_duplicate()
+		item.randomize_item()
+		store.add_item(item, i)
+		
 
 # PRIVATE METHODS
 

@@ -43,14 +43,14 @@ func close_popup():
 	hide()
 
 
-func show_popup(type : TYPE, material : AlchemyMaterial = null) -> void:
+func show_popup(type : TYPE, alch_mat : AlchemyMaterial = null) -> void:
 	popup_type = type
 	if type == TYPE.SPLIT_STACK:
 		title.text = "Select amount"
 		text.hide()
 		spinbox.show()
 		spinbox.value = 0
-		spinbox.max_value = material.amount_held
+		spinbox.max_value = alch_mat.amount_held
 		button.text = "Select"
 	if type == TYPE.ERR_GOLD:
 		title.text = "Not enough gold!"

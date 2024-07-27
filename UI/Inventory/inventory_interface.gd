@@ -52,7 +52,8 @@ func _ready():
 	#custom_minimum_size = grid_size
 	#$InventoryScroll.custom_minimum_size.y = grid_size.y/2
 	#%InventoryGrid.custom_minimum_size = grid_size
-	update_inventory()
+	if inventory:
+		update_inventory()
 
 func update_inventory() -> void:
 	for child in %InventoryGrid.get_children():
@@ -60,6 +61,7 @@ func update_inventory() -> void:
 		child.queue_free()
 	
 	if inventory:
+		inventory.sort_inventory(inventory.sort_by_tier)
 		for i in range(inventory.num_slots):
 			var slot := InventorySlot.new(SLOT_SIZE, Item.ITEM_TYPE.MAIN, stylebox, inv_source)
 			#var ref_rect := ReferenceRect.new()
@@ -78,6 +80,7 @@ func update_inventory() -> void:
 			#%InventoryGrid.get_child(i)
 		#%InventoryScroll.custom_minimum_size.y = %InventoryScroll/MarginContainer.size.y
 	%TitleLabel.text = title
+	
 
 func slot_changed(item: Item, slot: InventorySlot):
 	#print("from ", old_slot, " to ", new_slot)
@@ -86,6 +89,7 @@ func slot_changed(item: Item, slot: InventorySlot):
 	else:
 		inventory.remove_item_at(slot.get_index())
 		#var inv_item : Node = slot.get
+	#inventory.sort_inventory(inventory.sort_by_tier)
 	inventory_changed.emit()
 
 func clear_inventory():

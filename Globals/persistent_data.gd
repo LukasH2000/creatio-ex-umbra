@@ -20,6 +20,8 @@ const THEME_PATH : String = "res://UI/game_theme.tres"
 # @EXPORT_GROUP("name")
 # @EXPORT_SUBGROUP("name")
 # @EXPORT
+@export var materials_data : Array[Item]
+@export var items_data : Array[Item]
 
 # PUBLIC VARIABLES
 var area_scene_paths : Dictionary = {
@@ -53,6 +55,7 @@ var window_size_base : Vector2 = Vector2(
 # PUBLIC METHODS
 func _ready():
 	get_curr_scene()
+	game_data.randomize_stores()
 	#create_new_game()
 
 func get_curr_scene() -> Node:
