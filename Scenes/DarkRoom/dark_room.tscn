@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx1gi81t11v7j"]
+[gd_scene load_steps=7 format=3 uid="uid://dx1gi81t11v7j"]
 
 [ext_resource type="Texture2D" uid="uid://dj0rp4ny2u8mx" path="res://Scenes/DarkRoom/dark_room_bg.png" id="1_3ayo2"]
+[ext_resource type="Script" path="res://Scenes/DarkRoom/dark_room.gd" id="1_t63cd"]
 [ext_resource type="PackedScene" uid="uid://d0gvh212kv4n" path="res://Scenes/Common/doorway_light.tscn" id="2_odgvp"]
 [ext_resource type="Script" path="res://Scenes/DarkRoom/dark_room_interface.gd" id="4_se1vr"]
-[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="5_0vcry"]
-[ext_resource type="Texture2D" uid="uid://b65ykf0hs2lma" path="res://Resources/button_normal_texture.tres" id="5_fk8g7"]
-[ext_resource type="Texture2D" uid="uid://nh0lgw3db0h3" path="res://Resources/button_selection_texture.tres" id="6_uh0ae"]
+[ext_resource type="PackedScene" uid="uid://cp8cau48usklx" path="res://UI/AlchemySelection/alchemy_selection_interface.tscn" id="6_6jl5y"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="7_up3dj"]
 
 [node name="DarkRoom" type="Node"]
+script = ExtResource("1_t63cd")
 
 [node name="DarkRoomArea" type="Node2D" parent="."]
 
@@ -33,54 +33,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_se1vr")
 
-[node name="Labels" type="Control" parent="DarkRoomInterface"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LabelWorkshop" type="RichTextLabel" parent="DarkRoomInterface/Labels"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 85.0
-offset_right = 64.0
-offset_bottom = 141.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_0vcry")
-bbcode_enabled = true
-text = "[center]To the Umbral Workshop[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="LabelShadowCanvas" type="RichTextLabel" parent="DarkRoomInterface/Labels"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = -156.0
-offset_right = 64.0
-offset_bottom = -100.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_0vcry")
-bbcode_enabled = true
-text = "[center]Open the Shadow Canvas[/center]"
-fit_content = true
-scroll_active = false
-
 [node name="Buttons" type="Control" parent="DarkRoomInterface"]
 layout_mode = 1
 anchors_preset = 15
@@ -89,26 +41,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonWorkshop" type="TextureButton" parent="DarkRoomInterface/Buttons" groups=["area_change_buttons"]]
+[node name="ButtonWorkshop" type="Button" parent="DarkRoomInterface/Buttons" groups=["area_change_buttons"]]
+custom_minimum_size = Vector2(0, 26)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -61.0
-offset_top = 132.0
-offset_right = 62.0
-offset_bottom = 180.0
+offset_left = -60.0
+offset_top = 119.0
+offset_right = 64.0
+offset_bottom = 145.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_fk8g7")
-texture_hover = ExtResource("6_uh0ae")
-ignore_texture_size = true
-stretch_mode = 0
+text = "To workshop"
 script = ExtResource("7_up3dj")
 
-[node name="ButtonShadowCanvas" type="TextureButton" parent="DarkRoomInterface/Buttons" groups=["area_change_buttons"]]
+[node name="ButtonShadowCanvas" type="Button" parent="DarkRoomInterface/Buttons"]
+custom_minimum_size = Vector2(0, 26)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -116,20 +67,19 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -108.0
-offset_top = -109.0
+offset_top = -139.0
 offset_right = 110.0
-offset_bottom = 109.0
+offset_bottom = -113.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_fk8g7")
-texture_hover = ExtResource("6_uh0ae")
-ignore_texture_size = true
-stretch_mode = 0
+text = "Begin Umbral Alchemy"
 script = ExtResource("7_up3dj")
 
-[connection signal="mouse_entered" from="DarkRoomInterface/Buttons/ButtonWorkshop" to="DarkRoomInterface" method="_on_button_workshop_mouse_entered"]
-[connection signal="mouse_exited" from="DarkRoomInterface/Buttons/ButtonWorkshop" to="DarkRoomInterface" method="_on_button_workshop_mouse_exited"]
+[node name="AlchemySelectionInterface" parent="DarkRoomInterface" instance=ExtResource("6_6jl5y")]
+visible = false
+layout_mode = 1
+
+[connection signal="alch_interface_changed" from="DarkRoomInterface" to="." method="switch_canvas_modulate_visibility"]
 [connection signal="pressed" from="DarkRoomInterface/Buttons/ButtonWorkshop" to="DarkRoomInterface/Buttons/ButtonWorkshop" method="_on_pressed" binds= ["Workshop"]]
-[connection signal="mouse_entered" from="DarkRoomInterface/Buttons/ButtonShadowCanvas" to="DarkRoomInterface" method="_on_button_shadow_canvas_mouse_entered"]
-[connection signal="mouse_exited" from="DarkRoomInterface/Buttons/ButtonShadowCanvas" to="DarkRoomInterface" method="_on_button_shadow_canvas_mouse_exited"]
-[connection signal="pressed" from="DarkRoomInterface/Buttons/ButtonShadowCanvas" to="DarkRoomInterface/Buttons/ButtonShadowCanvas" method="_on_pressed" binds= ["Shadow Canvas"]]
+[connection signal="pressed" from="DarkRoomInterface/Buttons/ButtonShadowCanvas" to="DarkRoomInterface" method="show_alch_select_interface"]
+[connection signal="selection_cancelled" from="DarkRoomInterface/AlchemySelectionInterface" to="DarkRoomInterface" method="_on_alchemy_selection_interface_selection_cancelled"]

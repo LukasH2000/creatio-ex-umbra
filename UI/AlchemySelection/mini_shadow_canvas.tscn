@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv6nn0hxay1q4"]
+
+[ext_resource type="Script" path="res://UI/AlchemySelection/mini_shadow_canvas.gd" id="1_hn8fn"]
+[ext_resource type="Texture2D" uid="uid://cdsbcnkveb0my" path="res://Scenes/ShadowCanvas/shadow_canvas.png" id="1_wvo4w"]
+[ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="2_0poec"]
+
+[sub_resource type="Resource" id="Resource_ea2uo"]
+resource_local_to_scene = true
+script = ExtResource("2_0poec")
+items = Array[Resource("res://Resources/Items/item.gd")]([])
+num_slots = 9
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xou0"]
+atlas = ExtResource("1_wvo4w")
+region = Rect2(144, 4, 352, 352)
+
+[node name="MiniShadowCanvas" type="PanelContainer"]
+custom_minimum_size = Vector2(221, 270)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -145.5
+offset_right = 101.0
+offset_bottom = 124.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_hn8fn")
+inventory = SubResource("Resource_ea2uo")
+title = "Preview"
+inv_source = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2xou0")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="ButtonStartAlchemy" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+text = "Start Creating"
+
+[node name="Slots" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="pressed" from="VBoxContainer/ButtonStartAlchemy" to="." method="_on_button_start_alchemy_pressed"]

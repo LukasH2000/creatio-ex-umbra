@@ -9,7 +9,7 @@ class_name PopupWindow extends Control
 signal popup_finished
 
 # ENUMS
-enum TYPE {SPLIT_STACK, ERR_SLOTS, ERR_GOLD}
+enum TYPE {SPLIT_STACK, ERR_SLOTS, ERR_GOLD, ERR_ALCH_SELECT}
 
 # CONSTANTS
 
@@ -32,6 +32,8 @@ var popup_type : TYPE
 @onready var text : Label = $PopupWindow/PopupPanel/VBoxContainer/PopupText
 @onready var spinbox : SpinBox = $PopupWindow/PopupPanel/VBoxContainer/SpinBox
 @onready var button : Button = $PopupWindow/PopupPanel/VBoxContainer/Button
+@onready var pu_win_container : CenterContainer = $PopupWindow
+@onready var pu_win : PanelContainer = $PopupWindow/PopupPanel
 # OPTIONAL BUILT-IN VIRTUAL _INIT METHOD
 # OPTIONAL BUILT-IN VIRTUAL _ENTER_TREE() METHOD
 # BUILT-IN VIRTUAL _READY METHOD
@@ -52,6 +54,11 @@ func show_popup(type : TYPE, alch_mat : AlchemyMaterial = null) -> void:
 		spinbox.value = 0
 		spinbox.max_value = alch_mat.amount_held
 		button.text = "Select"
+		pu_win.custom_minimum_size = Vector2.ZERO
+		pu_win.size.x = 93
+	else:
+		pu_win.custom_minimum_size.x = 93*2
+		pu_win.size.x = pu_win.custom_minimum_size.x
 	if type == TYPE.ERR_GOLD:
 		title.text = "Not enough gold!"
 		text.show()
@@ -62,6 +69,11 @@ func show_popup(type : TYPE, alch_mat : AlchemyMaterial = null) -> void:
 		title.text = "Not enough space!"
 		text.show()
 		text.text = "You don't have enough inventory space to complete the transaction!"
+		spinbox.hide()
+	if type == TYPE.ERR_ALCH_SELECT:
+		title.text = "Select Form and materials!"
+		text.show()
+		text.text = "You cannot start transmuting an item without a form and at least 1 material!"
 		spinbox.hide()
 		button.text = "Close"
 	show()

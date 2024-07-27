@@ -23,7 +23,7 @@ class_name GameData extends Resource
 @export var player_storage : Inventory
 @export var player_gold : int
 @export var player_reputation : int
-@export var discovered_forms : Array[Form]
+@export var discovered_forms : Dictionary
 @export var discovered_materials : Array[AlchemyMaterial]
 
 @export var day : int
@@ -53,8 +53,8 @@ func pass_day():
 	randomize_stores()
 
 func randomize_stores():
-	randomize_store_inventory(material_store, PersistentData.materials_data)
-	randomize_store_inventory(item_store, PersistentData.items_data)
+	randomize_store_inventory(material_store, PersistentData.materials_inv.items)
+	randomize_store_inventory(item_store, PersistentData.items_inv.items)
 
 func randomize_store_inventory(store : Inventory, data_array : Array[Item]):
 	# TODO: make weighted randomization
@@ -67,8 +67,17 @@ func randomize_store_inventory(store : Inventory, data_array : Array[Item]):
 		item = item.custom_duplicate()
 		item.randomize_item()
 		store.add_item(item, i)
-		
 
+func update_discovered_form(name : String, form : BitMap) -> void:
+	discovered_forms[name] = form
+
+func get_discovered_form(name: String) -> BitMap:
+	return discovered_forms[name]
+
+func get_discovered_form_texture(name: String) -> ImageTexture:
+	var img : Image = discovered_forms[name].convert_to_image()
+	var texture := ImageTexture.create_from_image(img)
+	return texture
 # PRIVATE METHODS
 
 

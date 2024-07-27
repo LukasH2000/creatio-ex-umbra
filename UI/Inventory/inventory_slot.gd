@@ -34,12 +34,18 @@ signal slot_changed(item: Item, slot: InventorySlot)
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-func _init(cms : Vector2, type : Item.ITEM_TYPE, stylebox : StyleBox, inv_src : InventoryInterface.INV_SOURCE) -> void:
+func _init(
+	cms : Vector2 = Vector2(),
+	type : Item.ITEM_TYPE = Item.ITEM_TYPE.MAIN,
+	stylebox : StyleBox = null,
+	inv_src : InventoryInterface.INV_SOURCE = InventoryInterface.INV_SOURCE.PLAYER
+) -> void:
 	custom_minimum_size = cms
 	slot_item_type = type
 	slot_source_type = inv_src
 	theme = load(PersistentData.THEME_PATH)
-	add_theme_stylebox_override("panel", stylebox)
+	if stylebox:
+		add_theme_stylebox_override("panel", stylebox)
 
 func _can_drop_data(at_position : Vector2, data : Variant) -> bool:
 	if data is InventoryItem:
@@ -49,9 +55,14 @@ func _can_drop_data(at_position : Vector2, data : Variant) -> bool:
 				# TODO: allow dropping onto item stack if it's the same item
 				if get_child_count() > 0:
 					pass
+					#if slot_source_type == InventoryInterface.INV_SOURCE.CANVAS \
+					#or slot_source_type == InventoryInterface.INV_SOURCE.CANVAS_MATERIALS:
+						#return true
 					# ALERT: ALL SLOTS HAVE SLOT_ITEM_TYPE = MAIN, ALWAYS FALSE
 					#if slot_item_type != data_parent.slot_item_type:
 					#return get_child(0).item.item_type == data.item.item_type
+				elif slot_source_type == InventoryInterface.INV_SOURCE.CANVAS_MATERIALS:
+					return data.item.item_type == Item.ITEM_TYPE.MATERIAL
 				else: 
 					return true
 			else:
@@ -72,6 +83,10 @@ func compatible_inv(data_src : InventoryInterface.INV_SOURCE) -> bool:
 			return true
 		if slot_source_type == sources.SHOP_BUY and data_src == sources.SHOP_SELLER:
 			return true
+		if slot_source_type == sources.CANVAS and data_src == sources.CANVAS_FORMS:
+			return true
+		if slot_source_type == sources.CANVAS_MATERIALS and data_src == sources.PLAYER:
+			return true
 	return false
 
 func _drop_data(at_position, data):
@@ -80,39 +95,62 @@ func _drop_data(at_position, data):
 	var is_not_zero := true
 	if data_slot.slot_source_type != slot_source_type:
 		if data.item.item_type == Item.ITEM_TYPE.MATERIAL:
-			var popup_window : Node = PersistentData.get_popup_window()
-			popup_window.show_popup(PopupWindow.TYPE.SPLIT_STACK, data.item)
-			var selected_value : int = await popup_window.popup_finished
+			var selected_value : int
+			var is_canvas := false
+			if slot_source_type == InventoryInterface.INV_SOURCE.CANVAS_MATERIALS:
+				selected_value = 1
+				is_canvas = true
+			else:
+				var popup_window : Node = PersistentData.get_popup_window()
+				popup_window.show_popup(PopupWindow.TYPE.SPLIT_STACK, data.item)
+				selected_value = await popup_window.popup_finished
 			if selected_value > 0 :
 				if selected_value < data.item.amount_held:
-					# ALERT: duplicate does not dupe script or properties
+					# ALERT: duplicate() does not dupe script or properties
 					# var data_duplicate : Node = data.duplicate()
 					var old_item : Item = data.item
 					var new_item : Item = old_item.custom_duplicate()
-					var data_duplicate : Node = InventoryItem.new(new_item)
-					
+					var data_duplicate : Node = InventoryItem.new(new_item, data_slot.slot_source_type)
 					data_duplicate.item.amount_held = data.item.amount_held - selected_value
 					data.item.amount_held = selected_value
+					
+					data.item_src = slot_source_type
 					data_duplicate.update_tooltip_and_label()
 					data.update_tooltip_and_label()
+					if is_canvas:
+						data.remove_label()
 					data_slot.add_child(data_duplicate)
 					data_slot.slot_changed.emit(data_duplicate.item, data_slot)
 					data_slot_changed = true
 			else:
 				is_not_zero = false
+		if data_slot.slot_source_type == InventoryInterface.INV_SOURCE.CANVAS_FORMS:
+			var old_item : Item = data.item
+			var new_item : Item = old_item.custom_duplicate()
+			var data_duplicate : Node = InventoryItem.new(new_item, data_slot.slot_source_type)
+			
+			data.item_src = slot_source_type
+			data_slot.add_child(data_duplicate)
+			data_slot.slot_changed.emit(data_duplicate.item, data_slot)
+			data_slot_changed = true
+	
 	# TODO: allow dropping onto item stack if it's the same item
 	if is_not_zero:
 		if get_child_count() > 0:
 			var inv_item := get_child(0)
 			if inv_item == data:
 				return
+			inv_item.item_src = data_slot.slot_source_type
 			inv_item.reparent(data_slot)
+			data_slot.set_self_modulate(inv_item.TIER_COLORS[inv_item.item.tier])
 			data_slot.slot_changed.emit(inv_item.item, data_slot)
 			data_slot_changed = true
 		elif not data_slot_changed:
+			data_slot.set_self_modulate(data.TIER_COLORS[0])
 			data_slot.slot_changed.emit(null, data_slot)
 			data_slot_changed = true
 		data.reparent(self)
+		set_self_modulate(data.TIER_COLORS[data.item.tier])
 		slot_changed.emit(data.item, self)
 # PRIVATE METHODS
 

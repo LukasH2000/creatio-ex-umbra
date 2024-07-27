@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://yw5fut2qvnf7"
+path="res://.godot/imported/longsword_base_form.png-a6bc391e67ac0141595ced5d52dda46c.image"
+
+[deps]
+
+source_file="res://Resources/Items/Weapons/longsword_base_form.png"
+dest_files=["res://.godot/imported/longsword_base_form.png-a6bc391e67ac0141595ced5d52dda46c.image"]
+
+[params]
+

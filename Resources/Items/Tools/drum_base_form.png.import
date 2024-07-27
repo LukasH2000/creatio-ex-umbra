@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://drd4rg1m58na3"
+path="res://.godot/imported/drum_base_form.png-ef5f1610529e9728cc2a440d8d677962.image"
+
+[deps]
+
+source_file="res://Resources/Items/Tools/drum_base_form.png"
+dest_files=["res://.godot/imported/drum_base_form.png-ef5f1610529e9728cc2a440d8d677962.image"]
+
+[params]
+

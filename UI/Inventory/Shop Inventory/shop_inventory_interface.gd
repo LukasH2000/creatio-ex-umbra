@@ -61,9 +61,9 @@ func _on_button_end_transaction_pressed():
 		%SellInv.clear_inventory()
 		visible = false
 	elif transaction_result == TRANSACTION_RESULT.NOT_ENOUGH_SLOTS:
-		PersistentData.popup_window.show_popup(PopupWindow.TYPE.ERR_SLOTS)
+		PersistentData.get_popup_window().show_popup(PopupWindow.TYPE.ERR_SLOTS)
 	elif transaction_result == TRANSACTION_RESULT.NOT_ENOUGH_GOLD:
-		PersistentData.popup_window.show_popup(PopupWindow.TYPE.ERR_GOLD)
+		PersistentData.get_popup_window().show_popup(PopupWindow.TYPE.ERR_GOLD)
 
 func check_transaction() -> TRANSACTION_RESULT:
 	if trade_value < 0 and PersistentData.game_data.player_gold < -trade_value:
@@ -98,3 +98,13 @@ func update_trade_value():
 # SUBCLASSES
 
 
+
+
+func _on_button_cancel_pressed():
+	%BuyInv.inventory.add_items_to_inv(%ShopInv.inventory)
+	%SellInv.inventory.add_items_to_inv(PersistentData.game_data.player_storage)
+	%BuyInv.inventory.clear_inventory()
+	%SellInv.inventory.clear_inventory()
+	%BuyInv.update_inventory()
+	%SellInv.update_inventory()
+	visible = false

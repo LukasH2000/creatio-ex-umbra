@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://cciqjdtmhtt1v"
+path="res://.godot/imported/drum.png-4a20e09225f2233c045d4f6afccae174.image"
+
+[deps]
+
+source_file="res://Resources/Items/Tools/drum.png"
+dest_files=["res://.godot/imported/drum.png-4a20e09225f2233c045d4f6afccae174.image"]
+
+[params]
+

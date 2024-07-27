@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgieeaonogs84"]
 
 [ext_resource type="Script" path="res://UI/Inventory/Shop Inventory/shop_inventory_interface.gd" id="1_e7tcy"]
-[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_Interface.tscn" id="2_6o2uq"]
+[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_interface.tscn" id="2_6o2uq"]
 [ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="3_f8yr3"]
 
-[sub_resource type="Resource" id="Resource_x7tgd"]
+[sub_resource type="Resource" id="Resource_l1ws1"]
 resource_local_to_scene = true
 resource_name = "BuyInv"
 script = ExtResource("3_f8yr3")
 items = Array[Resource("res://Resources/Items/item.gd")]([])
 num_slots = 12
 
-[sub_resource type="Resource" id="Resource_m87dn"]
+[sub_resource type="Resource" id="Resource_uwedq"]
 resource_local_to_scene = true
 resource_name = "SellInv"
 script = ExtResource("3_f8yr3")
@@ -64,7 +64,7 @@ theme_override_constants/separation = 12
 [node name="BuyInv" parent="CenterContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_6o2uq")]
 unique_name_in_owner = true
 layout_mode = 2
-inventory = SubResource("Resource_x7tgd")
+inventory = SubResource("Resource_l1ws1")
 title = "Buy"
 inv_source = 2
 
@@ -84,11 +84,19 @@ text = "trade: +00000"
 [node name="SellInv" parent="CenterContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_6o2uq")]
 unique_name_in_owner = true
 layout_mode = 2
-inventory = SubResource("Resource_m87dn")
+inventory = SubResource("Resource_uwedq")
 title = "Sell"
 inv_source = 3
 
-[node name="ButtonEndTransaction" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="ButtonCancel" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+text = "Cancel"
+
+[node name="ButtonEndTransaction" type="Button" parent="CenterContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 text = "End transaction"
 
@@ -103,4 +111,5 @@ inventory = null
 title = "Shop Inventory"
 inv_source = 1
 
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/ButtonEndTransaction" to="." method="_on_button_end_transaction_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer2/HBoxContainer2/ButtonEndTransaction" to="." method="_on_button_end_transaction_pressed"]

@@ -1,12 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://b38g6w0p2gsrm"]
+[gd_scene load_steps=11 format=3 uid="uid://b38g6w0p2gsrm"]
 
 [ext_resource type="Script" path="res://Globals/persistent_data.gd" id="1_u5nqd"]
 [ext_resource type="Resource" uid="uid://dinyoox0ms2x8" path="res://Resources/Items/Materials/leather_skin.tres" id="2_v6l54"]
 [ext_resource type="Resource" uid="uid://bvbbyjneb57dl" path="res://Resources/Items/Materials/steel_ingot.tres" id="3_rkwy4"]
 [ext_resource type="Resource" uid="uid://8ko1mwvp2n1w" path="res://Resources/Items/Materials/wood_log.tres" id="4_h6ewf"]
 [ext_resource type="Resource" uid="uid://bcegt1688frth" path="res://Resources/Items/Weapons/Longsword.tres" id="5_3fs7h"]
+[ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="5_34qyh"]
+[ext_resource type="Resource" uid="uid://bfpu001ywb3f3" path="res://Resources/Items/Tools/Pickaxe.tres" id="6_cx1ie"]
+[ext_resource type="Resource" uid="uid://8hytm7hfnk87" path="res://Resources/Items/Tools/Drum.tres" id="7_k7csr"]
+
+[sub_resource type="Resource" id="Resource_1tkac"]
+resource_local_to_scene = true
+script = ExtResource("5_34qyh")
+items = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("4_h6ewf"), ExtResource("3_rkwy4"), ExtResource("2_v6l54")])
+num_slots = 3
+
+[sub_resource type="Resource" id="Resource_4ubqp"]
+resource_local_to_scene = true
+script = ExtResource("5_34qyh")
+items = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("6_cx1ie"), ExtResource("5_3fs7h"), ExtResource("7_k7csr")])
+num_slots = 3
 
 [node name="PersistentData" type="Node"]
 script = ExtResource("1_u5nqd")
-materials_data = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("2_v6l54"), ExtResource("3_rkwy4"), ExtResource("4_h6ewf")])
-items_data = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("5_3fs7h")])
+materials_inv = SubResource("Resource_1tkac")
+items_inv = SubResource("Resource_4ubqp")

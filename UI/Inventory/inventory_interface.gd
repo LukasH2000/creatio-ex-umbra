@@ -9,7 +9,7 @@ class_name InventoryInterface extends Control
 signal inventory_changed
 
 # ENUMS
-enum INV_SOURCE {PLAYER, SHOP_SELLER, SHOP_BUY, SHOP_SELL}
+enum INV_SOURCE {PLAYER, SHOP_SELLER, SHOP_BUY, SHOP_SELL, CANVAS_FORMS, CANVAS_MATERIALS, CANVAS}
 
 # CONSTANTS
 const SLOT_SIZE := Vector2(22+6, 22+6)
@@ -36,7 +36,8 @@ const SLOT_SIZE := Vector2(22+6, 22+6)
 	#"res://Resources/Items/Materials/wood_log.tres"
 #]
 var grid_size : Vector2 = SLOT_SIZE*10
-var stylebox : StyleBoxTexture = load("res://UI/panel_style_slot.tres")
+var stylebox : StyleBoxTexture = preload("res://UI/panel_style_slot.tres")
+var slots_type : Item.ITEM_TYPE = Item.ITEM_TYPE.MAIN
 # PRIVATE VARIABLES
 
 
@@ -52,6 +53,11 @@ func _ready():
 	#custom_minimum_size = grid_size
 	#$InventoryScroll.custom_minimum_size.y = grid_size.y/2
 	#%InventoryGrid.custom_minimum_size = grid_size
+	#if inv_source == INV_SOURCE.CANVAS_FORMS:
+		#
+	#or inv_source == INV_SOURCE.CANVAS_MATERIALS \
+	#or inv_source == INV_SOURCE.CANVAS:
+		#
 	if inventory:
 		update_inventory()
 
@@ -63,13 +69,13 @@ func update_inventory() -> void:
 	if inventory:
 		inventory.sort_inventory(inventory.sort_by_tier)
 		for i in range(inventory.num_slots):
-			var slot := InventorySlot.new(SLOT_SIZE, Item.ITEM_TYPE.MAIN, stylebox, inv_source)
+			var slot := InventorySlot.new(SLOT_SIZE, slots_type, stylebox, inv_source)
 			#var ref_rect := ReferenceRect.new()
 			#ref_rect.editor_only = false
 			#slot.add_child(ref_rect)
 			var item := inventory.items[i]
 			if item:
-				slot.add_child(InventoryItem.new(item))
+				slot.add_child(InventoryItem.new(item, inv_source))
 			%InventoryGrid.add_child(slot)
 			slot.slot_changed.connect(slot_changed)
 		#for i in inventory.items:
@@ -79,8 +85,10 @@ func update_inventory() -> void:
 			#item.add_child(ref_rect)
 			#%InventoryGrid.get_child(i)
 		#%InventoryScroll.custom_minimum_size.y = %InventoryScroll/MarginContainer.size.y
-	%TitleLabel.text = title
-	
+	if title != null and title != "":
+		%TitleLabel.text = title
+	else: 
+		%TitleLabel.text = ""
 
 func slot_changed(item: Item, slot: InventorySlot):
 	#print("from ", old_slot, " to ", new_slot)

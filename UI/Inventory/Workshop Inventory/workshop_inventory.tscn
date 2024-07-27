@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bf23ngwrl64s3"]
 
 [ext_resource type="Script" path="res://UI/Inventory/Workshop Inventory/workshop_inventory_interface.gd" id="1_55rgt"]
-[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_Interface.tscn" id="1_chi63"]
+[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_interface.tscn" id="1_chi63"]
 
 [node name="WorkshopInventory" type="Control"]
 layout_mode = 3

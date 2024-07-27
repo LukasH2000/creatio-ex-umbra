@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://uyoqkcg1apr4"]
 
-[ext_resource type="PackedScene" uid="uid://cwfafvrn6hswd" path="res://Scenes/MerchantGuild/merchant_guild.tscn" id="1_x8s85"]
+[ext_resource type="PackedScene" uid="uid://ekvs4ujlm5yt" path="res://Scenes/Workshop/workshop.tscn" id="1_t4e56"]
 
 [node name="World" type="Node2D"]
 
-[node name="MerchantGuild" parent="." instance=ExtResource("1_x8s85")]
+[node name="Workshop" parent="." instance=ExtResource("1_t4e56")]

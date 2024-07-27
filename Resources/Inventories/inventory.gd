@@ -55,6 +55,20 @@ func add_item(item : Item, index : int): # TODO
 	#resize_inventory()
 	#inventory_updated.emit()
 
+func add_items_to_inv(inv : Inventory):
+	for i in items:
+		if i:
+			var added := false
+			for j in inv.items:
+				if j:
+					if i.is_same_item(j):
+						j.amount_held += i.amount_held
+						added = true
+						break
+			if not added:
+				inv.add_item(i, inv.items.find(null))
+			
+
 func remove_item(item : Item): # TODO
 	if item in items:
 		#resize_inventory()

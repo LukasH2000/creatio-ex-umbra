@@ -13,7 +13,7 @@ enum GRADE {F, E, D, C, B, A, S, P}
 enum TIER {MORTAL, PEAK_MORTAL, MAGICAL, DRACONIC, DIVINE, IMMORTAL}
 enum ITEM_PROPERTY {MATERIAL, EQUIP_HEAD, EQUIP_SHIELD, EQUIP_HILT, EQUIP_GRIP, ACCESSORY_METAL, ACCESSORY_GEM, UTENSIL, ARMOR_PLATE, ARMOR_PADDING, ARMOR_CLOTHING, FURNITURE_WOOD, FURNITURE_METAL, FURNITURE_LEATHER, POTION_INGREDIENT, POTION_BOTTLE, POTION_CORK}
 enum MATERIAL_TYPE {WOOD, METAL, LEATHER, STONE, DIRT, BONE, CLOTH, DIAMOND, HERB, FUNGUS, GLASS}
-enum ITEM_TYPE {MAIN, ITEM, MATERIAL}
+enum ITEM_TYPE {MAIN, ITEM, MATERIAL, FORM}
 # CONSTANTS
 
 
@@ -58,6 +58,12 @@ enum ITEM_TYPE {MAIN, ITEM, MATERIAL}
 	set(value):
 		image = value
 
+@export var default_discovered_form_image : Image :
+	get:
+		return default_discovered_form_image
+	set(value):
+		default_discovered_form_image = value
+
 @export var item_components : Array[ITEM_PROPERTY]  :
 	get:
 		return item_components
@@ -79,6 +85,7 @@ enum ITEM_TYPE {MAIN, ITEM, MATERIAL}
 # PUBLIC VARIABLES
 var image_texture : ImageTexture
 var form : BitMap
+var form_img : Image
 var form_texture : ImageTexture
 var form_discovered : BitMap
 
@@ -112,18 +119,47 @@ func create_image_texture():
 func create_form():
 	form = BitMap.new()
 	form.create_from_image_alpha(image)
-	var form_size := form.get_size()
-	for x in range(form_size.x):
-		for y in range(form_size.y):
-			var inverse := not form.get_bit(x, y)
-			form.set_bit(x, y, inverse)
+	form = invert_bitmap(form)
+
+func get_form():
+	if not form:
+		create_form()
+	return form
+
+func invert_bitmap(bitmap : BitMap) -> BitMap:
+	var bitmap_size := bitmap.get_size()
+	var inverted := bitmap
+	for x in range(bitmap_size.x):
+		for y in range(bitmap_size.y):
+			var inverse := not bitmap.get_bit(x, y)
+			inverted.set_bit(x, y, inverse)
+	return inverted
+
+func get_form_image():
+	if not form_img:
+		form_img = get_form().convert_to_image()
+	return form_img
 
 func create_form_texture():
-	var form_img := form.convert_to_image()
-	form_texture = ImageTexture.create_from_image(form_img)
+	form_texture = ImageTexture.create_from_image(get_form_image())
 
 func create_form_discovered():
-	pass
+	if default_discovered_form_image:
+		form_discovered = BitMap.new()
+		form_discovered.create_from_image_alpha(default_discovered_form_image)
+		form_discovered = invert_bitmap(form_discovered)
+
+func get_form_discovered_texture():
+	var discovered_img := form_discovered.convert_to_image()
+	if not form_texture:
+		form_texture = ImageTexture.create_from_image(discovered_img)
+	else:
+		form_texture.update(discovered_img)
+	return form_texture
+
+func update_form_discovered(updated_form : BitMap):
+	form_discovered = updated_form
+	create_form_texture()
 
 func get_actual_value() -> int:
 	var tier_multiplier := (tier+1) ** 2 # if tier > 0 else 0
@@ -144,6 +180,7 @@ func is_same_item(item_to_compare : Item):
 		description == item_to_compare.description,
 		gold_value == item_to_compare.gold_value,
 		image == item_to_compare.image,
+		default_discovered_form_image == item_to_compare.default_discovered_form_image,
 		item_components == item_to_compare.item_components,
 		item_type == item_to_compare.item_type,
 		transmutable == item_to_compare.transmutable
@@ -161,9 +198,14 @@ func set_dupe_props(dupe : Item):
 	dupe.description = description
 	dupe.gold_value = gold_value
 	dupe.image = image
+	dupe.default_discovered_form_image = default_discovered_form_image
 	dupe.item_components = item_components
 	dupe.item_type = item_type
 	dupe.transmutable = transmutable
+	dupe.image_texture = image_texture
+	dupe.form = form
+	dupe.form_texture = form_texture
+	dupe.form_discovered = form_discovered
 	return dupe
 
 func randomize_item():

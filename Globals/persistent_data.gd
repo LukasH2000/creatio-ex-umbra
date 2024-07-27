@@ -20,8 +20,8 @@ const THEME_PATH : String = "res://UI/game_theme.tres"
 # @EXPORT_GROUP("name")
 # @EXPORT_SUBGROUP("name")
 # @EXPORT
-@export var materials_data : Array[Item]
-@export var items_data : Array[Item]
+@export var materials_inv : Inventory
+@export var items_inv : Inventory
 
 # PUBLIC VARIABLES
 var area_scene_paths : Dictionary = {
@@ -55,7 +55,9 @@ var window_size_base : Vector2 = Vector2(
 # PUBLIC METHODS
 func _ready():
 	get_curr_scene()
+	create_default_discovered_forms()
 	game_data.randomize_stores()
+	#print(game_data.discovered_forms)
 	#create_new_game()
 
 func get_curr_scene() -> Node:
@@ -80,7 +82,17 @@ func get_popup_window() -> Node:
 			popup_window = last_child.get_child(1)
 	return popup_window
 
-func goto_scene(path):
+func get_discovered_forms() -> Dictionary:
+	return game_data.discovered_forms
+
+func create_default_discovered_forms() -> void:
+	for i in items_inv.items:
+		if not game_data.discovered_forms.has(i.name):
+			if i.form_discovered == null:
+				i.create_form_discovered()
+			game_data.discovered_forms[i.name] = i.form_discovered
+
+func goto_scene(path : String, data : Inventory = null):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -90,10 +102,10 @@ func goto_scene(path):
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
 
-	call_deferred("_deferred_goto_scene", path)
+	call_deferred("_deferred_goto_scene", path, data)
 
 
-func _deferred_goto_scene(path):
+func _deferred_goto_scene(path, data = null):
 	# It is now safe to remove the current scene.
 	current_scene.free()
 
@@ -102,9 +114,13 @@ func _deferred_goto_scene(path):
 
 	# Instance the new scene.
 	current_scene = s.instantiate()
-
+	
+	if data:
+		current_scene.set_scene_data(data)
+	
 	# Add it to the active scene, as child of root.
 	world.add_child(current_scene)
+	
 
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	#get_tree().current_scene = current_scene

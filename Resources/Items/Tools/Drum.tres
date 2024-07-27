@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://8hytm7hfnk87"]
+
+[ext_resource type="Image" uid="uid://drd4rg1m58na3" path="res://Resources/Items/Tools/drum_base_form.png" id="1_68gam"]
+[ext_resource type="Image" uid="uid://cciqjdtmhtt1v" path="res://Resources/Items/Tools/drum.png" id="2_vgivq"]
+[ext_resource type="Script" path="res://Resources/Items/item.gd" id="3_4d3di"]
+
+[resource]
+script = ExtResource("3_4d3di")
+name = "Drum"
+tier = 0
+grade = 0
+description = "A drum for playing music. Not to be confused with drumsticks for eating."
+gold_value = 75
+image = ExtResource("2_vgivq")
+default_discovered_form_image = ExtResource("1_68gam")
+item_components = Array[int]([4, 3])
+item_type = 1
+transmutable = false

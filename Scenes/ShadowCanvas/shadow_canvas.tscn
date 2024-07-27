@@ -1,15 +1,16 @@
 [gd_scene load_steps=9 format=3 uid="uid://b1mneamuwm318"]
 
 [ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas_area.gd" id="1_4cwdc"]
+[ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas.gd" id="1_p2hoh"]
 [ext_resource type="Texture2D" uid="uid://cdsbcnkveb0my" path="res://Scenes/ShadowCanvas/shadow_canvas.png" id="1_sbyhv"]
 [ext_resource type="Script" path="res://Scenes/ShadowCanvas/shadow_canvas_interface.gd" id="2_2a30a"]
 [ext_resource type="PackedScene" uid="uid://l1vik88cgpaa" path="res://Scenes/ShadowCanvas/Canvas stuff/drawable_canvas.tscn" id="2_5bhui"]
 [ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_2b1bd"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="5_lpa7v"]
-[ext_resource type="Script" path="res://Scenes/ShadowCanvas/test.gd" id="8_n6y34"]
-[ext_resource type="Resource" uid="uid://bcegt1688frth" path="res://Resources/Items/Weapons/Longsword.tres" id="9_m8mjb"]
+[ext_resource type="PackedScene" uid="uid://benl422cbaawx" path="res://Scenes/ShadowCanvas/finished_item_screen.tscn" id="7_l6mli"]
 
 [node name="ShadowCanvas" type="Node"]
+script = ExtResource("1_p2hoh")
 
 [node name="ShadowCanvasArea" type="Node2D" parent="."]
 script = ExtResource("1_4cwdc")
@@ -28,6 +29,32 @@ limit_left = 0
 limit_top = 0
 limit_right = 640
 limit_bottom = 360
+
+[node name="MatSlotMarkers" type="Node2D" parent="ShadowCanvasArea"]
+
+[node name="Slot1" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(308, 11)
+
+[node name="Slot2" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(419, 57)
+
+[node name="Slot3" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(465, 168)
+
+[node name="Slot4" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(419, 279)
+
+[node name="Slot5" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(308, 325)
+
+[node name="Slot6" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(197, 279)
+
+[node name="Slot7" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(151, 168)
+
+[node name="Slot8" type="Marker2D" parent="ShadowCanvasArea/MatSlotMarkers"]
+position = Vector2(197, 57)
 
 [node name="ShadowCanvasInterface" type="Control" parent="."]
 layout_mode = 3
@@ -50,6 +77,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ButtonDarkRoom" type="Button" parent="ShadowCanvasInterface/Buttons" groups=["area_change_buttons"]]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -75,163 +103,9 @@ offset_bottom = 170.0
 theme = ExtResource("3_2b1bd")
 text = "Finish item"
 
-[node name="FinishedItemScreen" type="Control" parent="ShadowCanvasInterface"]
+[node name="FinishedItemScreen" parent="ShadowCanvasInterface" instance=ExtResource("7_l6mli")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="ShadowCanvasInterface/FinishedItemScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_2b1bd")
-color = Color(0.192157, 0.0313726, 0.321569, 0.937255)
-
-[node name="ItemImageContainer" type="PanelContainer" parent="ShadowCanvasInterface/FinishedItemScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -84.0
-offset_right = 84.0
-offset_bottom = 84.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-theme = ExtResource("3_2b1bd")
-script = ExtResource("8_n6y34")
-item = ExtResource("9_m8mjb")
-
-[node name="TextureRect" type="TextureRect" parent="ShadowCanvasInterface/FinishedItemScreen/ItemImageContainer"]
-layout_mode = 2
-expand_mode = 1
-
-[node name="PanelItemStats" type="Panel" parent="ShadowCanvasInterface/FinishedItemScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 90.0
-offset_top = -84.0
-offset_right = 186.0
-offset_bottom = 84.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -81.5
-offset_right = 45.0
-offset_bottom = 81.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LabelItemPrefix" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "You created:"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelItem" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Steel Sword"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelAccuracyPrefix" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Accuracy:"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelAccuracy" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "69 %"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelMaterialSynergyPrefix" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Material synergy:"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelMaterialSynergy" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "100 %"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelGradePrefix" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "Final grade:"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="LabelGrade" type="Label" parent="ShadowCanvasInterface/FinishedItemScreen/PanelItemStats/VBoxContainer"]
-custom_minimum_size = Vector2(74, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "C"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="ButtonReturn" type="Button" parent="ShadowCanvasInterface/FinishedItemScreen"]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = 146.0
-offset_right = 96.0
-offset_bottom = 170.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("3_2b1bd")
-text = "Return to dark room"
 
 [connection signal="pressed" from="ShadowCanvasInterface/Buttons/ButtonDarkRoom" to="ShadowCanvasInterface/Buttons/ButtonDarkRoom" method="_on_pressed"]
 [connection signal="pressed" from="ShadowCanvasInterface/Buttons/ButtonFinishItem" to="ShadowCanvasInterface" method="_on_button_finish_item_pressed"]

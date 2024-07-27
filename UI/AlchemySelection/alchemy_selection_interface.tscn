@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp8cau48usklx"]
+
+[ext_resource type="Script" path="res://UI/AlchemySelection/alchemy_selection_interface.gd" id="1_77wgv"]
+[ext_resource type="PackedScene" uid="uid://b2tnm3jrgkqan" path="res://UI/Inventory/inventory_interface.tscn" id="2_1mv4g"]
+[ext_resource type="PackedScene" uid="uid://bv6nn0hxay1q4" path="res://UI/AlchemySelection/mini_shadow_canvas.tscn" id="3_7h20p"]
+[ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="4_oq7oh"]
+
+[sub_resource type="Resource" id="Resource_hcqwd"]
+script = ExtResource("4_oq7oh")
+items = Array[Resource("res://Resources/Items/item.gd")]([])
+num_slots = 9
+
+[node name="AlchemySelectionInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_77wgv")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.498039)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(320, 270)
+layout_mode = 2
+tab_focus_mode = 0
+
+[node name="Select Form" type="MarginContainer" parent="CenterContainer/HBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Select Form" type="HBoxContainer" parent="CenterContainer/HBoxContainer/TabContainer/Select Form"]
+layout_mode = 2
+
+[node name="FormsInventory" parent="CenterContainer/HBoxContainer/TabContainer/Select Form/Select Form" instance=ExtResource("2_1mv4g")]
+layout_mode = 2
+inventory = null
+inv_source = 4
+
+[node name="Select Materials" type="MarginContainer" parent="CenterContainer/HBoxContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(320, 247)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Select Materials" type="HBoxContainer" parent="CenterContainer/HBoxContainer/TabContainer/Select Materials"]
+layout_mode = 2
+
+[node name="MatsInv" parent="CenterContainer/HBoxContainer/TabContainer/Select Materials/Select Materials" instance=ExtResource("2_1mv4g")]
+layout_mode = 2
+inventory = null
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MiniShadowCanvas" parent="CenterContainer/HBoxContainer" instance=ExtResource("3_7h20p")]
+layout_mode = 2
+inventory = SubResource("Resource_hcqwd")
+
+[node name="ButtonCancel" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -36.0
+offset_right = 88.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "Cancel"
+
+[connection signal="pressed" from="ButtonCancel" to="." method="_on_button_cancel_pressed"]
