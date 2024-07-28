@@ -23,7 +23,7 @@ class_name GameData extends Resource
 @export var player_storage : Inventory
 @export var player_gold : int
 @export var player_reputation : int
-@export var discovered_forms : Dictionary
+@export var discovered_forms : Inventory
 @export var discovered_materials : Array[AlchemyMaterial]
 
 @export var day : int
@@ -68,16 +68,16 @@ func randomize_store_inventory(store : Inventory, data_array : Array[Item]):
 		item.randomize_item()
 		store.add_item(item, i)
 
-func update_discovered_form(name : String, form : BitMap) -> void:
-	discovered_forms[name] = form
+#func update_discovered_form(name : String, form : BitMap) -> void:
+	#discovered_forms[name] = form
 
-func get_discovered_form(name: String) -> BitMap:
-	return discovered_forms[name]
-
-func get_discovered_form_texture(name: String) -> ImageTexture:
-	var img : Image = discovered_forms[name].convert_to_image()
-	var texture := ImageTexture.create_from_image(img)
-	return texture
+#func get_discovered_form(name: String) -> BitMap:
+	#return discovered_forms[name]
+#
+#func get_discovered_form_texture(name: String) -> ImageTexture:
+	#var img : Image = discovered_forms[name].convert_to_image()
+	#var texture := ImageTexture.create_from_image(img)
+	#return texture
 # PRIVATE METHODS
 
 

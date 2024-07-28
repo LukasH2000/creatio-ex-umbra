@@ -107,5 +107,7 @@ text = "Finish item"
 visible = false
 layout_mode = 1
 
+[connection signal="pixel_drawn" from="ShadowCanvasArea/DrawableCanvas" to="." method="_on_drawable_canvas_pixel_drawn"]
+[connection signal="item_finished" from="ShadowCanvasInterface" to="." method="_on_shadow_canvas_interface_item_finished"]
 [connection signal="pressed" from="ShadowCanvasInterface/Buttons/ButtonDarkRoom" to="ShadowCanvasInterface/Buttons/ButtonDarkRoom" method="_on_pressed"]
 [connection signal="pressed" from="ShadowCanvasInterface/Buttons/ButtonFinishItem" to="ShadowCanvasInterface" method="_on_button_finish_item_pressed"]

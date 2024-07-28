@@ -97,7 +97,7 @@ func pan_camera():
 		var clamp_offset := Vector2((PersistentData.window_size_base.x/2)/$Camera2D.zoom.x, (PersistentData.window_size_base.y/2)/$Camera2D.zoom.y)
 		$Camera2D.position.y = clamp($Camera2D.position.y, $Camera2D.limit_top + clamp_offset.y, $Camera2D.limit_bottom - clamp_offset.y)
 		$Camera2D.position.x = clamp($Camera2D.position.x, $Camera2D.limit_left + clamp_offset.x, $Camera2D.limit_right - clamp_offset.x)
-		print($Camera2D.position)
+		#print($Camera2D.position)
 # PRIVATE METHODS
 
 

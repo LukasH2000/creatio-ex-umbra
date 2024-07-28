@@ -39,7 +39,7 @@ signal selection_cancelled
 func _ready():
 	if mini_canvas.inventory.count_items() > 0:
 		mini_canvas.clear_inventory()
-	forms_inv.inventory = PersistentData.items_inv
+	forms_inv.inventory = PersistentData.game_data.discovered_forms
 	forms_inv.update_inventory()
 	mats_inv.inventory = PersistentData.game_data.player_storage
 	mats_inv.update_inventory()
@@ -55,5 +55,7 @@ func _ready():
 
 func _on_button_cancel_pressed():
 	#hide()
+	#if mini_canvas.inventory.count_items() > 0:
+		#mini_canvas.clear_inventory()
 	selection_cancelled.emit()
 	

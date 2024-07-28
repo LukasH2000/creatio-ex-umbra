@@ -55,6 +55,7 @@ var window_size_base : Vector2 = Vector2(
 # PUBLIC METHODS
 func _ready():
 	get_curr_scene()
+	create_default_forms()
 	create_default_discovered_forms()
 	game_data.randomize_stores()
 	#print(game_data.discovered_forms)
@@ -82,15 +83,24 @@ func get_popup_window() -> Node:
 			popup_window = last_child.get_child(1)
 	return popup_window
 
-func get_discovered_forms() -> Dictionary:
+func get_discovered_forms() -> Inventory:
+	if not game_data.discovered_forms:
+		game_data.discovered_forms = Inventory.new()
+		game_data.discovered_forms.num_slots = items_inv.num_slots
+		game_data.discovered_forms.resize_inventory()
 	return game_data.discovered_forms
 
 func create_default_discovered_forms() -> void:
+	var disc_forms := get_discovered_forms()
+	for i in range(0 , items_inv.items.size()):
+		if items_inv.items[i].form_discovered == null:
+			items_inv.items[i].create_form_discovered()
+		disc_forms.add_item(items_inv.items[i].custom_duplicate(),i)
+
+func create_default_forms() -> void:
 	for i in items_inv.items:
-		if not game_data.discovered_forms.has(i.name):
-			if i.form_discovered == null:
-				i.create_form_discovered()
-			game_data.discovered_forms[i.name] = i.form_discovered
+		if i.form == null:
+			i.create_form()
 
 func goto_scene(path : String, data : Inventory = null):
 	# This function will usually be called from a signal callback,

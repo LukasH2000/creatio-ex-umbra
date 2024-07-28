@@ -50,8 +50,8 @@ class_name AlchemyMaterial extends Item
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-func is_same_material(material_to_compare : AlchemyMaterial) -> bool:
-	if is_same_item(material_to_compare):
+func is_same_item(material_to_compare : Item) -> bool:
+	if super(material_to_compare):
 		if mat_type == material_to_compare.mat_type:
 			if mat_uses == material_to_compare.mat_uses:
 				return true

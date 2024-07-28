@@ -12,7 +12,7 @@ class_name InventoryItem extends TextureRect
 
 
 # CONSTANTS
-const item_tiers : Array[String] = [
+const ITEM_TIERS : Array[String] = [
 	"MORTAL",
 	"[color=green]PEAK MORTAL[/color]",
 	"[color=blue]MAGICAL[/color]",
@@ -28,7 +28,7 @@ const TIER_COLORS : Array[Color] = [
 	Color(Color.GOLD),
 	Color(Color.PLUM)
 ]
-const item_grades : Array[String] = ["F", "E", "D", "C", "B", "A", "S", "P"]
+const ITEM_GRADES : Array[String] = ["F", "E", "D", "C", "B", "A", "S", "P"]
 
 # EXPORTING PROPERTIES https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
 # @EXPORT_CATEGORY("name")
@@ -62,8 +62,6 @@ func _ready() -> void:
 		expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		stretch_mode = TextureRect.STRETCH_SCALE
 		var texture_to_set : ImageTexture
-		# ALERT: no items use form type the way you do it currently
-		# so this is never true
 		if item_src == InventoryInterface.INV_SOURCE.CANVAS_FORMS \
 		or item_src == InventoryInterface.INV_SOURCE.CANVAS:
 			texture_to_set = item.get_form_discovered_texture()
@@ -97,8 +95,8 @@ func make_drag_preview(at_pos : Vector2) -> Control:
 func update_tooltip_and_label():
 	tooltip_text = "%s\nTier: %s\nGrade: %s\nValue: %s" % [
 			item.name, 
-			item_tiers[item.tier],
-			item_grades[item.grade],
+			ITEM_TIERS[item.tier],
+			ITEM_GRADES[item.grade],
 			item.get_actual_value()
 		]
 	if item.item_type == Item.ITEM_TYPE.MATERIAL:

@@ -84,6 +84,12 @@ func remove_item_at(index : int): # TODO
 	#resize_inventory()
 	#inventory_updated.emit()
 
+func get_item_by_name(name : String) -> Item:
+	for i in items:
+		if i and i.name == name:
+			return i
+	return null
+
 func count_items() -> int:
 	var count := 0
 	for i in items:

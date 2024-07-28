@@ -142,8 +142,22 @@ func slot_changed(item: Item, slot: InventorySlot):
 	#inventory.sort_inventory(inventory.sort_by_tier)
 	inventory_changed.emit()
 
+func add_items_to_inv(inv : Inventory):
+	# Don't add the item that represents the form
+	for i in range(0, inventory.items.size() - 1):
+		if inventory.items[i]:
+			var added := false
+			for j in inv.items:
+				if j:
+					if inventory.items[i].is_same_item(j):
+						j.amount_held += inventory.items[i].amount_held
+						added = true
+						break
+			if not added:
+				inv.add_item(inventory.items[i], inv.items.find(null))
+
 func clear_inventory():
-	inventory.add_items_to_inv(PersistentData.game_data.player_storage)
+	add_items_to_inv(PersistentData.game_data.player_storage)
 	inventory.clear_inventory()
 	update_inventory()
 

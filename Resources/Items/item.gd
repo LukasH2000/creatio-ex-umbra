@@ -87,6 +87,7 @@ var image_texture : ImageTexture
 var form : BitMap
 var form_img : Image
 var form_texture : ImageTexture
+var form_discovered_texture : ImageTexture
 var form_discovered : BitMap
 
 # PRIVATE VARIABLES
@@ -116,6 +117,11 @@ var form_discovered : BitMap
 func create_image_texture():
 	image_texture = ImageTexture.create_from_image(image)
 
+func get_image_texture():
+	if not image_texture:
+		create_image_texture()
+	return image_texture
+
 func create_form():
 	form = BitMap.new()
 	form.create_from_image_alpha(image)
@@ -126,9 +132,11 @@ func get_form():
 		create_form()
 	return form
 
-func invert_bitmap(bitmap : BitMap) -> BitMap:
+static func invert_bitmap(bitmap : BitMap) -> BitMap:
 	var bitmap_size := bitmap.get_size()
-	var inverted := bitmap
+	# ALERT: since this is a reference (I think), it also changes the original
+	# INFO: use duplicate to prevent this (I think)
+	var inverted := bitmap.duplicate()
 	for x in range(bitmap_size.x):
 		for y in range(bitmap_size.y):
 			var inverse := not bitmap.get_bit(x, y)
@@ -143,19 +151,73 @@ func get_form_image():
 func create_form_texture():
 	form_texture = ImageTexture.create_from_image(get_form_image())
 
+func get_form_texture():
+	if not form_texture:
+		create_form_texture()
+	return form_texture
+
+# TEST
+func get_updated_form_texture():
+	form_img = get_form().convert_to_image()
+	form_texture = ImageTexture.create_from_image(get_form_image())
+	return form_texture
+
 func create_form_discovered():
 	if default_discovered_form_image:
 		form_discovered = BitMap.new()
 		form_discovered.create_from_image_alpha(default_discovered_form_image)
 		form_discovered = invert_bitmap(form_discovered)
+		#print_form(form_discovered)
+
+#func print_form(form):
+	#var bool_arr := []
+	#for y in range(form.get_size().y):
+		#for x in range(form.get_size().x):
+			#bool_arr.append(form.get_bit(x, y))
+		#print(bool_arr)
+		#bool_arr.clear()
+			
+
+func get_form_discovered():
+	if not form_discovered:
+		create_form_discovered()
+	return form_discovered
+
+func get_form_discovered_inverted():
+	if not form_discovered:
+		create_form_discovered()
+	return invert_bitmap(form_discovered) # inverts form_discovered permanently
 
 func get_form_discovered_texture():
 	var discovered_img := form_discovered.convert_to_image()
-	if not form_texture:
-		form_texture = ImageTexture.create_from_image(discovered_img)
+	if not form_discovered_texture:
+		form_discovered_texture = ImageTexture.create_from_image(discovered_img)
 	else:
-		form_texture.update(discovered_img)
-	return form_texture
+		form_discovered_texture.update(discovered_img)
+	return form_discovered_texture
+
+func reduce_form_by(pixel_num : int) -> void:
+	if form:
+		var rect := Rect2i(Vector2.ZERO, form.get_size())
+		#form.grow_mask(pixel_num/pixel_num, rect)
+		# since material bitmaps are inverted to create a black texture with a
+		# white background (for some reason convert_to_image make true bits
+		# white and false bits black), we need to flip the false bits to true 
+		# to erase pixels from the material
+		bitmap_remove_px(form, pixel_num, false)
+		#print(form.get_size())
+		form_img = form.convert_to_image()
+
+func bitmap_remove_px(bm: BitMap, pixel_num : int, bool_to_flip : bool) -> void:
+	var size := form.get_size()
+	var changed_count := 0
+	for x in range(0, size.x):
+		for y in range(0, size.y):
+			if bm.get_bit(x, y) == bool_to_flip:
+				bm.set_bit(x, y, not bool_to_flip)
+				changed_count += 1
+				if changed_count == pixel_num:
+					return
 
 func update_form_discovered(updated_form : BitMap):
 	form_discovered = updated_form
@@ -172,15 +234,15 @@ func get_actual_value() -> int:
 func get_sell_value() -> int:
 	return get_actual_value() * (PersistentData.game_data.player_reputation + 1)
 
-func is_same_item(item_to_compare : Item):
+func is_same_item(item_to_compare : Item) -> bool:
 	var checks_array := [
 		name == item_to_compare.name,
 		tier == item_to_compare.tier,
 		grade == item_to_compare.grade,
 		description == item_to_compare.description,
 		gold_value == item_to_compare.gold_value,
-		image == item_to_compare.image,
-		default_discovered_form_image == item_to_compare.default_discovered_form_image,
+		#image == item_to_compare.image,
+		#default_discovered_form_image == item_to_compare.default_discovered_form_image,
 		item_components == item_to_compare.item_components,
 		item_type == item_to_compare.item_type,
 		transmutable == item_to_compare.transmutable
@@ -197,21 +259,71 @@ func set_dupe_props(dupe : Item):
 	dupe.grade = grade
 	dupe.description = description
 	dupe.gold_value = gold_value
-	dupe.image = image
+	dupe.image = image.duplicate(true)
 	dupe.default_discovered_form_image = default_discovered_form_image
 	dupe.item_components = item_components
 	dupe.item_type = item_type
 	dupe.transmutable = transmutable
-	dupe.image_texture = image_texture
-	dupe.form = form
-	dupe.form_texture = form_texture
-	dupe.form_discovered = form_discovered
+	if image_texture:
+		dupe.image_texture = image_texture.duplicate(true)
+	if form:
+		dupe.form = form.duplicate(true)
+	if form_texture:
+		dupe.form_texture = form_texture.duplicate(true)
+	if form_discovered:
+		dupe.form_discovered = form_discovered.duplicate(true)
 	return dupe
 
 func randomize_item():
 	#print(TIER[TIER.keys().pick_random()])
 	tier = TIER[TIER.keys().pick_random()]
 	grade = GRADE[GRADE.keys().pick_random()]
+
+# ALERT: always returns 100% or 0% accuracy for some reason
+# NOTE: it works now after using total_item_bits instead of total_bits
+# and adding bit_to_compare == false to if statement
+# ALERT: doesnt fully work actually, you get accuracy once and then it seems to stay the same
+# NOTE: it was borked because I treated it as if I called this on the player-
+# created item with the correct form is the var in some areas, but I do
+# form_to_compare.compare_form_with(item_to_form) instead
+# Should probably change that around so it's the same as update_img_to_form
+# where the persistend item get passed as a var to the func
+# TODO: make this return a Vector2 with the accuracy (pixels correctly inside
+# form and wasted essence (pixels outside actual form)
+func compare_form_with(item : Item) -> float:
+	var accuracy := 0.0
+	var form_size := form.get_size()
+	var form_to_compare : BitMap= item.get_form_discovered()
+	var total_bits : float = form_size.x * form_size.y
+	var total_item_bits : float = total_bits - form.get_true_bit_count()
+	var correct_bits := 0.0
+	for x in range(form_size.x):
+		for y in range(form_size.y):
+			var bit := form.get_bit(x, y)
+			var bit_to_compare := form_to_compare.get_bit(x, y)
+			if bit == false and bit == bit_to_compare:
+				correct_bits += 1
+				#print(Vector2(x, y))
+	accuracy = correct_bits / total_item_bits
+	return accuracy
+
+# ALERT: doesn't work currently
+# NOTE:  it works now after using the correct form and setting it with
+# canvas.get_drawing()
+func update_img_to_form(game_data_form : Item):
+	var form_size := form_discovered.get_size()
+	var form_discovered_gd : BitMap = game_data_form.get_form_discovered()
+	#form_discovered = invert_bitmap(form_discovered)
+	for x in range(form_size.x):
+		for y in range(form_size.y):
+			var bit := form_discovered.get_bit(x, y)
+			var bit_to_compare := game_data_form.get_form().get_bit(x, y)
+			if bit == bit_to_compare and bit == false:
+				form_discovered_gd.set_bit(x, y, bit)
+			if bit != bit_to_compare:
+				image.set_pixel(x, y, Color(Color.TRANSPARENT))
+			# see if it's correct to game data form
+			# if yes, set 
 
 # PRIVATE METHODS
 

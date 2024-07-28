@@ -75,7 +75,7 @@ autowrap_mode = 2
 [node name="LabelItem" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
 custom_minimum_size = Vector2(74, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
 text = "Steel Sword"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -93,28 +93,28 @@ autowrap_mode = 2
 [node name="LabelAccuracy" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
 custom_minimum_size = Vector2(74, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 12
 text = "69 %"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LabelMaterialSynergyPrefix" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
+[node name="LabelTierPrefix" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
 custom_minimum_size = Vector2(74, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Material synergy:"
+theme_override_font_sizes/font_size = 12
+text = "Tier:"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="LabelMaterialSynergy" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
+[node name="LabelTier" type="RichTextLabel" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
 custom_minimum_size = Vector2(74, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "100 %"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "[center]MORTAL[/center]"
+fit_content = true
 autowrap_mode = 2
 
 [node name="LabelGradePrefix" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
@@ -129,11 +129,22 @@ autowrap_mode = 2
 [node name="LabelGrade" type="Label" parent="CenterContainer/HBoxContainer/PanelItemStats/VBoxContainer"]
 custom_minimum_size = Vector2(74, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 56
 text = "C"
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="ItemImageContainer2" type="PanelContainer" parent="CenterContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(168, 168)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_sr3ka")
+
+[node name="DebugRect" type="TextureRect" parent="CenterContainer/HBoxContainer/ItemImageContainer2"]
+visible = false
+layout_mode = 2
+expand_mode = 1
 
 [node name="ButtonReturn" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 24)

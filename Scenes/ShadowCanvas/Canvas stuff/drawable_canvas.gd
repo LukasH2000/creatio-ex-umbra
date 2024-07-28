@@ -6,7 +6,7 @@ extends Node2D
 # DOCSTRING
 
 # SIGNALS
-
+signal pixel_drawn
 
 # ENUMS
 enum GIZMOS {PENCIL, LINE, RECT, CIRCLE, MOVE, FILL}
@@ -45,6 +45,8 @@ var color_preview : Color = Color(0, 0, 0, alpha_preview)
 var is_drawing : bool = false
 var last_pixel_pos : Vector2i = Vector2i.ZERO
 var current_gizmo : GIZMOS = GIZMOS.PENCIL
+
+var remaining_essence : int = 0
 # PRIVATE VARIABLES
 
 
@@ -56,10 +58,24 @@ var current_gizmo : GIZMOS = GIZMOS.PENCIL
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
+# TODO: either remove the Drum or change it, as currently it's not exactly an
+# interesting object to draw, nor does the default discovered form make sense
+# TODO: try changing pixel size to see if things work better, even though the
+# textures would be weirdly sized
+# TODO: maybe draw discovered_form as preview, because right now the more you
+# have a form unlocked, the less you actually need to draw on it ( if the
+# discovered form == form, you won't even need to use mats currently :p )
 func _ready():
 	canvas_size = Vector2i(CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH)
 	canvas_pixels.create(canvas_size / pixel_size)
 	canvas_preview.create(canvas_size / pixel_size)
+
+func set_canvas_pixels_to_form(form : BitMap):
+	if form.get_size() == canvas_pixels.get_size():
+		canvas_pixels = form
+
+func get_drawing() -> BitMap:
+	return canvas_pixels
 
 func _process(delta):
 	if current_gizmo == GIZMOS.PENCIL:
@@ -73,7 +89,7 @@ func _draw():
 	draw_grid(grid_square_size)
 	draw_canvas_pixels()
 	draw_preview()
-	# TODO: draw_selected_form()
+	# TODO: draw_selected_form()? Not needed if canvas_pixels is set to form
 
 func draw_grid(grid_size : Vector2):
 	for x in range(1 + canvas_size.x / grid_size.x):
@@ -97,7 +113,14 @@ func draw_preview() -> void:
 				draw_rect(Rect2(x * pixel_size, y * pixel_size, pixel_size, pixel_size), color_preview)
 
 func set_draw_pixel(coords : Vector2i) -> void:
-	canvas_pixels.set_bitv(coords, true)
+	if remaining_essence >= pixel_size:
+		canvas_pixels.set_bitv(coords, true)
+		pixel_drawn.emit(pixel_size)
+	else:
+		pass # TODO: what happens when player has used all materials
+
+func set_remaining_essence(num_pixels : int):
+	remaining_essence = num_pixels
 
 func set_preview_pixel(coords : Vector2i, is_drawn_pixel : bool) -> void:
 	if last_pixel_pos != coords and not is_drawn_pixel:
@@ -136,6 +159,9 @@ func pencil_drawing():
 		elif not is_drawing and not is_preview_drawn:
 			set_preview_pixel(pixel_pos, is_pixel_drawn)
 
+# TODO: most important extra tools to me are line, move and erase
+# not sure about adding erase, but you could style it like "if you erase
+# a pixel, the essence will be lost"
 func line_drawing():
 	pass
 

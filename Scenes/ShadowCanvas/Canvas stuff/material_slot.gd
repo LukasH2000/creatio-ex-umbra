@@ -12,7 +12,7 @@ extends Node2D
 
 
 # CONSTANTS
-const MAT_SLOT_TEXTURE : Vector2 = Vector2(22, 22)
+const MAT_SLOT_TEXTURE : Vector2i = Vector2(22, 22)
 
 # EXPORTING PROPERTIES https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
 # @EXPORT_CATEGORY("name")
@@ -46,6 +46,9 @@ func update_sprite(t : Image):
 		texture = ImageTexture.create_from_image(t)
 		sprite.texture = texture
 	else:
+		#print_verbose()
+		if t.get_size() != MAT_SLOT_TEXTURE:
+			t.resize(MAT_SLOT_TEXTURE.x, MAT_SLOT_TEXTURE.y, 0)
 		sprite.texture.update(t)
 	texture.set_size_override(MAT_SLOT_TEXTURE)
 	

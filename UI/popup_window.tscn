@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2bysrf84s6lk"]
+[gd_scene load_steps=3 format=3 uid="uid://b2bysrf84s6lk"]
 
 [ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="1_5m4t1"]
 [ext_resource type="Script" path="res://UI/popup_window.gd" id="1_fac20"]
-[ext_resource type="Script" path="res://UI/popup_panel.gd" id="3_ixilp"]
 
 [node name="PopupWindow" type="Control"]
 layout_mode = 3
@@ -37,7 +36,6 @@ size_flags_vertical = 3
 [node name="PopupPanel" type="PanelContainer" parent="PopupWindow"]
 layout_mode = 2
 theme = ExtResource("1_5m4t1")
-script = ExtResource("3_ixilp")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupWindow/PopupPanel"]
 layout_mode = 2
@@ -68,9 +66,19 @@ max_value = 999.0
 update_on_text_changed = true
 select_all_on_focus = true
 
-[node name="Button" type="Button" parent="PopupWindow/PopupPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupWindow/PopupPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="PopupWindow/PopupPanel/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 text = "Select"
 
-[connection signal="pressed" from="PopupWindow/PopupPanel/VBoxContainer/Button" to="." method="close_popup"]
+[node name="Button2" type="Button" parent="PopupWindow/PopupPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+text = "Select"
+
+[connection signal="pressed" from="PopupWindow/PopupPanel/VBoxContainer/HBoxContainer/Button" to="." method="close_popup" binds= [true]]
+[connection signal="pressed" from="PopupWindow/PopupPanel/VBoxContainer/HBoxContainer/Button2" to="." method="close_popup"]
