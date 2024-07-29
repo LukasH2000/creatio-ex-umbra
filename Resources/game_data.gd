@@ -27,6 +27,7 @@ class_name GameData extends Resource
 @export var discovered_materials : Array[AlchemyMaterial]
 
 @export var day : int
+@export var current_area_name : String
 
 @export var material_store : Inventory
 @export var item_store : Inventory

@@ -49,7 +49,7 @@ func resize_inventory():
 	items.resize(num_slots)
 	#inventory_updated.emit()
 
-func add_item(item : Item, index : int): # TODO
+func add_item(item : Item, index : int):
 	#resize_inventory()
 	items[index] = item
 	#resize_inventory()
@@ -69,14 +69,14 @@ func add_items_to_inv(inv : Inventory):
 				inv.add_item(i, inv.items.find(null))
 			
 
-func remove_item(item : Item): # TODO
+func remove_item(item : Item):
 	if item in items:
 		#resize_inventory()
 		items[items.find(item)] = null
 	#resize_inventory()
 		#inventory_updated.emit()
 
-func remove_item_at(index : int): # TODO
+func remove_item_at(index : int):
 	#if item in items:
 		#items.erase(item)
 	#resize_inventory()
@@ -97,12 +97,16 @@ func count_items() -> int:
 			count += 1
 	return count
 
-func get_total_value() -> int:
+func get_total_value(is_buying : bool) -> int:
 	var total_value := 0
 	for i in items:
 		if i is Item and i != null:
-			total_value += i.get_actual_value()
+			if is_buying:
+				total_value += i.get_actual_value()
+			if not is_buying:
+				total_value += i.get_sell_value()
 			# TODO: make selling items add less to value
+			# NOTE: DONE, i think
 	return total_value
 
 func clear_inventory():

@@ -45,5 +45,5 @@ class_name area_change_button extends Button
 
 
 func _on_pressed(scene_name : String):
-	var path = PersistentData.area_scene_paths[scene_name]
-	PersistentData.goto_scene(path)
+	#var path = PersistentData.area_scene_paths[scene_name]
+	PersistentData.goto_scene(scene_name)

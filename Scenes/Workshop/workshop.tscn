@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://ekvs4ujlm5yt"]
+[gd_scene load_steps=10 format=3 uid="uid://ekvs4ujlm5yt"]
 
 [ext_resource type="Texture2D" uid="uid://cani44s8owksn" path="res://Scenes/Workshop/workshop_bg.png" id="1_0xrml"]
+[ext_resource type="Script" path="res://Scenes/Workshop/workshop.gd" id="1_i7me8"]
 [ext_resource type="Script" path="res://Scenes/Workshop/workshop_interface.gd" id="2_3a7mt"]
 [ext_resource type="Texture2D" uid="uid://d3r8unkckv01d" path="res://Resources/point_light_gradient.tres" id="2_46xg0"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="4_pep5s"]
 [ext_resource type="PackedScene" uid="uid://bf23ngwrl64s3" path="res://UI/Inventory/Workshop Inventory/workshop_inventory.tscn" id="5_5nl7x"]
+[ext_resource type="Script" path="res://Scenes/Workshop/button_sleep.gd" id="5_udpj0"]
 [ext_resource type="Script" path="res://Scenes/Common/button_change_area.gd" id="7_n0bpo"]
+[ext_resource type="PackedScene" uid="uid://ceoqr6g7a05rh" path="res://UI/Book/book_interface.tscn" id="8_4upaj"]
 
 [node name="Workshop" type="Node"]
+script = ExtResource("1_i7me8")
 
 [node name="WorkshopArea" type="Node2D" parent="."]
 
@@ -56,6 +61,7 @@ offset_right = -203.0
 offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_pep5s")
 text = "Go outside"
 script = ExtResource("7_n0bpo")
 
@@ -73,7 +79,8 @@ offset_right = 84.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "To shadow canvas"
+theme = ExtResource("4_pep5s")
+text = "To Dark Room"
 script = ExtResource("7_n0bpo")
 
 [node name="ButtonStorage" type="Button" parent="WorkshopInterface/Buttons"]
@@ -90,6 +97,7 @@ offset_right = 315.0
 offset_bottom = 65.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_pep5s")
 text = "View
 storage"
 
@@ -106,14 +114,32 @@ offset_right = 237.0
 offset_bottom = -31.0
 grow_horizontal = 2
 grow_vertical = 2
-disabled = true
+theme = ExtResource("4_pep5s")
 text = "Open
 Manual"
 
+[node name="ButtonSleep" type="Button" parent="WorkshopInterface/Buttons"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 0
+offset_left = -209.0
+offset_top = 69.0
+offset_right = -89.0
+offset_bottom = 104.0
+theme = ExtResource("4_pep5s")
+text = "Sleep until
+morning"
+script = ExtResource("5_udpj0")
+
 [node name="WorkshopInventory" parent="WorkshopInterface" instance=ExtResource("5_5nl7x")]
+visible = false
+layout_mode = 1
+
+[node name="BookInterface" parent="WorkshopInterface" instance=ExtResource("8_4upaj")]
 visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="WorkshopInterface/Buttons/ButtonOutside" to="WorkshopInterface/Buttons/ButtonOutside" method="_on_pressed" binds= ["Thoroughfare"]]
 [connection signal="pressed" from="WorkshopInterface/Buttons/ButtonShadowCanvas" to="WorkshopInterface/Buttons/ButtonShadowCanvas" method="_on_pressed" binds= ["Dark Room"]]
 [connection signal="pressed" from="WorkshopInterface/Buttons/ButtonStorage" to="WorkshopInterface" method="_on_button_storage_pressed"]
+[connection signal="pressed" from="WorkshopInterface/Buttons/ButtonBook" to="WorkshopInterface" method="_on_button_book_pressed"]
+[connection signal="pressed" from="WorkshopInterface/Buttons/ButtonSleep" to="WorkshopInterface/Buttons/ButtonSleep" method="_on_pressed"]

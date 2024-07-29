@@ -1,0 +1,458 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceoqr6g7a05rh"]
+
+[ext_resource type="Script" path="res://UI/Book/book_interface.gd" id="1_oys7r"]
+[ext_resource type="Texture2D" uid="uid://bqmcfam08qoxn" path="res://UI/Book/book.png" id="2_ojcpc"]
+[ext_resource type="Texture2D" uid="uid://d0q3d7iqkyaem" path="res://icon_64x64.png" id="3_v7t0c"]
+[ext_resource type="Texture2D" uid="uid://dj0rp4ny2u8mx" path="res://Scenes/DarkRoom/dark_room_bg.png" id="4_cj8tj"]
+[ext_resource type="Texture2D" uid="uid://cs8ehynytdkqd" path="res://UI/Book/im4.png" id="5_5qeam"]
+[ext_resource type="VideoStream" path="res://UI/Book/2024-07-28-21-26-05.ogv" id="5_cfc8j"]
+
+[node name="BookInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oys7r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.498039)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -193.0
+offset_right = 320.0
+offset_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_ojcpc")
+
+[node name="PagesControl" type="Control" parent="CenterContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -140.0
+offset_right = 248.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftPage" type="MarginContainer" parent="CenterContainer/TextureRect/PagesControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.60894e-05
+anchor_right = 0.497984
+anchor_bottom = 1.0
+offset_left = 0.00798035
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Page1" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Umbral Alchemy
+for Dummies"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+custom_minimum_size = Vector2(232, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Welcome to the wonderful world of umbral alchemy, a branch of alchemy for those aligned with the aspect of shadows!"
+autowrap_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 2
+texture = ExtResource("3_v7t0c")
+stretch_mode = 5
+
+[node name="Page3" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Chapter 1"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Basics"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+custom_minimum_size = Vector2(232, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "To start transmuting base materials into new items, you first need a room that blocks all outside light, a \"dark room\" of sorts."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "This room will need a large, white canvas, lit evenly by a strong light source from behind and a spatial locking array to contain the materials."
+autowrap_mode = 2
+
+[node name="Page5" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("5_cfc8j")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Once selected, you can start the process by activating the light source and lowering the canvas."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "You will see a formation that allows you to direct the shadow essence of your"
+autowrap_mode = 2
+
+[node name="Page7" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page7"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "To finish, just press the button and confirm.
+Your item's tier is based on the average tier of the materials used, while the grade is based on how accurate to the item's form you were."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page7"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Items come in various tiers and grades, greatly affecting their value"
+autowrap_mode = 2
+
+[node name="Page9" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page9"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Grades are simpler, being assigned a letter from F to A, with F being almost a failure and a being a fairly high quality item.
+The highest grade are S and P, S being an item of amazing quality and p being a perfected item, capable of rivaling items of the next tier"
+autowrap_mode = 2
+
+[node name="Page11" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page11"]
+layout_mode = 2
+texture = ExtResource("5_5qeam")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page11"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "To sell items, just drag them from your inventory to one of the sell slots, and to buy items, drag them from the shop inventory to the buy slots."
+autowrap_mode = 2
+
+[node name="Page13" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page13"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "TODO
+Custom item orders"
+autowrap_mode = 2
+
+[node name="RightPage" type="MarginContainer" parent="CenterContainer/TextureRect/PagesControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.502
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.00798035
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Page2" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page2"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "This book contains a guide to the art for any aspiring umbral alchemist, or for those who simply need a refresher, together with some other advice on making a living with your abilities."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page2"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Authored and reviewed by
+the Chuangxin Sect under
+the celestial court"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Page4" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 2
+texture = ExtResource("4_cj8tj")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Example of a standard \"dark room\""
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Afterwards, you will need to choose a base form for the item you wish to create and the materials to create it with."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "The more you use a form, the better your base form becomes."
+autowrap_mode = 2
+
+[node name="Page6" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page6"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "materials into the canvas, allowing you to shape the essence into the shadow of your desired item."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page6"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "To draw with shadow essence, use left click on the canvas. You have a limited amount of essence based on your materials.
+You can zoom in on the canvas using the scroll wheel and pan with the middle mouse button.
+"
+autowrap_mode = 2
+
+[node name="Page8" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="RichTextLabel" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page8"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Item tiers are as follows:
+[color=white]Mortal[/color] - items with no special properties
+[color=green]Peak mortal[/color] - the best an item can be without magic
+[color=blue]Magical[/color] - an item infused with magic
+[color=red]Draconic[/color] - an item of legendary status, like our dragon guardians
+[color=gold]Divine[/color] - items infused with divine power, naturally or artificially
+[color=plum]Immortal[/color] - an item that is intertwined with the very aspects of the universe, they cannot be destroyed."
+fit_content = true
+autowrap_mode = 2
+
+[node name="Page10" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Chapter 2"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Resource management"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+custom_minimum_size = Vector2(232, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "So you've created a new item, or you don't have any materials to transmute, what do you do now?
+You go to the local merchant guild of course!
+They're always stocked with materials for those who can afford it, and they always accept any new items for their auctions."
+autowrap_mode = 2
+
+[node name="Page12" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page12"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Make sure you always have either enough gold to buy new materials or enough materials to create an item, as you wouldn't want to go bankrupt and have to shut down your workshop, would you?
+
+The merchant guild refreshes their stock each day, so be on the lookout for good materials!"
+autowrap_mode = 2
+
+[node name="Page14" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page14"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Now you're ready to start your alchemical journey! Always remember to strive for perfection, and maybe you'll be the first alchemist to uncover the deepest depths of umbral alchemy..."
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 128
+alignment = 1
+
+[node name="ButtonPrev" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+disabled = true
+text = "prev page"
+
+[node name="ButtonClose" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+text = "close"
+
+[node name="ButtonNext" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(103, 26)
+layout_mode = 2
+text = "next page"
+
+[connection signal="pressed" from="HBoxContainer/ButtonPrev" to="." method="_on_button_prev_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonClose" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonNext" to="." method="_on_button_next_pressed"]

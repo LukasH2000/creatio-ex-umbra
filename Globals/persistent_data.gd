@@ -14,6 +14,7 @@ extends Node
 # CONSTANTS
 const SAVE_DATA_PATH : String = "user://Saves/"
 const THEME_PATH : String = "res://UI/game_theme.tres"
+const REP_THRESHOLD : int = 3
 
 # EXPORTING PROPERTIES https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html
 # @EXPORT_CATEGORY("name")
@@ -35,8 +36,11 @@ var area_scene_paths : Dictionary = {
 var current_scene : Node = null
 var world : Node = null
 var popup_window : Node = null
-
+var fade : Node
+	
 var game_data : Resource = load("res://Resources/game_data_default.tres")
+var is_new_game := false
+var fade_scene : PackedScene = preload("res://UI/fade.tscn")
 
 var window_size_base : Vector2 = Vector2(
 	ProjectSettings.get_setting("display/window/size/viewport_width"),
@@ -54,6 +58,7 @@ var window_size_base : Vector2 = Vector2(
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
 func _ready():
+	#create_save_path()
 	get_curr_scene()
 	create_default_forms()
 	create_default_discovered_forms()
@@ -102,7 +107,7 @@ func create_default_forms() -> void:
 		if i.form == null:
 			i.create_form()
 
-func goto_scene(path : String, data : Inventory = null):
+func goto_scene(path_name : String, data : Inventory = null):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.
 	# Deleting the current scene at this point is
@@ -111,17 +116,17 @@ func goto_scene(path : String, data : Inventory = null):
 
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
+	var faded : bool = await fade_screen(3.0)
+	call_deferred("_deferred_goto_scene", path_name, data)
 
-	call_deferred("_deferred_goto_scene", path, data)
 
-
-func _deferred_goto_scene(path, data = null):
+func _deferred_goto_scene(path_name, data = null):
 	# It is now safe to remove the current scene.
 	current_scene.free()
 
 	# Load the new scene.
-	var s = ResourceLoader.load(path)
-
+	var s = ResourceLoader.load(area_scene_paths[path_name])
+	
 	# Instance the new scene.
 	current_scene = s.instantiate()
 	
@@ -130,16 +135,29 @@ func _deferred_goto_scene(path, data = null):
 	
 	# Add it to the active scene, as child of root.
 	world.add_child(current_scene)
+	if is_new_game:
+		current_scene.open_book()
+		is_new_game = false
 	
-
+	game_data.current_area_name = path_name
+	if path_name != "Shadow Canvas":
+		save_game(0)
+	
+	unfade_screen()
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	#get_tree().current_scene = current_scene
 
 func check_save_path() -> Error:
-	if not DirAccess.dir_exists_absolute(SAVE_DATA_PATH):
-		return DirAccess.make_dir_absolute(SAVE_DATA_PATH)
+	var dir_access := DirAccess.open("user://")
+	#print(dir_access.dir_exists(SAVE_DATA_PATH))
+	#print(DirAccess.dir_exists_absolute(SAVE_DATA_PATH))
+	#print(dir_access.get_directories())
+	if not dir_access.dir_exists(SAVE_DATA_PATH):
+		return dir_access.make_dir(SAVE_DATA_PATH)
 	return OK
 
+# TODO ALERT: doesn't save inv game_data properly? inv wasn't restored after loading
+# the area name was properly saved and loaded tho
 func save_game(save_num : int = -1) -> void:
 	if check_save_path() == OK:
 		if save_num == -1:
@@ -150,12 +168,45 @@ func save_game(save_num : int = -1) -> void:
 	else:
 		printerr("Could not create save data folder")
 
-func load_game(save_num : int) -> Resource:
-	if ResourceLoader.exists(SAVE_DATA_PATH):
-		return ResourceLoader.load(SAVE_DATA_PATH + "save_%s.tres" % save_num)
-	return null
+func does_save_exist(save_num : int) -> bool:
+	return ResourceLoader.exists(SAVE_DATA_PATH + "save_%s.tres" % save_num)
 
+func load_game(save_num : int) -> void:
+	var save_path := SAVE_DATA_PATH + "save_%s.tres" % save_num
+	if ResourceLoader.exists(save_path):
+		game_data = ResourceLoader.load(save_path)
+		if game_data:
+			goto_scene(game_data.current_area_name)
+	#return null
 
+func pass_day():
+	var faded : bool = await fade_screen(1.0)
+	game_data.pass_day()
+	unfade_screen()
+
+func fade_screen(anim_spd : float):
+	fade = fade_scene.instantiate()
+	fade.anim_speed = anim_spd
+	get_parent().add_child(fade)
+	await fade.fade_halfway
+	return true
+
+func unfade_screen():
+	fade.unfade()
+	await fade.fade_done
+	get_parent().remove_child(fade)
+	fade.queue_free()
+
+func new_game():
+	is_new_game = true
+	goto_scene("Workshop")
+
+func load_autosave():
+	load_game(0)
+
+func quit_game():
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	get_tree().quit()
 #func create_new_game():
 	#game_data = GameData.new()
 	#game_data.player_storage

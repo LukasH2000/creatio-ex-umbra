@@ -41,6 +41,8 @@ func _on_button_storage_pressed():
 	$WorkshopInventory.visible = not $WorkshopInventory.visible
 	$WorkshopInventory.set_inventory()
 
+func _on_button_book_pressed():
+	$BookInterface.show()
 # PRIVATE METHODS
 
 
@@ -79,3 +81,6 @@ func _on_button_storage_pressed():
 #
 #func _on_button_outside_mouse_exited():
 	#$Labels/LabelOutside.hide()
+
+
+

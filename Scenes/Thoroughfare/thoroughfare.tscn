@@ -62,8 +62,8 @@ offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "To
-merchant
-guild"
+Merchant
+Guild"
 script = ExtResource("6_ulw2i")
 
 [connection signal="pressed" from="ThoroughfareInterface/Buttons/ButtonWorkshop" to="ThoroughfareInterface/Buttons/ButtonWorkshop" method="_on_pressed" binds= ["Workshop"]]

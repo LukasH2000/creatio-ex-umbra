@@ -162,9 +162,9 @@ func clear_inventory():
 	update_inventory()
 
 func _on_button_start_alchemy_pressed():
-	var path = PersistentData.area_scene_paths["Shadow Canvas"]
+	#var path = PersistentData.area_scene_paths["Shadow Canvas"]
 	if inventory.count_items() >= 2 and inventory.items[-1] != null:
-		PersistentData.goto_scene(path, inventory)
+		PersistentData.goto_scene("Shadow Canvas", inventory)
 	else:
 		PersistentData.get_popup_window().show_popup(PopupWindow.TYPE.ERR_ALCH_SELECT)
 # PRIVATE METHODS

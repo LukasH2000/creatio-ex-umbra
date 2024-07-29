@@ -232,7 +232,9 @@ func get_actual_value() -> int:
 	return actual_value
 
 func get_sell_value() -> int:
-	return get_actual_value() * (PersistentData.game_data.player_reputation + 1)
+	var rep : int = PersistentData.game_data.player_reputation + 1
+	var val : float = (get_actual_value() * rep) / PersistentData.REP_THRESHOLD 
+	return ceili(val)
 
 func is_same_item(item_to_compare : Item) -> bool:
 	var checks_array := [

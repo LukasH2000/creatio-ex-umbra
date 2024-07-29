@@ -5,12 +5,12 @@
 [ext_resource type="StyleBox" uid="uid://ntoekj6engo0" path="res://UI/button_style_box_normal.tres" id="3_f678n"]
 [ext_resource type="StyleBox" uid="uid://bq6luw2imupf7" path="res://UI/button_style_pressed.tres" id="4_2s0lr"]
 [ext_resource type="StyleBox" uid="uid://brcty83y8iv8b" path="res://UI/panel_style_container.tres" id="5_58w25"]
-[ext_resource type="FontFile" uid="uid://driqhgeax584v" path="res://UI/upheavtt.ttf" id="5_kh6j3"]
+[ext_resource type="FontFile" uid="uid://c1sjgjccpd4ue" path="res://UI/Font/ModernDOS8x16.ttf" id="6_hc2f5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_br2jj"]
 
 [resource]
-default_font = ExtResource("5_kh6j3")
+default_font = ExtResource("6_hc2f5")
 default_font_size = 16
 Button/styles/disabled = ExtResource("1_tivcy")
 Button/styles/focus = SubResource("StyleBoxEmpty_br2jj")

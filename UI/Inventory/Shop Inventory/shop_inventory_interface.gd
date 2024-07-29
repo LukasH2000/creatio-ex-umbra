@@ -45,17 +45,20 @@ func _ready():
 func _on_button_end_transaction_pressed():
 	var transaction_result := check_transaction()
 	if transaction_result == TRANSACTION_RESULT.OK:
-		var buyer_inv : Array[Item] = PersistentData.game_data.player_storage.items
-		var seller_inv: Array[Item] = %ShopInv.inventory.items
-		for i in %BuyInv.inventory.items:
-			if i:
-				var next_available_slot := buyer_inv.find(null)
-				buyer_inv[next_available_slot] = i
-			# TODO: make split materials add to first available stack
-		for i in %SellInv.inventory.items:
-			if i:
-				var next_available_slot := seller_inv.find(null)
-				seller_inv[next_available_slot] = i
+		var buyer_inv : Inventory = PersistentData.game_data.player_storage
+		var seller_inv: Inventory = %ShopInv.inventory
+		%BuyInv.inventory.add_items_to_inv(buyer_inv)
+		%SellInv.inventory.add_items_to_inv(seller_inv)
+		#for i in %BuyInv.inventory.items:
+			#if i:
+				#var next_available_slot := buyer_inv.find(null)
+				#buyer_inv[next_available_slot] = i
+			## TODO: make split materials add to first available stack
+			# NOTE: Done i think
+		#for i in %SellInv.inventory.items:
+			#if i:
+				#var next_available_slot := seller_inv.find(null)
+				#seller_inv[next_available_slot] = i
 		PersistentData.game_data.player_gold += trade_value
 		%BuyInv.clear_inventory()
 		%SellInv.clear_inventory()
@@ -85,8 +88,8 @@ func change_seller(seller_inventory : Inventory, seller_title : String) -> void:
 	%ShopInv.update_inventory()
 
 func update_trade_value():
-	var buy_val : int = -%BuyInv.inventory.get_total_value()
-	var sell_val : int = %SellInv.inventory.get_total_value()
+	var buy_val : int = -%BuyInv.inventory.get_total_value(true)
+	var sell_val : int = %SellInv.inventory.get_total_value(false)
 	#print("val: ", val)
 	trade_value = buy_val + sell_val
 	var val_sign := "+" if trade_value >=0 else ""

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv6nn0hxay1q4"]
+[gd_scene load_steps=7 format=3 uid="uid://bv6nn0hxay1q4"]
 
 [ext_resource type="Script" path="res://UI/AlchemySelection/mini_shadow_canvas.gd" id="1_hn8fn"]
 [ext_resource type="Texture2D" uid="uid://cdsbcnkveb0my" path="res://Scenes/ShadowCanvas/shadow_canvas.png" id="1_wvo4w"]
 [ext_resource type="Script" path="res://Resources/Inventories/inventory.gd" id="2_0poec"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="4_wqu8y"]
 
 [sub_resource type="Resource" id="Resource_ea2uo"]
 resource_local_to_scene = true
@@ -52,6 +53,7 @@ stretch_mode = 5
 [node name="ButtonStartAlchemy" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
+theme = ExtResource("4_wqu8y")
 text = "Start Creating"
 
 [node name="Slots" type="Control" parent="."]
