@@ -83,3 +83,4 @@ layout_mode = 1
 [connection signal="pressed" from="DarkRoomInterface/Buttons/ButtonWorkshop" to="DarkRoomInterface/Buttons/ButtonWorkshop" method="_on_pressed" binds= ["Workshop"]]
 [connection signal="pressed" from="DarkRoomInterface/Buttons/ButtonShadowCanvas" to="DarkRoomInterface" method="show_alch_select_interface"]
 [connection signal="selection_cancelled" from="DarkRoomInterface/AlchemySelectionInterface" to="DarkRoomInterface" method="_on_alchemy_selection_interface_selection_cancelled"]
+[connection signal="selection_cleared" from="DarkRoomInterface/AlchemySelectionInterface" to="DarkRoomInterface" method="_on_alchemy_selection_interface_selection_cleared"]

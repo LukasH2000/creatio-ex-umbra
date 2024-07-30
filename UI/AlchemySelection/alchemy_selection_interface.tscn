@@ -44,23 +44,7 @@ custom_minimum_size = Vector2(320, 270)
 layout_mode = 2
 tab_focus_mode = 0
 
-[node name="Select Form" type="MarginContainer" parent="CenterContainer/HBoxContainer/TabContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Select Form" type="HBoxContainer" parent="CenterContainer/HBoxContainer/TabContainer/Select Form"]
-layout_mode = 2
-
-[node name="FormsInventory" parent="CenterContainer/HBoxContainer/TabContainer/Select Form/Select Form" instance=ExtResource("2_1mv4g")]
-layout_mode = 2
-inventory = null
-inv_source = 4
-
 [node name="Select Materials" type="MarginContainer" parent="CenterContainer/HBoxContainer/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(320, 247)
 layout_mode = 2
 theme_override_constants/margin_left = 8
@@ -83,17 +67,51 @@ theme_override_constants/separation = 12
 layout_mode = 2
 inventory = SubResource("Resource_hcqwd")
 
-[node name="ButtonCancel" type="Button" parent="."]
-custom_minimum_size = Vector2(0, 26)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+[node name="Select Form" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -36.0
-offset_right = 88.0
-offset_bottom = -10.0
+offset_left = 39.0
+offset_top = 68.0
+offset_right = 39.0
+offset_bottom = 44.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Select Form" type="HBoxContainer" parent="Select Form"]
+layout_mode = 2
+
+[node name="FormsInventory" parent="Select Form/Select Form" instance=ExtResource("2_1mv4g")]
+layout_mode = 2
+inventory = null
+inv_source = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -276.0
+offset_top = -37.0
+offset_right = 36.0
+offset_bottom = -11.0
+grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 128
+
+[node name="ButtonCancel" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
 text = "Cancel"
 
-[connection signal="pressed" from="ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[node name="ButtonClear" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Clear canvas"
+
+[connection signal="pressed" from="HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/ButtonClear" to="." method="_on_button_clear_pressed"]

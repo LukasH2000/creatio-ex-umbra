@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=6 format=3 uid="uid://cos5e2c0myf1v"]
+
+[ext_resource type="Script" path="res://Resources/Items/item.gd" id="1_g5ubi"]
+[ext_resource type="Image" uid="uid://dplf6y52nqg6o" path="res://Resources/Items/Armour/leather_boots_base_form.png" id="1_r5cri"]
+[ext_resource type="Image" uid="uid://dyvfna10tpr86" path="res://Resources/Items/Armour/leather_boots.png" id="2_g58t1"]
+[ext_resource type="Resource" uid="uid://dinyoox0ms2x8" path="res://Resources/Items/Materials/leather_skin.tres" id="3_v25nf"]
+[ext_resource type="Resource" uid="uid://b6yxk7e367447" path="res://Resources/Items/Materials/rope.tres" id="4_e5m6g"]
+
+[resource]
+script = ExtResource("1_g5ubi")
+name = "Leather Boots"
+tier = 0
+grade = 0
+description = "Leather boots made for walking, at least 500 miles and maybe even 500 more."
+gold_value = 75
+image = ExtResource("2_g58t1")
+default_discovered_form_image = ExtResource("1_r5cri")
+item_components = Array[int]([10])
+item_type = 1
+transmutable = false
+recipe_items = Array[ExtResource("1_g5ubi")]([ExtResource("3_v25nf"), ExtResource("3_v25nf"), ExtResource("4_e5m6g")])

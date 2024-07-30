@@ -59,12 +59,13 @@ func add_items_to_inv(inv : Inventory):
 	for i in items:
 		if i:
 			var added := false
-			for j in inv.items:
-				if j:
-					if i.is_same_item(j):
-						j.amount_held += i.amount_held
-						added = true
-						break
+			if i.item_type == Item.ITEM_TYPE.MATERIAL:
+				for j in inv.items:
+					if j:
+						if i.is_same_item(j):
+							j.amount_held += i.amount_held
+							added = true
+							break
 			if not added:
 				inv.add_item(i, inv.items.find(null))
 			
@@ -126,6 +127,12 @@ func sort_by_tier(a : Item, b : Item) -> bool:
 		or (a.tier == b.tier and a.grade < b.grade):
 			return true
 	return false
+
+func get_items_no_nulls():
+	var items_no_null := items.duplicate(true)
+	while null in items_no_null:
+		items_no_null.erase(null)
+	return items_no_null
 # PRIVATE METHODS
 
 

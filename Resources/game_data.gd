@@ -48,7 +48,7 @@ static var save_num = 0
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-# TODO: every day, randomize the shop stores
+# every day, randomize the shop stores
 func pass_day():
 	day += 1
 	randomize_stores()

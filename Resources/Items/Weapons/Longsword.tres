@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bcegt1688frth"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://bcegt1688frth"]
 
 [ext_resource type="Image" uid="uid://yw5fut2qvnf7" path="res://Resources/Items/Weapons/longsword_base_form.png" id="1_cyjf0"]
 [ext_resource type="Image" uid="uid://drnctx77wqyc4" path="res://Resources/Items/Weapons/basic_longsword.png" id="1_hk5bs"]
 [ext_resource type="Script" path="res://Resources/Items/Weapons/weapon.gd" id="1_j2ba5"]
+[ext_resource type="Resource" uid="uid://bvbbyjneb57dl" path="res://Resources/Items/Materials/steel_ingot.tres" id="3_mtprj"]
+[ext_resource type="Resource" uid="uid://8ko1mwvp2n1w" path="res://Resources/Items/Materials/wood_log.tres" id="4_pi2by"]
+[ext_resource type="Resource" uid="uid://dinyoox0ms2x8" path="res://Resources/Items/Materials/leather_skin.tres" id="5_8m05i"]
 
 [resource]
 script = ExtResource("1_j2ba5")
@@ -18,3 +21,4 @@ default_discovered_form_image = ExtResource("1_cyjf0")
 item_components = Array[int]([1, 3, 4])
 item_type = 1
 transmutable = false
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([ExtResource("3_mtprj"), ExtResource("3_mtprj"), ExtResource("4_pi2by"), ExtResource("5_8m05i")])

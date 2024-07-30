@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://ct4l7ebuc30hq"
+path="res://.godot/imported/wolf_pelt.png-66d5d9e51af60296847d5a7d5fdfae38.image"
+
+[deps]
+
+source_file="res://Resources/Items/Materials/wolf_pelt.png"
+dest_files=["res://.godot/imported/wolf_pelt.png-66d5d9e51af60296847d5a7d5fdfae38.image"]
+
+[params]
+

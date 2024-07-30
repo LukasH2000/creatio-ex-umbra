@@ -46,12 +46,22 @@ var window_size_base : Vector2 = Vector2(
 	ProjectSettings.get_setting("display/window/size/viewport_width"),
 	ProjectSettings.get_setting("display/window/size/viewport_height")
 )
+
+var good_jingle := preload("res://Globals/Audio/jingles-retro_11.ogg")
+var bad_jingle := preload("res://Globals/Audio/jingles-retro_16.ogg")
 # PRIVATE VARIABLES
 
 
 # @ONREADY VARIABLES
-
-
+@onready var footsteps := $Footsteps
+@onready var sleep := $Sleeping
+@onready var menu_msc := $"Menu music"
+@onready var gen_msc := $"General music"
+@onready var canv_msc := $"Canvas music"
+@onready var finish_item_jingle := $"Finish item jingle"
+@onready var click := $Click
+@onready var book_flip := $BookFlip
+@onready var coins := $Coins
 # OPTIONAL BUILT-IN VIRTUAL _INIT METHOD
 # OPTIONAL BUILT-IN VIRTUAL _ENTER_TREE() METHOD
 # BUILT-IN VIRTUAL _READY METHOD
@@ -116,11 +126,21 @@ func goto_scene(path_name : String, data : Inventory = null):
 
 	# The solution is to defer the load to a later time, when
 	# we can be sure that no code from the current scene is running:
-	var faded : bool = await fade_screen(3.0)
+	
+	var faded : bool = await fade_screen(4.0)
+	
 	call_deferred("_deferred_goto_scene", path_name, data)
 
 
 func _deferred_goto_scene(path_name, data = null):
+	if not (
+	current_scene.name == "MainMenu" 
+	or current_scene.name == "ShadowCanvas"
+	or path_name == "Shadow Canvas"
+	):
+		for i in 3:
+			footsteps.play()
+			var fin = await footsteps.finished
 	# It is now safe to remove the current scene.
 	current_scene.free()
 
@@ -141,7 +161,19 @@ func _deferred_goto_scene(path_name, data = null):
 	
 	game_data.current_area_name = path_name
 	if path_name != "Shadow Canvas":
+		canv_msc.stop()
+		menu_msc.stop()
+		if not gen_msc.playing:
+			gen_msc.play()
 		save_game(0)
+	elif path_name == "Main menu":
+		canv_msc.stop()
+		menu_msc.play()
+		gen_msc.stop()
+	else:
+		canv_msc.play()
+		menu_msc.stop()
+		gen_msc.stop()
 	
 	unfade_screen()
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
@@ -180,8 +212,10 @@ func load_game(save_num : int) -> void:
 	#return null
 
 func pass_day():
-	var faded : bool = await fade_screen(1.0)
+	var faded : bool = await fade_screen(2.0)
+	sleep.play()
 	game_data.pass_day()
+	save_game(0)
 	unfade_screen()
 
 func fade_screen(anim_spd : float):
@@ -207,6 +241,31 @@ func load_autosave():
 func quit_game():
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
+
+func check_recipes_for_correct(recipe : Array[Item]) -> Item:
+	for i in items_inv.items:
+		if i.is_recipe_correct(recipe):
+			return i
+	return null
+
+func play_finish_item_jingle(accuracy : float):
+	if accuracy > 0.3:
+		finish_item_jingle.stream = good_jingle
+	else:
+		finish_item_jingle.stream = bad_jingle
+	finish_item_jingle.play()
+
+func play_book_flip():
+	book_flip.play()
+
+func play_click():
+	click.play()
+
+func play_coins_sound():
+	coins.play()
+	await coins.finished
+	#print(coins.playing)
+	coins.play()
 #func create_new_game():
 	#game_data = GameData.new()
 	#game_data.player_storage

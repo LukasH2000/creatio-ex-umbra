@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://b680d10qrwjx4"]
+
+[ext_resource type="Image" uid="uid://4g6kcjl7hhrf" path="res://Resources/Items/Armour/leather_chest_armor_base_form.png" id="1_ld6om"]
+[ext_resource type="Script" path="res://Resources/Items/item.gd" id="1_m4kpm"]
+[ext_resource type="Image" uid="uid://dn8aj3j2lxgoq" path="res://Resources/Items/Armour/leather_chest_armor.png" id="2_r6tgo"]
+[ext_resource type="Resource" uid="uid://dinyoox0ms2x8" path="res://Resources/Items/Materials/leather_skin.tres" id="3_m7w63"]
+[ext_resource type="Resource" uid="uid://bvbbyjneb57dl" path="res://Resources/Items/Materials/steel_ingot.tres" id="4_jgn4q"]
+[ext_resource type="Resource" uid="uid://cjg5uw4n4cbpy" path="res://Resources/Items/Materials/wolf_pelt.tres" id="5_agiq7"]
+
+[resource]
+script = ExtResource("1_m4kpm")
+name = "Leather Cuirass"
+tier = 0
+grade = 0
+description = "A leather cuirass for protecting your vital organs from slashing attacks. Try not to get stabbed, though!"
+gold_value = 200
+image = ExtResource("2_r6tgo")
+default_discovered_form_image = ExtResource("1_ld6om")
+item_components = Array[int]([8, 9, 10])
+item_type = 1
+transmutable = false
+recipe_items = Array[ExtResource("1_m4kpm")]([ExtResource("3_m7w63"), ExtResource("3_m7w63"), ExtResource("4_jgn4q"), ExtResource("5_agiq7")])

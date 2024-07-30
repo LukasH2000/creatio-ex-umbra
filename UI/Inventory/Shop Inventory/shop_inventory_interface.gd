@@ -63,6 +63,7 @@ func _on_button_end_transaction_pressed():
 		%BuyInv.clear_inventory()
 		%SellInv.clear_inventory()
 		visible = false
+		PersistentData.play_coins_sound()
 	elif transaction_result == TRANSACTION_RESULT.NOT_ENOUGH_SLOTS:
 		PersistentData.get_popup_window().show_popup(PopupWindow.TYPE.ERR_SLOTS)
 	elif transaction_result == TRANSACTION_RESULT.NOT_ENOUGH_GOLD:

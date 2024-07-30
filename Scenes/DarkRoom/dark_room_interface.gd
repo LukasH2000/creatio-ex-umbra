@@ -67,6 +67,11 @@ func _on_alchemy_selection_interface_selection_cancelled():
 	
 
 func reset_alch_select_interface():
+	new_alch_interface()
+	alch_select_interface.hide()
+	alch_interface_changed.emit()
+
+func new_alch_interface():
 	var new := alch_select_interface_scene.instantiate()
 	remove_child(alch_select_interface)
 	alch_select_interface.free()
@@ -75,5 +80,9 @@ func reset_alch_select_interface():
 	alch_select_interface.selection_cancelled.connect(
 		_on_alchemy_selection_interface_selection_cancelled
 	)
-	alch_select_interface.hide()
-	alch_interface_changed.emit()
+	alch_select_interface.selection_cleared.connect(
+		_on_alchemy_selection_interface_selection_cleared
+	)
+
+func _on_alchemy_selection_interface_selection_cleared():
+	call_deferred("new_alch_interface")

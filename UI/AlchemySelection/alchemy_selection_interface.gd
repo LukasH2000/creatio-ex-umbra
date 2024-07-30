@@ -7,6 +7,7 @@ extends Control
 
 # SIGNALS
 signal selection_cancelled
+signal selection_cleared
 
 # ENUMS
 
@@ -28,7 +29,7 @@ signal selection_cancelled
 
 
 # @ONREADY VARIABLES
-@onready var forms_inv := $"CenterContainer/HBoxContainer/TabContainer/Select Form/Select Form/FormsInventory"
+#@onready var forms_inv := $"CenterContainer/HBoxContainer/TabContainer/Select Form/Select Form/FormsInventory"
 @onready var mats_inv := $"CenterContainer/HBoxContainer/TabContainer/Select Materials/Select Materials/MatsInv"
 @onready var mini_canvas := $CenterContainer/HBoxContainer/MiniShadowCanvas
 # OPTIONAL BUILT-IN VIRTUAL _INIT METHOD
@@ -39,8 +40,8 @@ signal selection_cancelled
 func _ready():
 	if mini_canvas.inventory.count_items() > 0:
 		mini_canvas.clear_inventory()
-	forms_inv.inventory = PersistentData.game_data.discovered_forms
-	forms_inv.update_inventory()
+	#forms_inv.inventory = PersistentData.game_data.discovered_forms
+	#forms_inv.update_inventory()
 	mats_inv.inventory = PersistentData.game_data.player_storage
 	mats_inv.update_inventory()
 	
@@ -59,3 +60,7 @@ func _on_button_cancel_pressed():
 		#mini_canvas.clear_inventory()
 	selection_cancelled.emit()
 	
+
+
+func _on_button_clear_pressed():
+	selection_cleared.emit()

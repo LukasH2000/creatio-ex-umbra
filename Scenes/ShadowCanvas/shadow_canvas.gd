@@ -55,7 +55,10 @@ func _ready():
 			used_materials.append(passed_materials[i])
 		else:
 			mat_slots.append(null)
-	canvas.set_canvas_pixels_to_form(
+	#canvas.set_canvas_pixels_to_form(
+		#passed_item_to_form.get_form_discovered_inverted()
+	#)
+	canvas.set_canvas_form_disc_to_form(
 		passed_item_to_form.get_form_discovered_inverted()
 	)
 	var mat_form_size : Vector2i = \
@@ -119,7 +122,8 @@ func _on_drawable_canvas_pixel_drawn(pixel_size : float):
 		# full pixel size * 2 seems too much
 		# TODO: possibly make a progression system where you can
 		# get traits/talents/... to reduce pixels used per level
-		first_mat.reduce_form_by(pixel_size ** 2)
+		#first_mat.reduce_form_by(pixel_size ** 2)
+		first_mat.reduce_form_by(pixel_size*2)
 		mat_slots[first_mat_i].update_sprite(first_mat.get_form_image())
 		if passed_inv.items[first_mat_i]:
 			passed_inv.remove_item_at(first_mat_i)

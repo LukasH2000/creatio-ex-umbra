@@ -37,7 +37,7 @@ extends Control
 # PUBLIC METHODS
 func set_inventory():
 	$CenterContainer/VBoxContainer/InventoryInterface.inventory = PersistentData.game_data.player_storage
-
+	$CenterContainer/VBoxContainer/InventoryInterface.update_inventory()
 # PRIVATE METHODS
 
 

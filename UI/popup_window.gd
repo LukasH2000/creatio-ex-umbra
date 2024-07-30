@@ -78,9 +78,9 @@ func show_popup(type : TYPE, alch_mat : AlchemyMaterial = null) -> void:
 		button_ok.text = "Close"
 		button_cancel.hide()
 	if type == TYPE.ERR_ALCH_SELECT:
-		title.text = "Select Form and materials!"
+		title.text = "Not a recipe!"
 		text.show()
-		text.text = "You cannot start transmuting an item without a form and at least 1 material!"
+		text.text = "You cannot create an item without a valid recipe!"
 		spinbox.hide()
 		button_ok.text = "Close"
 		button_cancel.hide()

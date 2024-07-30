@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bqmcfam08qoxn" path="res://UI/Book/book.png" id="2_ojcpc"]
 [ext_resource type="Texture2D" uid="uid://d0q3d7iqkyaem" path="res://icon_64x64.png" id="3_v7t0c"]
 [ext_resource type="Texture2D" uid="uid://dj0rp4ny2u8mx" path="res://Scenes/DarkRoom/dark_room_bg.png" id="4_cj8tj"]
+[ext_resource type="VideoStream" path="res://UI/Book/2024-07-30-14-34-29.ogv" id="4_wffct"]
 [ext_resource type="Texture2D" uid="uid://cs8ehynytdkqd" path="res://UI/Book/im4.png" id="5_5qeam"]
-[ext_resource type="VideoStream" path="res://UI/Book/2024-07-28-21-26-05.ogv" id="5_cfc8j"]
 
 [node name="BookInterface" type="Control"]
 layout_mode = 3
@@ -161,7 +161,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("5_cfc8j")
+stream = ExtResource("4_wffct")
 autoplay = true
 expand = true
 loop = true
@@ -247,6 +247,26 @@ text = "TODO
 Custom item orders"
 autowrap_mode = 2
 
+[node name="Page15" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page15"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "TODO
+Update recipes automatically
+
+Recipes:
+Sword - Steel ingot, steel ingot, wood log, tanned leather
+
+Pickaxe - Steel ingot, steel ingot, wood log
+
+Leather chest armor - tanned leather, tanned leather, steel ingot, wolf pelt"
+autowrap_mode = 2
+
 [node name="RightPage" type="MarginContainer" parent="CenterContainer/TextureRect/PagesControl"]
 layout_mode = 1
 anchors_preset = -1
@@ -308,7 +328,7 @@ custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "Afterwards, you will need to choose a base form for the item you wish to create and the materials to create it with."
+text = "Afterwards, you will need to place the materials on the canvas according to a recipe."
 autowrap_mode = 2
 
 [node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
@@ -316,7 +336,7 @@ custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "The more you use a form, the better your base form becomes."
+text = "This book stores recipes in the final pages, with the unknown being unlockable in various ways."
 autowrap_mode = 2
 
 [node name="Page6" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
@@ -422,6 +442,28 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
 text = "Now you're ready to start your alchemical journey! Always remember to strive for perfection, and maybe you'll be the first alchemist to uncover the deepest depths of umbral alchemy..."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page14"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "The next pages will magically store known recipes"
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Page16" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page16"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Leather boots - Tanned leather, tanned leather, rope"
 autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

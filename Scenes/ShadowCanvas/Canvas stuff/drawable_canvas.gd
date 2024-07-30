@@ -33,6 +33,7 @@ var pixel_size : float = 4
 var canvas_size : Vector2i
 var canvas_pixels : BitMap = BitMap.new()
 var canvas_preview : BitMap = BitMap.new()
+var canvas_form_disc : BitMap = BitMap.new()
 var grid_square_size : Vector2 = Vector2(pixel_size, pixel_size)
 
 var alpha_grid : float = 0.1
@@ -41,6 +42,9 @@ var alpha_pixel : float = 1
 var color_pixel : Color = Color(0, 0, 0, alpha_pixel)
 var alpha_preview : float = 0.25
 var color_preview : Color = Color(0, 0, 0, alpha_preview)
+var alpha_form_disc : float = 0.5
+var color_form_disc : Color = Color(0, 0, 0, alpha_form_disc)
+
 
 var is_drawing : bool = false
 var last_pixel_pos : Vector2i = Vector2i.ZERO
@@ -69,10 +73,15 @@ func _ready():
 	canvas_size = Vector2i(CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH)
 	canvas_pixels.create(canvas_size / pixel_size)
 	canvas_preview.create(canvas_size / pixel_size)
+	canvas_form_disc.create(canvas_size / pixel_size)
 
 func set_canvas_pixels_to_form(form : BitMap):
 	if form.get_size() == canvas_pixels.get_size():
 		canvas_pixels = form
+
+func set_canvas_form_disc_to_form(form : BitMap):
+	if form.get_size() == canvas_form_disc.get_size():
+		canvas_form_disc = form
 
 func get_drawing() -> BitMap:
 	return canvas_pixels
@@ -89,6 +98,7 @@ func _draw():
 	draw_grid(grid_square_size)
 	draw_canvas_pixels()
 	draw_preview()
+	draw_canvas_form_disc()
 	# TODO: draw_selected_form()? Not needed if canvas_pixels is set to form
 
 func draw_grid(grid_size : Vector2):
@@ -96,6 +106,12 @@ func draw_grid(grid_size : Vector2):
 		draw_line(Vector2(x * grid_size.x, 0), Vector2(x * grid_size.x, canvas_size.y), color_grid)
 	for y in range(1 + canvas_size.y / grid_size.y):
 		draw_line(Vector2(0, y * grid_size.y), Vector2(canvas_size.x, y * grid_size.y), color_grid)
+
+func draw_canvas_form_disc() -> void:
+	for x in range(CANVAS_SIDE_LENGTH / pixel_size):
+		for y in range(CANVAS_SIDE_LENGTH / pixel_size):
+			if canvas_form_disc.get_bit(x, y):
+				draw_rect(Rect2(x * pixel_size, y * pixel_size, pixel_size, pixel_size), color_form_disc)
 
 func draw_canvas_pixels() -> void:
 	for x in range(CANVAS_SIDE_LENGTH / pixel_size):
@@ -115,6 +131,9 @@ func draw_preview() -> void:
 func set_draw_pixel(coords : Vector2i) -> void:
 	if remaining_essence >= pixel_size:
 		canvas_pixels.set_bitv(coords, true)
+		PersistentData.play_click()
+		if canvas_form_disc.get_bitv(coords):
+			canvas_form_disc.set_bitv(coords, false)
 		pixel_drawn.emit(pixel_size)
 	else:
 		pass # TODO: what happens when player has used all materials

@@ -54,6 +54,7 @@ func set_data(item : Item, acc : float):
 	acc_lbl.text = "%.2f%%" % (acc*100)
 	tier_lbl.text = "[center]" + InventoryItem.ITEM_TIERS[item.tier] + "[/center]"
 	grade_lbl.text = InventoryItem.ITEM_GRADES[item.grade]
+	PersistentData.play_finish_item_jingle(acc)
 	#debug_rect.texture = item.get_form_discovered_texture()
 # PRIVATE METHODS
 

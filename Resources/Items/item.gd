@@ -82,6 +82,15 @@ enum ITEM_TYPE {MAIN, ITEM, MATERIAL, FORM}
 	set(value):
 		transmutable = value
 
+@export var recipe_items : Array[Item]  :
+	get:
+		return recipe_items
+	set(value):
+		recipe_items = value
+		#for i in recipe_items:
+			#if not i.name in recipe_names:
+				#recipe_names.append(i.name)
+
 # PUBLIC VARIABLES
 var image_texture : ImageTexture
 var form : BitMap
@@ -89,6 +98,7 @@ var form_img : Image
 var form_texture : ImageTexture
 var form_discovered_texture : ImageTexture
 var form_discovered : BitMap
+#var recipe_names : Array[String]
 
 # PRIVATE VARIABLES
 
@@ -189,7 +199,7 @@ func get_form_discovered_inverted():
 	return invert_bitmap(form_discovered) # inverts form_discovered permanently
 
 func get_form_discovered_texture():
-	var discovered_img := form_discovered.convert_to_image()
+	var discovered_img : Image = get_form_discovered().convert_to_image()
 	if not form_discovered_texture:
 		form_discovered_texture = ImageTexture.create_from_image(discovered_img)
 	else:
@@ -247,7 +257,8 @@ func is_same_item(item_to_compare : Item) -> bool:
 		#default_discovered_form_image == item_to_compare.default_discovered_form_image,
 		item_components == item_to_compare.item_components,
 		item_type == item_to_compare.item_type,
-		transmutable == item_to_compare.transmutable
+		transmutable == item_to_compare.transmutable,
+		recipe_items == item_to_compare.recipe_items
 	]
 	return not checks_array.has(false)
 
@@ -266,6 +277,8 @@ func set_dupe_props(dupe : Item):
 	dupe.item_components = item_components
 	dupe.item_type = item_type
 	dupe.transmutable = transmutable
+	dupe.recipe_items = recipe_items.duplicate(true)
+	#dupe.recipe_names = recipe_names.duplicate(true)
 	if image_texture:
 		dupe.image_texture = image_texture.duplicate(true)
 	if form:
@@ -327,6 +340,16 @@ func update_img_to_form(game_data_form : Item):
 			# see if it's correct to game data form
 			# if yes, set 
 
+func is_recipe_correct(recipe : Array[Item]):
+	var len := recipe.size()
+	var correct := false
+	if recipe_items.size() == len:
+		correct = true
+		for i in range(0, len):
+			if recipe[i].name != recipe_items[i].name:
+				correct = false
+	return correct
+		
 # PRIVATE METHODS
 
 

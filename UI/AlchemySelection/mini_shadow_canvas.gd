@@ -22,7 +22,7 @@ extends InventoryInterface
 
 
 # PUBLIC VARIABLES
-var inv_slot_script_path := "res://UI/Inventory/inventory_slot.gd"
+#var inv_slot_script_path := "res://UI/Inventory/inventory_slot.gd"
 var mat_slot_size := Vector2i(16,16)
 var form_slot_size := Vector2i(101,101)
 var slot_positions := [
@@ -53,6 +53,7 @@ var slot_positions := [
 #]
 #@onready var form_slot : Node = $Control/FormSlot
 @onready var slots : Node = $Slots
+@onready var recipe_lbl : Node = $VBoxContainer/TextureRect/RecipeLabel
 
 # OPTIONAL BUILT-IN VIRTUAL _INIT METHOD
 # OPTIONAL BUILT-IN VIRTUAL _ENTER_TREE() METHOD
@@ -98,6 +99,10 @@ func update_inventory() -> void:
 			if i < 8:
 				slot.add_theme_stylebox_override("panel", load("res://UI/AlchemySelection/mat_selection_style.tres"))
 			else:
+				if item:
+					recipe_lbl.hide()
+				else:
+					recipe_lbl.show()
 				slot.add_theme_stylebox_override("panel", load("res://UI/AlchemySelection/form_selection_style.tres"))
 			slots.add_child(slot)
 			slot.position = slot_positions[i]
@@ -140,6 +145,14 @@ func slot_changed(item: Item, slot: InventorySlot):
 		inventory.remove_item_at(slot.get_index())
 		#var inv_item : Node = slot.get
 	#inventory.sort_inventory(inventory.sort_by_tier)
+	var recipe_item : Item = PersistentData.check_recipes_for_correct(
+		inventory.get_items_no_nulls()
+	)
+	if recipe_item:
+		inventory.add_item(recipe_item, inventory.num_slots-1)
+	else:
+		inventory.remove_item_at(inventory.num_slots-1)
+	update_inventory()
 	inventory_changed.emit()
 
 func add_items_to_inv(inv : Inventory):
@@ -163,7 +176,8 @@ func clear_inventory():
 
 func _on_button_start_alchemy_pressed():
 	#var path = PersistentData.area_scene_paths["Shadow Canvas"]
-	if inventory.count_items() >= 2 and inventory.items[-1] != null:
+	#if inventory.count_items() >= 2 and inventory.items[-1] != null:
+	if inventory.items[-1] != null:
 		PersistentData.goto_scene("Shadow Canvas", inventory)
 	else:
 		PersistentData.get_popup_window().show_popup(PopupWindow.TYPE.ERR_ALCH_SELECT)

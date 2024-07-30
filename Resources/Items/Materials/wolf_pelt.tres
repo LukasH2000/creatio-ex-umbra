@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AlchemyMaterial" load_steps=3 format=3 uid="uid://cjg5uw4n4cbpy"]
+
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="1_mdcje"]
+[ext_resource type="Image" uid="uid://ct4l7ebuc30hq" path="res://Resources/Items/Materials/wolf_pelt.png" id="1_s4l68"]
+
+[resource]
+script = ExtResource("1_mdcje")
+mat_type = 2
+mat_uses = Array[int]([10, 9])
+amount_held = 1
+name = "Wolf Pelt"
+tier = 0
+grade = 0
+description = "A pelt from a wolf. If not friend, why friend shaped?"
+gold_value = 20
+image = ExtResource("1_s4l68")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([])

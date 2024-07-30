@@ -71,6 +71,13 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
+visible = false
+modulate = Color(0.380392, 0.0627451, 0.635294, 1)
+layout_mode = 2
+texture = ExtResource("2_dp82y")
+stretch_mode = 3
+
 [node name="Label" type="Label" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.1904, 0.032, 0.32, 1)
@@ -79,12 +86,6 @@ theme_override_constants/shadow_outline_size = 8
 theme_override_font_sizes/font_size = 32
 text = "Creatio
   Ex Umbra"
-
-[node name="TextureRect" type="TextureRect" parent="MainMenu/CenterContainer/VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("2_dp82y")
-stretch_mode = 3
 
 [node name="ButtonNewGame" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
 light_mask = 0

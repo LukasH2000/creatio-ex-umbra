@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AlchemyMaterial" load_steps=3 format=3 uid="uid://b6yxk7e367447"]
+
+[ext_resource type="Image" uid="uid://cus5vt1etoe5b" path="res://Resources/Items/Materials/rope.png" id="1_0rsn5"]
+[ext_resource type="Script" path="res://Resources/Items/Materials/material.gd" id="1_e6ffc"]
+
+[resource]
+script = ExtResource("1_e6ffc")
+mat_type = 2
+mat_uses = Array[int]([0])
+amount_held = 1
+name = "Rope"
+tier = 0
+grade = 0
+description = "Just some rope, but useful in countless ways."
+gold_value = 5
+image = ExtResource("1_0rsn5")
+item_components = Array[int]([0])
+item_type = 2
+transmutable = true
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([])

@@ -35,8 +35,6 @@ extends Control
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-# TODO: disable all buttons except the book button on a new game until the player
-# has opened the book
 func _on_button_storage_pressed():
 	$WorkshopInventory.visible = not $WorkshopInventory.visible
 	$WorkshopInventory.set_inventory()

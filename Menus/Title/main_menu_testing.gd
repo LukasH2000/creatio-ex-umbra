@@ -2,7 +2,7 @@
 # @TOOL
 # CLASS_NAME
 # EXTENDS
-extends Node
+class_name MainMenu extends Node
 # DOCSTRING
 
 # SIGNALS
@@ -44,6 +44,8 @@ var is_playing : bool
 # TODO: settings
 # TODO: orders
 # TODO: audio
+# TODO: instead of selecting a form, you select the materials and then draw
+# the item according to the form, which is previewed but not added to canvas_pixels
 func _ready():
 	if is_playing:
 		btn_new.hide()
