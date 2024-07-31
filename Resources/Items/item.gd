@@ -124,6 +124,12 @@ var form_discovered : BitMap
 	#form.create_from_image_alpha(image)
 	#var form_image := form.convert_to_image()
 	#form_texture = ImageTexture.create_from_image(form_image)
+static func create_new_item_to_order(item, tier, grade):
+	var new : Item= item.custom_duplicate()
+	new.tier = tier as Item.TIER
+	new.grade = grade as Item.GRADE
+	return new
+
 func create_image_texture():
 	image_texture = ImageTexture.create_from_image(image)
 
@@ -349,7 +355,13 @@ func is_recipe_correct(recipe : Array[Item]):
 			if recipe[i].name != recipe_items[i].name:
 				correct = false
 	return correct
-		
+
+func qualifies_as(ordered_item : Item):
+	if name == ordered_item.name:
+		if tier >= ordered_item.tier:
+			if grade >= ordered_item.grade:
+				return true
+	return false
 # PRIVATE METHODS
 
 

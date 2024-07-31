@@ -21,6 +21,7 @@ image = ExtResource("1_emvqw")
 item_components = Array[int]([0])
 item_type = 2
 transmutable = true
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([])
 
 [sub_resource type="Resource" id="Resource_kssx0"]
 script = ExtResource("2_baco2")
@@ -37,6 +38,7 @@ image = ExtResource("3_jec2l")
 item_components = Array[int]([0])
 item_type = 2
 transmutable = true
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([])
 
 [sub_resource type="Resource" id="Resource_sd22h"]
 script = ExtResource("2_baco2")
@@ -53,6 +55,7 @@ image = ExtResource("4_c4tnx")
 item_components = Array[int]([0])
 item_type = 2
 transmutable = true
+recipe_items = Array[Resource("res://Resources/Items/item.gd")]([])
 
 [resource]
 script = ExtResource("1_8r80n")

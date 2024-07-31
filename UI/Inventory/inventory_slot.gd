@@ -87,6 +87,10 @@ func compatible_inv(data_src : InventoryInterface.INV_SOURCE) -> bool:
 			return true
 		if slot_source_type == sources.CANVAS_MATERIALS and data_src == sources.PLAYER:
 			return true
+		if slot_source_type == sources.PLAYER and data_src == sources.ORDER:
+			return true
+		if slot_source_type == sources.ORDER and data_src == sources.PLAYER:
+			return true
 	return false
 
 func _drop_data(at_position, data):

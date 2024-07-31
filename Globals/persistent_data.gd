@@ -73,6 +73,7 @@ func _ready():
 	create_default_forms()
 	create_default_discovered_forms()
 	game_data.randomize_stores()
+	game_data.randomize_orders()
 	#print(game_data.discovered_forms)
 	#create_new_game()
 
@@ -266,6 +267,8 @@ func play_coins_sound():
 	await coins.finished
 	#print(coins.playing)
 	coins.play()
+
+#func 
 #func create_new_game():
 	#game_data = GameData.new()
 	#game_data.player_storage

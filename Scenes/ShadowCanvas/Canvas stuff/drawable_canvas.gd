@@ -62,13 +62,8 @@ var remaining_essence : int = 0
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-# TODO: either remove the Drum or change it, as currently it's not exactly an
-# interesting object to draw, nor does the default discovered form make sense
 # TODO: try changing pixel size to see if things work better, even though the
 # textures would be weirdly sized
-# TODO: maybe draw discovered_form as preview, because right now the more you
-# have a form unlocked, the less you actually need to draw on it ( if the
-# discovered form == form, you won't even need to use mats currently :p )
 func _ready():
 	canvas_size = Vector2i(CANVAS_SIDE_LENGTH, CANVAS_SIDE_LENGTH)
 	canvas_pixels.create(canvas_size / pixel_size)
@@ -99,7 +94,6 @@ func _draw():
 	draw_canvas_pixels()
 	draw_preview()
 	draw_canvas_form_disc()
-	# TODO: draw_selected_form()? Not needed if canvas_pixels is set to form
 
 func draw_grid(grid_size : Vector2):
 	for x in range(1 + canvas_size.x / grid_size.x):
