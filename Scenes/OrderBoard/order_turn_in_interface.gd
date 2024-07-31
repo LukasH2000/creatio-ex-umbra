@@ -96,3 +96,10 @@ func _on_button_cancel_pressed():
 	#turn_in_inv.update_inventory()
 	player_inv.update_inventory()
 	visible = false
+
+
+func _on_visibility_changed():
+	if visible:
+		PersistentData.hide_pause_menu_button()
+	else:
+		PersistentData.show_pause_menu_button()

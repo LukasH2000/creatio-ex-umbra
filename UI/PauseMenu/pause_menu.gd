@@ -22,32 +22,34 @@ extends Control
 
 
 # PUBLIC VARIABLES
-
-
+var gold : int
+var rep : int
+var rep_xp : int
+var max_rep_xp : int
 # PRIVATE VARIABLES
 
 
 # @ONREADY VARIABLES
-
+@onready var lbl_gold := $CenterContainer/PanelContainer/VBoxContainer/LabelGold
+@onready var lbl_rep := $CenterContainer/PanelContainer/VBoxContainer/LabelRep
+@onready var lbl_rep_xp := $CenterContainer/PanelContainer/VBoxContainer/LabelRepXp
 
 # OPTIONAL BUILT-IN VIRTUAL _INIT METHOD
 # OPTIONAL BUILT-IN VIRTUAL _ENTER_TREE() METHOD
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-func set_inventory():
-	$CenterContainer/VBoxContainer/InventoryInterface.inventory = PersistentData.game_data.player_storage
-	$CenterContainer/VBoxContainer/InventoryInterface.update_inventory()
+func _ready():
+	lbl_gold.text = "Gold: %s" % gold
+	lbl_rep.text = "Reputation: %s" % rep
+	lbl_rep_xp.text = "Reputation XP: %s/%s" % [rep_xp, max_rep_xp]
+
 # PRIVATE METHODS
 
 
 # SUBCLASSES
 
 
-
-
-func _on_button_close_pressed():
-	visible = false
 
 
 func _on_visibility_changed():

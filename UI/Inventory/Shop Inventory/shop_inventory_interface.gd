@@ -112,3 +112,10 @@ func _on_button_cancel_pressed():
 	%BuyInv.update_inventory()
 	%SellInv.update_inventory()
 	visible = false
+
+
+func _on_visibility_changed():
+	if visible:
+		PersistentData.hide_pause_menu_button()
+	else:
+		PersistentData.show_pause_menu_button()

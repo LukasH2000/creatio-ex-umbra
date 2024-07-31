@@ -36,11 +36,14 @@ var area_scene_paths : Dictionary = {
 var current_scene : Node = null
 var world : Node = null
 var popup_window : Node = null
+var pause_btn : Node = null
 var fade : Node
+var pause_menu : Node
 	
 var game_data : Resource = load("res://Resources/game_data_default.tres")
 var is_new_game := false
 var fade_scene : PackedScene = preload("res://UI/fade.tscn")
+var pause_scene : PackedScene = preload("res://UI/PauseMenu/pause_menu.tscn")
 
 var window_size_base : Vector2 = Vector2(
 	ProjectSettings.get_setting("display/window/size/viewport_width"),
@@ -99,6 +102,16 @@ func get_popup_window() -> Node:
 			popup_window = last_child.get_child(1)
 	return popup_window
 
+func get_pause_btn() -> Node:
+	if pause_btn == null:
+		var root := get_tree().root
+		# The last child of root will be Main, while we need to change a scene in
+		# the World node, which is the first child of Main
+		var last_child := root.get_child(root.get_child_count() - 1)
+		if last_child.is_in_group("main"):
+			pause_btn = last_child.get_child(2)
+	return pause_btn
+
 func get_discovered_forms() -> Inventory:
 	if not game_data.discovered_forms:
 		game_data.discovered_forms = Inventory.new()
@@ -135,7 +148,7 @@ func goto_scene(path_name : String, data : Inventory = null):
 
 func _deferred_goto_scene(path_name, data = null):
 	if not (
-	current_scene.name == "MainMenu" 
+	current_scene.name == "MainMenu"
 	or current_scene.name == "ShadowCanvas"
 	or path_name == "Shadow Canvas"
 	):
@@ -156,27 +169,31 @@ func _deferred_goto_scene(path_name, data = null):
 	
 	# Add it to the active scene, as child of root.
 	world.add_child(current_scene)
-	if is_new_game:
-		current_scene.open_book()
-		is_new_game = false
+	var show_pause_btn := true
 	
 	game_data.current_area_name = path_name
 	if path_name != "Shadow Canvas":
+		if is_new_game:
+			current_scene.open_book()
+			is_new_game = false
+			show_pause_btn = false
 		canv_msc.stop()
 		menu_msc.stop()
 		if not gen_msc.playing:
 			gen_msc.play()
 		save_game(0)
 	elif path_name == "Main menu":
+		show_pause_btn = false
 		canv_msc.stop()
 		menu_msc.play()
 		gen_msc.stop()
 	else:
+		show_pause_btn = false
 		canv_msc.play()
 		menu_msc.stop()
 		gen_msc.stop()
 	
-	unfade_screen()
+	unfade_screen(show_pause_btn)
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	#get_tree().current_scene = current_scene
 
@@ -189,8 +206,6 @@ func check_save_path() -> Error:
 		return dir_access.make_dir(SAVE_DATA_PATH)
 	return OK
 
-# TODO ALERT: doesn't save inv game_data properly? inv wasn't restored after loading
-# the area name was properly saved and loaded tho
 func save_game(save_num : int = -1) -> void:
 	if check_save_path() == OK:
 		if save_num == -1:
@@ -217,24 +232,30 @@ func pass_day():
 	sleep.play()
 	game_data.pass_day()
 	save_game(0)
-	unfade_screen()
+	unfade_screen(true)
 
 func fade_screen(anim_spd : float):
+	hide_pause_menu_button()
 	fade = fade_scene.instantiate()
 	fade.anim_speed = anim_spd
 	get_parent().add_child(fade)
 	await fade.fade_halfway
 	return true
 
-func unfade_screen():
+func unfade_screen(show_pause_btn : bool):
 	fade.unfade()
 	await fade.fade_done
 	get_parent().remove_child(fade)
 	fade.queue_free()
+	if show_pause_btn:
+		show_pause_menu_button()
 
 func new_game():
 	is_new_game = true
 	goto_scene("Workshop")
+
+func save_autosave():
+	save_game(0)
 
 func load_autosave():
 	load_game(0)
@@ -268,6 +289,25 @@ func play_coins_sound():
 	#print(coins.playing)
 	coins.play()
 
+func show_pause_menu():
+	hide_pause_menu_button()
+	pause_menu = pause_scene.instantiate()
+	pause_menu.gold = game_data.player_gold
+	pause_menu.rep = game_data.player_reputation
+	pause_menu.rep_xp = game_data.player_rep_xp
+	pause_menu.max_rep_xp = game_data.get_required_rep_xp_up()
+	get_parent().add_child(pause_menu)
+
+func delete_pause_menu():
+	get_parent().remove_child(pause_menu)
+	pause_menu.queue_free()
+	show_pause_menu_button()
+
+func show_pause_menu_button():
+	get_pause_btn().show()
+
+func hide_pause_menu_button():
+	get_pause_btn().hide()
 #func 
 #func create_new_game():
 	#game_data = GameData.new()

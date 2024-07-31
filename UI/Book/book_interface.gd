@@ -80,3 +80,10 @@ func change_page():
 
 # SUBCLASSES
 
+
+
+func _on_visibility_changed():
+	if visible:
+		PersistentData.hide_pause_menu_button()
+	else:
+		PersistentData.show_pause_menu_button()

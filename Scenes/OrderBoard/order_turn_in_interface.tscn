@@ -85,6 +85,7 @@ inventory = SubResource("Resource_r4an1")
 title = "Turn in items"
 inv_source = 7
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ButtonTurnIn" to="." method="_on_button_turn_in_pressed"]
 [connection signal="inventory_changed" from="MarginContainer/HBoxContainer/InventoryInterface2" to="." method="_on_inventory_interface_2_inventory_changed"]

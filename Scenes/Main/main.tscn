@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://w16m22gmxhj6"]
+[gd_scene load_steps=5 format=3 uid="uid://w16m22gmxhj6"]
 
 [ext_resource type="PackedScene" uid="uid://uyoqkcg1apr4" path="res://Scenes/Overworld/world.tscn" id="1_hemcx"]
 [ext_resource type="PackedScene" uid="uid://b2bysrf84s6lk" path="res://UI/popup_window.tscn" id="2_4wf3g"]
+[ext_resource type="Theme" uid="uid://cty2l2sj86fnj" path="res://UI/game_theme.tres" id="3_p7boc"]
+[ext_resource type="Script" path="res://Scenes/Main/btn_menu.gd" id="4_j2yow"]
 
 [node name="Main" type="Node" groups=["main"]]
 
@@ -9,3 +11,25 @@
 
 [node name="PopupWindow" parent="." instance=ExtResource("2_4wf3g")]
 visible = false
+
+[node name="PauseMenuBtn" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenuBtn"]
+layout_mode = 1
+offset_right = 60.0
+offset_bottom = 34.0
+theme = ExtResource("3_p7boc")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="Button" type="Button" parent="PauseMenuBtn/MarginContainer"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+theme = ExtResource("3_p7boc")
+text = "Menu"
+script = ExtResource("4_j2yow")
+
+[connection signal="pressed" from="PauseMenuBtn/MarginContainer/Button" to="PauseMenuBtn/MarginContainer/Button" method="_on_pressed"]

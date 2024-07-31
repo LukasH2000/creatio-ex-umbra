@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ceoqr6g7a05rh"]
+[gd_scene load_steps=8 format=3 uid="uid://ceoqr6g7a05rh"]
 
 [ext_resource type="Script" path="res://UI/Book/book_interface.gd" id="1_oys7r"]
 [ext_resource type="Texture2D" uid="uid://bqmcfam08qoxn" path="res://UI/Book/book.png" id="2_ojcpc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dj0rp4ny2u8mx" path="res://Scenes/DarkRoom/dark_room_bg.png" id="4_cj8tj"]
 [ext_resource type="VideoStream" path="res://UI/Book/2024-07-30-14-34-29.ogv" id="4_wffct"]
 [ext_resource type="Texture2D" uid="uid://cs8ehynytdkqd" path="res://UI/Book/im4.png" id="5_5qeam"]
+[ext_resource type="Texture2D" uid="uid://c8p27w37muem0" path="res://UI/Book/order_brd.png" id="7_wawn8"]
 
 [node name="BookInterface" type="Control"]
 layout_mode = 3
@@ -71,10 +72,10 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Page1" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage1" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage1"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -84,12 +85,12 @@ for Dummies"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage1"]
 custom_minimum_size = Vector2(232, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage1"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -97,17 +98,17 @@ theme_override_font_sizes/font_size = 16
 text = "Welcome to the wonderful world of umbral alchemy, a branch of alchemy for those aligned with the aspect of shadows!"
 autowrap_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page1"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage1"]
 custom_minimum_size = Vector2(0, 104)
 layout_mode = 2
 texture = ExtResource("3_v7t0c")
 stretch_mode = 5
 
-[node name="Page3" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage2" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -116,7 +117,7 @@ text = "Chapter 1"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -125,12 +126,12 @@ text = "Basics"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage2"]
 custom_minimum_size = Vector2(232, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -138,7 +139,7 @@ theme_override_font_sizes/font_size = 16
 text = "To start transmuting base materials into new items, you first need a room that blocks all outside light, a \"dark room\" of sorts."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page3"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -146,15 +147,15 @@ theme_override_font_sizes/font_size = 16
 text = "This room will need a large, white canvas, lit evenly by a strong light source from behind and a spatial locking array to contain the materials."
 autowrap_mode = 2
 
-[node name="Page5" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage3" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+[node name="Control" type="Control" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage3"]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5/Control"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage3/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,7 +167,7 @@ autoplay = true
 expand = true
 loop = true
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage3"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -174,7 +175,7 @@ theme_override_font_sizes/font_size = 16
 text = "Once selected, you can start the process by activating the light source and lowering the canvas."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page5"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage3"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -182,11 +183,11 @@ theme_override_font_sizes/font_size = 16
 text = "You will see a formation that allows you to direct the shadow essence of your"
 autowrap_mode = 2
 
-[node name="Page7" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage4" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page7"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage4"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -195,7 +196,7 @@ text = "To finish, just press the button and confirm.
 Your item's tier is based on the average tier of the materials used, while the grade is based on how accurate to the item's form you were."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page7"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage4"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -203,11 +204,11 @@ theme_override_font_sizes/font_size = 16
 text = "Items come in various tiers and grades, greatly affecting their value"
 autowrap_mode = 2
 
-[node name="Page9" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage5" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page9"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage5"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -216,17 +217,17 @@ text = "Grades are simpler, being assigned a letter from F to A, with F being al
 The highest grade are S and P, S being an item of amazing quality and p being a perfected item, capable of rivaling items of the next tier"
 autowrap_mode = 2
 
-[node name="Page11" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage6" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page11"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage6"]
 layout_mode = 2
 texture = ExtResource("5_5qeam")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page11"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage6"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -234,37 +235,51 @@ theme_override_font_sizes/font_size = 16
 text = "To sell items, just drag them from your inventory to one of the sell slots, and to buy items, drag them from the shop inventory to the buy slots."
 autowrap_mode = 2
 
-[node name="Page13" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage7" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page13"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage7"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "TODO
-Custom item orders"
+text = "The Merchant Guild also has a system for customers to order specific items, these orders are displayed on a board for anyone to complete. Orders only remain on the board for a certain number of days though, so it's first come, first serve!
+To complete an order, you'll need to have the requested items in your inventory, view the order and drop them in the turn-in inventory."
 autowrap_mode = 2
 
-[node name="Page15" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+[node name="LPage8" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/Page15"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage8"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "TODO
-Update recipes automatically
+text = "Now you're ready to start your alchemical journey! Always remember to strive for perfection, and maybe you'll be the first alchemist to uncover the deepest depths of umbral alchemy..."
+autowrap_mode = 2
 
-Recipes:
-Sword - Steel ingot, steel ingot, wood log, tanned leather
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage8"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "The next pages will magically store known recipes"
+vertical_alignment = 2
+autowrap_mode = 2
 
-Pickaxe - Steel ingot, steel ingot, wood log
+[node name="LPage9" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/LeftPage"]
+visible = false
+layout_mode = 2
 
-Leather chest armor - tanned leather, tanned leather, steel ingot, wolf pelt"
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/LeftPage/LPage9"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Leather boots - Tanned leather, tanned leather, rope"
 autowrap_mode = 2
 
 [node name="RightPage" type="MarginContainer" parent="CenterContainer/TextureRect/PagesControl"]
@@ -281,10 +296,10 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Page2" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage1" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page2"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage1"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -292,7 +307,7 @@ theme_override_font_sizes/font_size = 16
 text = "This book contains a guide to the art for any aspiring umbral alchemist, or for those who simply need a refresher, together with some other advice on making a living with your abilities."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page2"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage1"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 size_flags_vertical = 10
@@ -304,18 +319,18 @@ the celestial court"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Page4" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage2" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage2"]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 2
 texture = ExtResource("4_cj8tj")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -323,7 +338,7 @@ theme_override_font_sizes/font_size = 12
 text = "Example of a standard \"dark room\""
 autowrap_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -331,7 +346,7 @@ theme_override_font_sizes/font_size = 16
 text = "Afterwards, you will need to place the materials on the canvas according to a recipe."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page4"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage2"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -339,11 +354,11 @@ theme_override_font_sizes/font_size = 16
 text = "This book stores recipes in the final pages, with the unknown being unlockable in various ways."
 autowrap_mode = 2
 
-[node name="Page6" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage3" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page6"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage3"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -351,7 +366,7 @@ theme_override_font_sizes/font_size = 16
 text = "materials into the canvas, allowing you to shape the essence into the shadow of your desired item."
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page6"]
+[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage3"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -361,11 +376,11 @@ You can zoom in on the canvas using the scroll wheel and pan with the middle mou
 "
 autowrap_mode = 2
 
-[node name="Page8" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage4" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="RichTextLabel" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page8"]
+[node name="Label3" type="RichTextLabel" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage4"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -381,11 +396,11 @@ text = "Item tiers are as follows:
 fit_content = true
 autowrap_mode = 2
 
-[node name="Page10" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage5" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+[node name="Label" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage5"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -394,7 +409,7 @@ text = "Chapter 2"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage5"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -403,12 +418,12 @@ text = "Resource management"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage5"]
 custom_minimum_size = Vector2(232, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page10"]
+[node name="Label2" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage5"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -418,11 +433,11 @@ You go to the local merchant guild of course!
 They're always stocked with materials for those who can afford it, and they always accept any new items for their auctions."
 autowrap_mode = 2
 
-[node name="Page12" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage6" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page12"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage6"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -432,38 +447,58 @@ text = "Make sure you always have either enough gold to buy new materials or eno
 The merchant guild refreshes their stock each day, so be on the lookout for good materials!"
 autowrap_mode = 2
 
-[node name="Page14" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage7" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page14"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage7"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "Now you're ready to start your alchemical journey! Always remember to strive for perfection, and maybe you'll be the first alchemist to uncover the deepest depths of umbral alchemy..."
+text = "After turning in the items, you'll gain gold based on whether you met or exceeded the requirements, and you'll also gain some reputation xp. With a higher reputation, you gain access to better orders, so get to grinding!"
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page14"]
-custom_minimum_size = Vector2(64, 1)
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage7"]
 layout_mode = 2
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 16
-text = "The next pages will magically store known recipes"
-vertical_alignment = 2
-autowrap_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("7_wawn8")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="Page16" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+[node name="RPage8" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/Page16"]
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage8"]
 custom_minimum_size = Vector2(64, 1)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "Leather boots - Tanned leather, tanned leather, rope"
+text = "TODO
+Update recipes automatically
+
+Recipes:
+Sword - Steel ingot, steel ingot, wood log, tanned leather
+
+Pickaxe - Steel ingot, steel ingot, wood log
+
+Leather chest armor - tanned leather, tanned leather, steel ingot, wolf pelt"
+autowrap_mode = 2
+
+[node name="RPage9" type="VBoxContainer" parent="CenterContainer/TextureRect/PagesControl/RightPage"]
+visible = false
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CenterContainer/TextureRect/PagesControl/RightPage/RPage9"]
+custom_minimum_size = Vector2(64, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "TODO
+More items and materials, crafting trees, show materials here, material & item traits
+
+Living Shadow crafting tree, rumors and research log"
 autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -495,6 +530,7 @@ custom_minimum_size = Vector2(103, 26)
 layout_mode = 2
 text = "next page"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/ButtonPrev" to="." method="_on_button_prev_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonClose" to="." method="_on_button_close_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonNext" to="." method="_on_button_next_pressed"]

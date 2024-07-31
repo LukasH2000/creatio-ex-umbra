@@ -94,9 +94,12 @@ func create_random_order() -> Order:
 func increase_rep(num : int) -> void:
 	if player_reputation < MAX_REP:
 		player_rep_xp += num
-		if player_rep_xp >= REP_XP_REQ * (player_reputation+1):
-			player_rep_xp = player_rep_xp - REP_XP_REQ * (player_reputation+1)
+		if player_rep_xp >= get_required_rep_xp_up():
+			player_rep_xp = player_rep_xp - get_required_rep_xp_up()
 			player_reputation += 1
+
+func get_required_rep_xp_up():
+	return REP_XP_REQ * (player_reputation+1)
 
 func randomize_stores():
 	randomize_store_inventory(material_store, PersistentData.materials_inv.items)

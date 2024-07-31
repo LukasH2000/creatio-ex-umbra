@@ -2,7 +2,7 @@
 # @TOOL
 # CLASS_NAME
 # EXTENDS
-extends Control
+extends Button
 # DOCSTRING
 
 # SIGNALS
@@ -35,9 +35,8 @@ extends Control
 # BUILT-IN VIRTUAL _READY METHOD
 # REMAINING BUILT-IN VIRTUAL METHODS
 # PUBLIC METHODS
-func set_inventory():
-	$CenterContainer/VBoxContainer/InventoryInterface.inventory = PersistentData.game_data.player_storage
-	$CenterContainer/VBoxContainer/InventoryInterface.update_inventory()
+
+
 # PRIVATE METHODS
 
 
@@ -46,12 +45,5 @@ func set_inventory():
 
 
 
-func _on_button_close_pressed():
-	visible = false
-
-
-func _on_visibility_changed():
-	if visible:
-		PersistentData.hide_pause_menu_button()
-	else:
-		PersistentData.show_pause_menu_button()
+func _on_pressed():
+	PersistentData.save_autosave()

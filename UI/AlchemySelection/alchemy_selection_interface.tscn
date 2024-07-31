@@ -113,5 +113,6 @@ text = "Cancel"
 layout_mode = 2
 text = "Clear canvas"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="HBoxContainer/ButtonCancel" to="." method="_on_button_cancel_pressed"]
 [connection signal="pressed" from="HBoxContainer/ButtonClear" to="." method="_on_button_clear_pressed"]
